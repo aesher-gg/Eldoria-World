@@ -1,7 +1,7 @@
 # ELDORIA WORLD — CANON GEOGRAPHY REGISTRY
 
 > **Authority:** Admin
-> **Status:** Admin Canon v1.4
+> **Status:** Admin Canon v1.5
 > **Purpose:** Registry resmi struktur geografis-politik Eldoria sebagai dasar settlement, population model, faction, dan Canon NPC.
 
 ## 1. Authority
@@ -21,12 +21,14 @@ WORLD
 ```text
 CONTINENT_COUNT: 1 (main continent)
 EMPIRE_COUNT: 1
-KINGDOM_COUNT: 1+ (KINGDOM-001 established; future count remains open)
+KINGDOM_COUNT: 2+ (KINGDOM-001 and KINGDOM-002 established; future count remains open)
 KINGDOM-001_REGION_COUNT: 4
 KINGDOM-001_CITY_COUNT: 4
 KINGDOM-001_VILLAGE_SETTLEMENT_COUNT: 8
 KINGDOM-001_POPULATION_MODEL: ACTIVE
-KINGDOM-002+: PENDING
+KINGDOM-002_GEOGRAPHY: PENDING
+KINGDOM-002_POPULATION_MODEL: PENDING
+KINGDOM-003+: PENDING
 ```
 
 ## 3. Empire Registry
@@ -84,13 +86,9 @@ KEKAISARAN VALTHERA
 ```text
 EMPIRE-001
     ↓
-KINGDOM-001 ... KINGDOM-???
-    ↓
-REGION
-    ↓
-CITY
-    ↓
-SETTLEMENT
+KINGDOM-001 — Valedorn
+KINGDOM-002 — Brannor
+KINGDOM-003 ... KINGDOM-???
 ```
 
 Integrity rules:
@@ -121,7 +119,7 @@ EMPIRE_ID: EMPIRE-001
 NAME: Kekaisaran Valthera
 CAPITAL: Aurelis
 CONTINENT: Benua Utama Eldoria
-KINGDOMS: KINGDOM-001 + future kingdoms (count open)
+KINGDOMS: KINGDOM-001 + KINGDOM-002 + future kingdoms (count open)
 MAJOR_REGIONS: ???
 POLITICAL_SYSTEM: Monarki Kekaisaran Terdesentralisasi
 RULER: Kaisar Valthera (nama pribadi: ???)
@@ -154,21 +152,6 @@ CANON NPC
 
 ## 4. Kingdom Registry
 
-Setiap Kingdom Canon wajib memiliki:
-
-```text
-KINGDOM_ID
-EMPIRE_ID
-NAME
-TYPE
-CAPITAL
-BOUNDARY
-REGIONS
-CURRENT_STATE
-ORIGIN
-HISTORY
-```
-
 ### 4.1 KINGDOM-001 — Kerajaan Valedorn
 
 ```text
@@ -186,30 +169,36 @@ HISTORY: ???
 
 Valedorn berfungsi sebagai heartland pangan, perdagangan darat, koridor sungai, dan konektivitas internal. Karakter regional: **subur, produktif, terhubung, dan pragmatis**.
 
-### 4.1.1 Geographic / Political / Economic Function
+Detail Region → City → Village/Settlement → Population Model berada di `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
 
-- Geography: dataran produktif, koridor sungai, jaringan jalan, zona produksi-ke-pasar.
-- Politics: pemerintahan kerajaan sendiri dalam batas kewenangan imperial.
-- Economy: pertanian, pengolahan pangan, perdagangan sungai, pasar antarkota, transportasi, pergudangan, dan kerajinan pendukung.
-- Penguasa, keluarga penguasa, hukum lokal, faction politik, komoditas spesifik, volume produksi, pajak, dan jalur dagang rinci = `???` kecuali telah ditetapkan Canon lain.
-
-### 4.1.2 Geography Extension
-
-Detail Region → City → Village/Settlement → Population Model Kingdom-001 berada di:
-
-`world/kingdoms/KINGDOM-001_GEOGRAPHY.md`
-
-File tersebut adalah Admin Canon extension dan wajib diperlakukan sebagai bagian dari geography authority Kingdom-001.
-
-### 4.2 Future Kingdoms
+### 4.2 KINGDOM-002 — Kerajaan Brannor
 
 ```text
-KINGDOM-002: ???
+KINGDOM_ID: KINGDOM-002
+EMPIRE_ID: EMPIRE-001
+NAME: Kerajaan Brannor
+TYPE: Kerajaan Highland-Mineral
+CAPITAL: Durnhaven
+BOUNDARY: Wilayah dataran tinggi dan pegunungan di luar heartland Valedorn; batas fisik rinci = ???
+REGIONS: PENDING
+CURRENT_STATE: Stabil secara administratif; kondisi keamanan, politik, dan ekonomi aktif = ???
+ORIGIN: Berkembang sebagai pusat dataran tinggi, sumber daya mineral, dan jalur lintas pegunungan; detail pendirian = ???
+HISTORY: ???
+```
+
+Brannor menjadi pelengkap geografis Valedorn melalui fungsi dataran tinggi, pegunungan, mineral, jalur lintas pegunungan, perdagangan, dan frontier transport.
+
+Detail Region → City → Village/Settlement → Population Model Brannor belum dibuat.
+
+### 4.3 Future Kingdoms
+
+```text
 KINGDOM-003: ???
+KINGDOM-004: ???
 ...
 ```
 
-Kingdom berikutnya dibangun satu per satu berdasarkan fungsi geografis, politik, ekonomi, dan karakter yang berbeda atau saling melengkapi dengan Kingdom-001.
+Kerajaan berikutnya dibangun satu per satu berdasarkan fungsi geografis, politik, ekonomi, dan karakter yang berbeda atau saling melengkapi dengan Kingdom yang sudah ada.
 
 ## 5. City Registry
 
@@ -222,7 +211,9 @@ CITY-003 → Goldmere → REGION-003 → KINGDOM-001
 CITY-004 → Thornwick → REGION-004 → KINGDOM-001
 ```
 
-Detail City Canon berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+Detail City Canon Kingdom-001 berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+
+Kingdom-002 City Registry: `PENDING`.
 
 ## 6. Village / Settlement Registry
 
@@ -239,7 +230,7 @@ SETTLEMENT-007 → Briarford    → CITY-004 → REGION-004
 SETTLEMENT-008 → Greenhollow  → CITY-004 → REGION-004
 ```
 
-Detail Settlement Canon berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+Kingdom-002 Settlement Registry: `PENDING`.
 
 ## 7. Region Registry
 
@@ -252,33 +243,29 @@ REGION-003 → Dataran Ladang Emas      → KINGDOM-001
 REGION-004 → Perbatasan Hutan Thorn   → KINGDOM-001
 ```
 
-Region dipakai sebagai konteks geography, ecology, travel, economy, monster ecology, faction influence, migration, dan population.
-
-Detail Region Canon berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+Kingdom-002 Region Registry: `PENDING`.
 
 ## 8. Parent-Child Integrity
 
 ```text
 EMPIRE-001
 ↓
-KINGDOM-001.EMPIRE_ID = EMPIRE-001
+KINGDOM-001 / KINGDOM-002 → existing EMPIRE-001
 ↓
-REGION-001..004.PARENT_ID = KINGDOM-001
+REGION → existing parent Kingdom
 ↓
-CITY-001..004.KINGDOM_ID = KINGDOM-001
-CITY-001..004.REGION_ID = matching REGION
+CITY → existing Kingdom + Region
 ↓
-SETTLEMENT-001..008.CITY_ID = matching CITY
-SETTLEMENT-001..008.REGION_ID = matching REGION
+SETTLEMENT → existing City + Region
 ```
 
-Semua parent Kingdom-001 yang tercatat saat ini memiliki identity Canon valid.
+Tidak ada Region/City/Settlement Kingdom-002 yang boleh dianggap Canon sampai parent geography-nya dibuat secara resmi.
 
 ## 9. Population Boundary
 
 Population Model menangani penduduk massal secara agregat. Tidak semua penduduk menjadi Canon NPC atau record individual.
 
-Kingdom-001 memiliki Population Model aktif dengan:
+Kingdom-001 memiliki Population Model aktif:
 
 ```text
 POPULATION_MODEL_ID: POP-VAL-001
@@ -290,7 +277,7 @@ MIGRATION_BALANCE: ???
 SEASONAL_MOBILITY: MODERATE
 ```
 
-Regional distribution model:
+Regional distribution model Kingdom-001:
 
 ```text
 REGION-001 → 20–25%
@@ -299,11 +286,11 @@ REGION-003 → 35–40%
 REGION-004 → 15–20%
 ```
 
-Range adalah model, bukan jumlah individu tetap. Exact race percentages tetap `???`; hanya Race Canon aktif dari `races/CANON_REGISTRY.md` yang boleh dipakai sebagai racial category.
+Exact race percentages tetap `???`; hanya Race Canon aktif dari `races/CANON_REGISTRY.md` yang boleh dipakai sebagai racial category.
+
+Kingdom-002 Population Model: `PENDING`.
 
 ## 10. Canon NPC Build Gate
-
-Urutan wajib:
 
 ```text
 CANON GEOGRAPHY
@@ -322,17 +309,18 @@ KERAJAAN   → ≥ 10 Canon NPC per kingdom
 KEKAISARAN → ≥ 25 Canon NPC
 ```
 
-Kingdom-001 geography dan population model sekarang sudah tersedia; tahap Canon NPC dapat dimulai setelah faction/governance context lokal yang diperlukan ditetapkan.
+Kingdom-001 geography dan population model tersedia; Canon NPC belum dibangun.
+Kingdom-002 harus menyelesaikan geography dan population model sebelum Canon NPC wilayah dibangun.
 
 ## 11. Canon Safety
 
-- `Kekaisaran Valthera`, `Aurelis`, `Monarki Kekaisaran Terdesentralisasi`, `Kerajaan Valedorn`, dan `Varenhold` tetap Canon resmi.
-- Region/City/Settlement Kingdom-001 yang tercantum di extension file adalah Admin Canon.
-- `???` tetap Unknown/Unresolved dan tidak boleh ditebak oleh AI GM.
+- `Kekaisaran Valthera`, `Aurelis`, `Monarki Kekaisaran Terdesentralisasi`, `Kerajaan Valedorn`, `Varenhold`, `Kerajaan Brannor`, dan `Durnhaven` adalah Canon resmi.
+- Region/City/Settlement Kingdom-001 yang tercantum adalah Admin Canon.
+- Kingdom-002 belum memiliki Region/City/Village Canon.
+- `???` tetap Unknown/Unresolved dan tidak boleh ditebak AI GM.
 - Population Model tidak membuat individu massal menjadi file repository.
 - Race tidak boleh ditebak dari nama, penampilan, lokasi, class, faction, atau stereotype.
 - Dynamic NPC tidak otomatis menjadi Canon NPC.
-- Kingdom-002 belum dibuat.
 - Perubahan struktur geography Canon adalah kewenangan Admin.
 
 ## 12. Construction Status
@@ -346,7 +334,11 @@ PHASE 5 — KINGDOM-001 CITIES: COMPLETE
 PHASE 6 — KINGDOM-001 VILLAGES / SETTLEMENTS: COMPLETE
 PHASE 7 — KINGDOM-001 POPULATION MODEL: COMPLETE
 PHASE 8 — KINGDOM-001 CANON NPC: READY / NOT YET BUILT
-PHASE 9 — KINGDOM-002: NEXT
+PHASE 9 — KINGDOM-002 IDENTITY: COMPLETE
+PHASE 10 — KINGDOM-002 REGIONS: NEXT
+PHASE 11 — KINGDOM-002 CITIES: PENDING
+PHASE 12 — KINGDOM-002 VILLAGES / SETTLEMENTS: PENDING
+PHASE 13 — KINGDOM-002 POPULATION MODEL: PENDING
 ```
 
 ## 13. Final Principle
