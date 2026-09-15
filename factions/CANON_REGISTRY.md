@@ -3,7 +3,7 @@
 > **Authority:** Admin
 > **Canon:** ELDORIA CANON v1.0 — LOCKED
 > **Status:** Admin Canon v1.0
-> **Purpose:** Registry faction spesifik sebagai konteks governance, ekonomi, keamanan, dan organisasi bagi Canon NPC.
+> **Purpose:** Registry faction spesifik sebagai konteks governance, ekonomi, keamanan, organisasi, dan bangsawan bagi Canon NPC.
 
 ## 1. Rules
 
@@ -25,7 +25,7 @@ ORIGIN
 HISTORY
 ```
 
-Faction Canon di registry ini memiliki `ORIGIN: Admin Canon` dan `CANON_STATUS: ACTIVE`; detail leadership, history, relation, atau territory yang belum ditetapkan tetap `???`.
+Faction Canon di registry ini memiliki `ORIGIN: Admin Canon` dan `CANON_STATUS: ACTIVE`; detail yang belum ditetapkan tetap `???` kecuali sudah ditetapkan pada source Canon spesifik.
 
 ## 2. Empire-Level Factions
 
@@ -36,8 +36,6 @@ Faction Canon di registry ini memiliki `ORIGIN: Admin Canon` dan `CANON_STATUS: 
 | FACTION-003 | Administrasi Perdagangan Kekaisaran | MERCANTILE / ADMINISTRATIVE | EMPIRE-001 | Koordinasi perdagangan antar-kerajaan |
 
 ## 3. Kingdom-Level Factions
-
-Setiap Kingdom memiliki konteks minimum pemerintahan, pertahanan, dan ekonomi/strategis. Ini bukan NPC dan tidak menentukan pejabat individual.
 
 | ID | Name | Type | Kingdom | Function |
 |---|---|---|---|---|
@@ -64,7 +62,7 @@ Setiap Kingdom memiliki konteks minimum pemerintahan, pertahanan, dan ekonomi/st
 
 ## 4. City-Level Factions
 
-Setiap 20 kota memiliki satu faction administrasi kota agar jabatan pemerintahan kota memiliki konteks Canon tanpa menciptakan pejabat individual.
+Setiap 20 kota memiliki satu faction administrasi kota.
 
 | ID | City | Kingdom | Faction |
 |---|---|---|---|
@@ -113,54 +111,64 @@ Tidak ada faction settlement spesifik yang dibuat pada v1.0.
 
 40 settlement tetap memiliki konteks komunitas lokal melalui Geography/Population Model. Faction lokal dapat muncul secara Dynamic bila dibutuhkan; jika menjadi material dan persisten, gunakan `DYNAMIC_PERSISTENT` tanpa otomatis menjadi Canon.
 
-`SPECIFIC_CANON_FACTION: ???` untuk settlement sampai Admin memiliki alasan lore/institusional yang cukup.
+## 6. Noble House Factions — Canon
 
-## 6. Cross-Territorial Factions
+Noble House adalah faction type `NOBLE_HOUSE` dan memiliki registry terpisah di `factions/NOBLE_HOUSES_CANON.md`.
+
+| ID | Name | Kingdom | Function |
+|---|---|---|---|
+| NOBLE-HOUSE-001 | House Varen | KINGDOM-001 | Royal House / Crown succession |
+| NOBLE-HOUSE-002 | House Goldriver | KINGDOM-001 | Agrarian and riverine stewardship |
+| NOBLE-HOUSE-003 | House Brann | KINGDOM-002 | Royal House / Crown succession |
+| NOBLE-HOUSE-004 | House Ironvein | KINGDOM-002 | Mineral, mountain route, and defense interests |
+| NOBLE-HOUSE-005 | House Aureon | KINGDOM-003 | Royal House / Crown succession |
+| NOBLE-HOUSE-006 | House Tideward | KINGDOM-003 | Maritime and coastal infrastructure |
+| NOBLE-HOUSE-007 | House Sylvar | KINGDOM-004 | Royal House / Crown succession |
+| NOBLE-HOUSE-008 | House Thornward | KINGDOM-004 | Forest frontier and river-route stewardship |
+| NOBLE-HOUSE-009 | House Qasrane | KINGDOM-005 | Royal House / Crown succession |
+| NOBLE-HOUSE-010 | House Dustveil | KINGDOM-005 | Caravan and arid frontier stewardship |
+
+All ten houses are `CANON`, `ACTIVE`, and operate under the authority boundaries of `37_NOBILITY_SYSTEM.md` and the kingdom-specific variation Canon.
+
+## 7. Cross-Territorial Factions
 
 ```text
-CROSS_TERRITORIAL_CANON_FACTIONS: ???
+CROSS_TERRITORIAL_CANON_FACTIONS: NONE YET
 ```
 
-Belum ada faction cross-territorial tambahan yang Canonized.
+## 8. Political Relations
 
-## 7. Political Relations
+No specific political relation is inferred merely from registry membership. Allowed relationship states remain `ALLY`, `FRIENDLY`, `NEUTRAL`, `TENSE`, `HOSTILE`, `AT_WAR`.
 
-Tidak ada hubungan politik spesifik yang ditambahkan hanya karena faction masuk registry.
+Specific House↔House, House↔Crown, House↔Guild, and Kingdom↔Kingdom relations must be separately Canonized or resolved from established state.
 
-```text
-KINGDOM ↔ KINGDOM: ???
-FACTION ↔ FACTION: ???
-FACTION ↔ EMPIRE: mengikuti authority parent bila tersurat; detail = ???
-```
-
-Allowed relationship states mengikuti Module 04: `ALLY`, `FRIENDLY`, `NEUTRAL`, `TENSE`, `HOSTILE`, `AT_WAR`.
-
-## 8. NPC Dependency
-
-Registry ini menyediakan konteks untuk jabatan pemerintahan, keamanan, ekonomi, dan administrasi. Membership, rank, authority, access, reputation, resources, dan hubungan personal tidak diwariskan otomatis kepada NPC.
+## 9. NPC Dependency
 
 ```text
 FACTION CANON
+↓
+NOBLE HOUSE / GOVERNANCE CONTEXT
 ↓
 NPC MASTER LIST
 ↓
 INDIVIDUAL CANON NPC
 ```
 
-NPC tidak boleh dibuat hanya untuk memenuhi quota Coverage Matrix.
+Membership, rank, authority, access, reputation, resources, and personal relationships are not inherited automatically by NPCs.
 
-## 9. Registry Status
+## 10. Registry Status
 
 ```text
 EMPIRE-LEVEL CANON FACTIONS: 3
 KINGDOM-LEVEL CANON FACTIONS: 20
 CITY-LEVEL CANON FACTIONS: 20
+CANON NOBLE HOUSES: 10
 SETTLEMENT-LEVEL SPECIFIC CANON FACTIONS: 0
 ADDITIONAL CROSS-TERRITORIAL CANON FACTIONS: 0
-TOTAL CURRENT CANON FACTIONS: 43
+TOTAL CURRENT CANON FACTIONS: 53
 INDIVIDUAL CANON NPC CREATED: 15
 ```
 
-## 10. Final Principle
+## 11. Final Principle
 
-> **Faction dibuat karena dunia membutuhkannya, bukan karena NPC Coverage Matrix membutuhkan angka. Faction menyediakan konteks organisasi; NPC individual tetap berada pada layer terpisah.**
+> **Faction dan Noble House dibuat karena dunia membutuhkannya, bukan karena NPC Coverage Matrix membutuhkan angka. Organisasi menyediakan konteks; NPC individual tetap berada pada layer terpisah.**
