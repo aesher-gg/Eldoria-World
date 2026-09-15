@@ -7,7 +7,7 @@
 >
 > **Untuk AI GM:** baca seluruh INDEX ini terlebih dahulu, lalu jalankan **Prosedur Bootstrap** sebelum menulis balasan apa pun kepada Player. Jangan menjawab berdasarkan ingatan bebas jika data resmi dapat diverifikasi dari repository.
 >
-> **PENTING:** Eldoria memiliki Canon NPC penting, Monster Canon terbatas, Player Registry resmi, Population Model, dan Dynamic Entity Generation. Tidak semua penduduk/monster harus dibuat sebagai file individual. Repository menyimpan Canon dan persistent data yang memang telah menjadi bagian resmi dunia; entitas sementara dapat hidup di runtime/session sampai memenuhi persistence threshold.
+> **PENTING:** Eldoria memiliki Canon NPC penting, Monster Canon terbatas, Player Registry resmi, Race Canon, Population Model, dan Dynamic Entity Generation. Tidak semua penduduk/monster harus dibuat sebagai file individual. Repository menyimpan Canon dan persistent data yang memang telah menjadi bagian resmi dunia; entitas sementara dapat hidup di runtime/session sampai memenuhi persistence threshold.
 
 ---
 
@@ -43,13 +43,24 @@ Data tersebut adalah **submission Player**, bukan Character resmi. AI GM tidak b
 
 Jangan membuat identity Player Character baru secara otomatis. Resolution yang membutuhkan PC resmi harus ditahan sampai registry/authority tersedia.
 
-### 0.4 Tentukan lokasi dan konteks
+### 0.4 Race Canon Check
+
+Jika Player Character terdaftar memiliki `RACE_CANON_ID`, atau race relevan terhadap identity/capability/state, AI GM wajib:
+
+1. fetch `36_RACE_SYSTEM.md`;
+2. fetch `races/CANON_REGISTRY.md`;
+3. verifikasi `RACE_CANON_ID` exact match dengan Race Canon yang terdaftar;
+4. fetch detail Race Canon yang relevan bila tersedia.
+
+**Jangan menebak Race dari nama, penampilan, lokasi, class, faction, atau stereotype.** Jika Race belum diketahui dan entity contract mengizinkan Unknown, pertahankan `???`; jangan membuat Race baru.
+
+### 0.5 Tentukan lokasi dan konteks
 
 Setelah identity karakter diketahui, fetch module wilayah/settlement/faction yang relevan.
 
 Jangan memuat seluruh dunia jika tidak diperlukan.
 
-### 0.5 Canon NPC Check
+### 0.6 Canon NPC Check
 
 Jika Player berinteraksi dengan NPC penting atau NPC yang mungkin merupakan tokoh Canon:
 
@@ -59,34 +70,48 @@ Jika Player berinteraksi dengan NPC penting atau NPC yang mungkin merupakan toko
 4. jika record Canon ditemukan, fetch record tersebut;
 5. fetch `27_NPC_STATE.md` dan state NPC bila state persisten tersedia.
 
+Jika Canon NPC memiliki `RACE_CANON_ID`, verifikasi Race melalui `races/CANON_REGISTRY.md` sebelum resolution.
+
 **Jangan membuat Dynamic NPC pengganti jika Canon NPC yang sesuai sudah ada.**
 
-### 0.6 Monster Canon Check
+### 0.7 Monster Canon Check
 
 Jika Monster muncul atau Player berinteraksi dengan creature:
 
 1. fetch `14_MONSTER_ECOSYSTEM.md`;
 2. jika species/type dapat diidentifikasi sebagai Canon, periksa `monsters/CANON_REGISTRY.md`;
 3. fetch definisi Monster Canon yang sesuai;
-4. fetch `28_MONSTER_STATE.md` bila individual monster persisten/material.
+4. jika monster memiliki `RACE_CANON_ID` sebagai field yang berlaku, verifikasi Race melalui `races/CANON_REGISTRY.md`;
+5. fetch `28_MONSTER_STATE.md` bila individual monster persisten/material.
 
 AI GM tidak boleh membuat species Canon baru melalui narrative.
 
-### 0.7 Cek world events yang relevan
+### 0.8 Population / Race Context Check
+
+Jika roleplay menyentuh demografi, komposisi ras, migrasi, settlement population, race distribution, atau konflik sosial yang bergantung pada ras:
+
+1. fetch `36_RACE_SYSTEM.md`;
+2. fetch `races/CANON_REGISTRY.md`;
+3. fetch `02_REALMS_AND_REGIONS.md` dan `03_CITIES_AND_SETTLEMENTS.md` bila geography/settlement relevan;
+4. fetch Population Model/state yang relevan.
+
+Population Model tidak boleh menciptakan Race Canon baru atau menetapkan race distribution resmi tanpa source Canon/Population yang sah.
+
+### 0.9 Cek world events yang relevan
 
 Jika terdapat active/persistent event yang relevan terhadap lokasi, waktu, faction, quest, atau tindakan karakter, fetch `18_WORLD_EVENTS.md` dan state event terkait.
 
-### 0.8 Mulai / lanjutkan roleplay
+### 0.10 Mulai / lanjutkan roleplay
 
 Setelah Bootstrap selesai, AI GM dapat menjalankan roleplay.
 
-### 0.9 Dynamic Module Loading
+### 0.11 Dynamic Module Loading
 
 Selama sesi berlangsung, fetch module tambahan **hanya ketika kondisi/aksi membutuhkannya**.
 
 Jangan menganggap module masih loaded hanya karena pernah digunakan pada turn sebelumnya.
 
-### 0.10 Error / Missing File
+### 0.12 Error / Missing File
 
 Jika file resmi yang diperlukan gagal diakses atau tidak tersedia:
 
@@ -154,6 +179,7 @@ CANON
 ├── World Canon
 ├── Canon NPC penting
 ├── Monster Canon ≤150 jenis
+├── Race Canon
 └── Registered Player Characters
 
 RUNTIME / POPULATION
@@ -175,6 +201,7 @@ AI GM menentukan module berdasarkan kondisi nyata roleplay, bukan sekadar keywor
 |---|---|
 | Selalu pada awal turn/session | `INDEX.md` → `00_CORE_RULES.md` |
 | Player / Character identity / lifecycle | `05_CHARACTER_SYSTEM.md` + `characters/players.md` + Character Record + `26_CHARACTER_STATE.md` |
+| Race / racial identity / racial capability | `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md` + relevant Character/NPC/Monster/Population state |
 | Lokasi / wilayah / perjalanan | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md` |
 | Faction / organisasi | `04_FACTIONS.md`, `19_FACTION_SYSTEM.md` |
 | Atribut / class / skill | `06_ATTRIBUTES.md`, `07_CLASSES.md`, `08_SKILLS.md` |
@@ -203,6 +230,24 @@ AI GM menentukan module berdasarkan kondisi nyata roleplay, bukan sekadar keywor
 
 AI GM harus mengikuti dependency module yang tercantum pada module yang sedang digunakan.
 
+### 2.1 Race Routing Rule
+
+Race module wajib dimuat bila Race merupakan bagian dari identity, capability, population, migration, social context, atau rule yang sedang di-resolve.
+
+```text
+ENTITY HAS RACE_CANON_ID
+        ↓
+LOAD 36_RACE_SYSTEM.md
+        ↓
+LOAD races/CANON_REGISTRY.md
+        ↓
+VERIFY EXACT RACE_CANON_ID
+        ↓
+LOAD ENTITY STATE / RELEVANT CONTEXT
+```
+
+Jika action tidak menyentuh Race dan race information tidak diperlukan untuk resolution, Race module tidak perlu dimuat hanya untuk memenuhi keyword.
+
 ---
 
 ## 3. RUNTIME STATE HIERARCHY
@@ -229,6 +274,16 @@ CANON / REGISTRY
 
 CURRENT STATE
 → kondisi entity saat ini
+```
+
+Untuk Race:
+
+```text
+races/CANON_REGISTRY.md
+→ Race identity + official Race definition
+
+Character/NPC/Monster/Population State
+→ current race assignment/context
 ```
 
 Jika dua sumber state bertentangan:
@@ -322,6 +377,8 @@ Wilayah dapat memiliki populasi sangat besar, termasuk jutaan penduduk, tanpa me
 
 Population Model mensimulasikan skala dan distribusi umum.
 
+Jika Population Model membedakan populasi berdasarkan Race, hanya Race Canon yang terdaftar yang boleh digunakan sebagai Canon racial category.
+
 ### Dynamic NPC
 
 NPC biasa dapat dimaterialisasi AI GM berdasarkan lokasi, population model, role, faction, event, needs, dan context.
@@ -348,6 +405,8 @@ Population/ecology dapat menghasilkan banyak individu dari species Canon dan cre
 
 AI GM tidak boleh menambahkan species Canon baru hanya melalui narrative atau generation.
 
+Jika monster/entity memiliki `RACE_CANON_ID` sebagai field yang berlaku, Race Registry menjadi authority untuk field tersebut.
+
 ---
 
 ## 8. INFORMATION BOUNDARY
@@ -366,6 +425,8 @@ Informasi yang diketahui Character tidak otomatis diketahui NPC/Monster.
 
 Rumor, pengamatan, laporan, dan informasi palsu harus memiliki sumber/Origin yang sesuai bila menjadi material.
 
+Race knowledge juga mengikuti information boundary. Mengetahui `RACE_CANON_ID` di repository tidak berarti Character otomatis mengetahui identitas/asal ras entity lain.
+
 ---
 
 ## 9. `???` RULE
@@ -375,6 +436,12 @@ Rumor, pengamatan, laporan, dan informasi palsu harus memiliki sumber/Origin yan
 `???` bukan zero, empty, false, N/A, error, default value, atau izin untuk menebak.
 
 Jika Canon tidak menentukan nilai, jangan menciptakan nilai seolah-olah resmi.
+
+Khusus Race:
+
+- `RACE_CANON_ID = ???` berarti Race belum diketahui/unresolved jika entity contract mengizinkannya;
+- jangan mengganti `???` dengan Race Canon arbitrer;
+- jangan membuat Race baru untuk mengisi kekosongan.
 
 ---
 
@@ -450,7 +517,9 @@ sebagai satu transaction.
 
 Repository write access adalah tanggung jawab Admin/Operator.
 
-Player tidak perlu menjadi operator database untuk NPC, Monster, atau world state.
+Player tidak perlu menjadi operator database untuk NPC, Monster, Race, atau world state.
+
+Race Canon Registry bukan runtime save target biasa. Perubahan pada Race Canon adalah Admin Canon transaction. Runtime hanya menyimpan valid `RACE_CANON_ID` references sebagai bagian dari entity state bila diperlukan.
 
 ---
 
@@ -475,6 +544,7 @@ Player tidak perlu menjadi operator database untuk NPC, Monster, atau world stat
 | `07_CLASSES.md` | Classes/professions |
 | `08_SKILLS.md` | Skills |
 | `09_MAGIC_SYSTEM.md` | Magic |
+| `36_RACE_SYSTEM.md` | Race identity, Canon authority, population/migration integration |
 
 ### Physical / Action
 
@@ -522,16 +592,17 @@ Player tidak perlu menjadi operator database untuk NPC, Monster, atau world stat
 
 | File | Scope |
 |---|---|
-| `32_MODULE_ROUTER.md` | Module loading/routing |
+| `32_MODULE_ROUTER.md` | Module loading/routing + Race authority routing |
 | `33_ACTION_RESOLVER.md` | Simulation/action resolution |
-| `34_STATE_VALIDATOR.md` | Validation |
-| `35_SAVE_PIPELINE.md` | Persistence/recovery |
+| `34_STATE_VALIDATOR.md` | Validation + Race Canon ID validation |
+| `35_SAVE_PIPELINE.md` | Persistence/recovery + Race authority boundary |
 
 ### Registries
 
 | File | Scope |
 |---|---|
 | `characters/players.md` | Admin Player Registry |
+| `races/CANON_REGISTRY.md` | Admin Race Canon registry |
 | `npcs/CANON_REGISTRY.md` | Canon NPC registry |
 | `monsters/CANON_REGISTRY.md` | Canon Monster registry, maximum 150 types |
 
@@ -548,6 +619,8 @@ Player tidak perlu menjadi operator database untuk NPC, Monster, atau world stat
 > Player tidak perlu menjadi operator database.
 >
 > Player Character resmi dibuat melalui Admin Registration.
+>
+> Race identity resmi harus berasal dari Race Canon Registry; `RACE_CANON_ID` tidak boleh ditebak.
 >
 > Canon NPC menyediakan tokoh penting dunia.
 >
@@ -574,4 +647,5 @@ Player tidak perlu menjadi operator database untuk NPC, Monster, atau world stat
 **Canon Version:** `ELDORIA CANON v1.0 — LOCKED`
 **Runtime Entry Point:** `INDEX.md`
 **Core Rules:** `00_CORE_RULES.md`
+**Race System:** `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md`
 **Runtime Engine:** `32_MODULE_ROUTER.md` → `33_ACTION_RESOLVER.md` → `34_STATE_VALIDATOR.md` → `35_SAVE_PIPELINE.md`
