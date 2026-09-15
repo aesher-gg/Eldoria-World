@@ -6,6 +6,8 @@
 > **Phase:** WORLD DEVELOPMENT
 > **Dependencies:** `37_NOBILITY_SYSTEM.md` + `world/NOBILITY_KINGDOM_VARIATIONS.md` + Governance + Faction + Geography + Magic
 
+---
+
 ## 1. Purpose
 
 File ini menetapkan Noble House yang benar-benar dibutuhkan oleh struktur dunia saat ini. House tidak dibuat untuk memenuhi quota NPC atau memperbanyak lore.
@@ -299,7 +301,7 @@ KINGDOM_ID: KINGDOM-005
 TYPE: ROYAL_HOUSE
 PRIMARY_SCOPE: Crown of Sahrad
 LEADERSHIP_MODEL: Hereditary Royal House
-CURRENT_HEAD: Reigning Sovereign of Sahrad — office identity; individual Canon NPC to be established in the Noble NPC stage
+CURRENT_HEAD: NPC-CANON-016 — Nadir Qasrane
 PRIMARY_TITLE_CONTEXT: King / Queen of Sahrad
 DOMAIN_CONTEXT: Royal oasis and Crown administration; exact territorial holdings follow Crown law
 GOALS: Maintain Crown legitimacy, water security, caravan continuity, frontier stability, and lawful succession
@@ -309,11 +311,11 @@ MILITARY_FUNCTION: Crown coordination for oasis, route, and frontier defense
 MAGIC_RELATION: May patronize water, navigation, environmental, or other lawful magical capabilities; no automatic magical lineage
 CURRENT_STATE: ACTIVE
 ORIGIN: Royal foundation of Sahrad
-HISTORY: Current royal house of Sahrad; reigning sovereign identity is intentionally a separate NPC-layer dependency
+HISTORY: Current royal house of Sahrad; reigning sovereign is NPC-CANON-016 Nadir Qasrane
 CANON_STATUS: ACTIVE
 ```
 
-**Why needed:** Establishes the dynastic anchor required by Sahrad governance without prematurely creating the sovereign NPC.
+**Why needed:** Establishes the dynastic anchor required by Sahrad governance and now resolves its reigning sovereign identity.
 
 ## HOUSE-010 — HOUSE DUSTVEIL
 
@@ -382,7 +384,7 @@ INDIVIDUAL RELATIONSHIPS / SUCCESSION / CAPABILITIES
 
 House record tidak mengarang spouse, child, sibling, heir, personal magic, personal wealth, atau personal military strength NPC.
 
-Untuk `House Qasrane`, office of the reigning Sovereign sudah Canon sebagai leadership context; identitas personal sovereign dibuat pada tahap **Noble NPC**.
+Untuk `House Qasrane`, office of the reigning Sovereign dan individual sovereign sekarang Canon sebagai `NPC-CANON-016 — Nadir Qasrane`.
 
 ## 11. Canon Safety
 
@@ -393,9 +395,4 @@ Untuk `House Qasrane`, office of the reigning Sovereign sudah Canon sebagai lead
 - House tidak otomatis memiliki standing army.
 - House membership tidak menentukan race, class, skill, morality, personality, atau capability.
 - Magic-specific claims harus kembali ke `09_MAGIC_SYSTEM.md`.
-- Political relations antar-House belum dibuat hanya berdasarkan nama atau fungsi.
-- Semua future House changes wajib melalui resolution, state validation, origin, dan history.
-
-## 12. Final Principle
-
-> **Canon Noble House dibuat untuk memberi struktur nyata pada kerajaan. Jumlahnya sengaja kecil: cukup untuk membentuk Crown, ekonomi strategis, militer, frontier, dan magic context tanpa mengubah dunia menjadi katalog keluarga bangsawan.**
+- Individual Noble NPC harus memiliki record sendiri dan tidak boleh mengambil detail personal dari House record secara otomatis.
