@@ -1,7 +1,7 @@
 # ELDORIA WORLD — KINGDOM-001 GEOGRAPHY
 
 > **Authority:** Admin
-> **Canon:** Admin Canon v1.0
+> **Canon:** Admin Canon v1.1
 > **Kingdom:** KINGDOM-001 — Kerajaan Valedorn
 > **Empire:** EMPIRE-001 — Kekaisaran Valthera
 > **Purpose:** Registry resmi Region → City → Village/Settlement → Population Model untuk Kingdom-001.
@@ -385,4 +385,4 @@ Canon NPC untuk Kingdom-001 belum dibuat dalam file ini. Pembuatan Canon NPC dil
 - `???` tetap unresolved dan tidak boleh diisi oleh AI GM tanpa source yang sah.
 - Population Model adalah agregat, bukan daftar penduduk individual.
 - Race distribution tidak boleh ditebak dari nama settlement atau karakteristik visual.
-- Kingdom-002 belum dibangun di file ini.
+- Kingdom lain tidak didefinisikan di file ini.
