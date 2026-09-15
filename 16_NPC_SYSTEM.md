@@ -2,15 +2,50 @@
 
 > **Module:** 16 — NPC System
 > **Canon:** ELDORIA CANON v1.0 — LOCKED
-> **Status:** Admin Canon v1.0
+> **Status:** Admin Canon v1.1
 
 ## 1. Purpose
 
 Mendefinisikan NPC sebagai entitas hidup dengan identity, needs, goals, knowledge, relationships, capability, agency, dan lifecycle.
 
-Module ini menetapkan framework, bukan katalog NPC tetap.
+Module ini menetapkan framework dan aturan. NPC Canon disimpan sebagai data resmi repository; populasi biasa tidak perlu dikatalogkan satu per satu.
 
-## 2. NPC Identity
+## 2. NPC Classes
+
+Eldoria menggunakan tiga kategori operasional:
+
+```text
+CANON NPC
+DYNAMIC NPC
+PERSISTENT DYNAMIC NPC
+```
+
+### Canon NPC
+
+Canon NPC adalah tokoh penting yang ditetapkan Admin sebagai penghuni/tokoh resmi dunia.
+
+Canon NPC tidak boleh dibuat ulang secara acak jika record resminya sudah tersedia.
+
+Pedoman minimum populasi Canon:
+
+```text
+DESA       → minimal 3 Canon NPC
+KOTA       → minimal 5 Canon NPC
+KERAJAAN   → minimal 10 Canon NPC
+KEKAISARAN → minimal 25 Canon NPC
+```
+
+Angka tersebut adalah minimum tokoh Canon per wilayah, bukan jumlah seluruh penduduk.
+
+### Dynamic NPC
+
+Dynamic NPC adalah individu biasa yang dapat dimaterialisasi AI GM dari population/context ketika interaksi membutuhkannya. Mereka tidak wajib memiliki file repository sejak kemunculan pertama.
+
+### Persistent Dynamic NPC
+
+Dynamic NPC yang kemudian menjadi material bagi continuity dunia memperoleh stable identity dan persistence. Status ini tidak otomatis menjadikannya Canon NPC Admin.
+
+## 3. NPC Identity
 
 NPC persisten wajib memiliki:
 
@@ -18,6 +53,7 @@ NPC persisten wajib memiliki:
 NPC_ID
 NAME / DESIGNATION
 ROLE / TYPE
+NPC_CLASS = CANON | DYNAMIC_PERSISTENT
 CURRENT_STATE
 ORIGIN
 GENERATION_DATA
@@ -26,7 +62,28 @@ HISTORY
 
 Field yang belum diketahui = `???`.
 
-## 3. NPC State
+## 4. Canon NPC Authority
+
+Untuk Canon NPC, repository Canon adalah authority atas identity dan lore dasar, termasuk bila relevan:
+
+```text
+NAME
+ROLE
+ORIGIN
+BACKGROUND
+FACTION
+CORE RELATIONSHIPS
+CAPABILITIES
+GOALS
+KNOWLEDGE BOUNDARY
+CANON STATUS
+```
+
+AI GM boleh mensimulasikan keputusan dan perubahan state Canon NPC, tetapi tidak boleh diam-diam mengganti identity/lore dasar atau membuat duplicate Canon NPC.
+
+Perubahan Canon yang benar-benar mengubah world canon membutuhkan perubahan Admin Canon. Perubahan kondisi gameplay biasa menggunakan NPC State dan pipeline persistence.
+
+## 5. NPC State
 
 State dapat mencakup, bila relevan:
 
@@ -54,7 +111,7 @@ STATE_VERSION
 
 Nilai aktual harus berasal dari state atau resolution yang sah.
 
-## 4. Agency
+## 6. Agency
 
 NPC memiliki kemampuan mengambil keputusan sesuai capability, knowledge, needs, goals, relationships, resources, dan kondisi.
 
@@ -75,7 +132,7 @@ NPC dapat:
 
 NPC tidak dipaksa mengikuti plot Player.
 
-## 5. Needs & Goals
+## 7. Needs & Goals
 
 Needs adalah tekanan/kebutuhan yang memengaruhi perilaku.
 
@@ -83,7 +140,7 @@ Goals adalah tujuan yang ingin dicapai.
 
 Keduanya bukan jaminan keberhasilan; outcome tetap melalui resolution.
 
-## 6. Knowledge Boundary
+## 8. Knowledge Boundary
 
 NPC memiliki knowledge state sendiri.
 
@@ -97,26 +154,14 @@ NPC tidak otomatis mengetahui:
 
 Informasi diperoleh melalui observation, communication, rumor, records, faction network, discovery, atau mekanisme sah lain.
 
-## 7. Relationships
+## 9. Dynamic Generation
 
-NPC dapat memiliki hubungan dengan:
-
-- Character,
-- NPC lain,
-- Faction,
-- Settlement,
-- Monster,
-- atau entity lain.
-
-Hubungan dapat memengaruhi trust, cooperation, hostility, access, trade, information, dan decisions sesuai resolution.
-
-## 8. Dynamic Generation
-
-NPC dapat dihasilkan secara dinamis berdasarkan context seperti:
+Dynamic NPC dapat dihasilkan berdasarkan context seperti:
 
 ```text
 LOCATION
 SETTLEMENT
+POPULATION MODEL
 FACTION
 ROLE / NEED
 WORLD STATE
@@ -124,15 +169,27 @@ EVENT CONTEXT
 GENERATION SEED / PARAMETERS
 ```
 
-Jika NPC menjadi material, generator harus memberi stable identity, origin, generation data, current state, dan history.
+Generator harus menghormati Canon NPC yang sudah ada. Jika Player berinteraksi dengan tokoh Canon yang relevan, fetch record Canon terlebih dahulu daripada membuat pengganti.
 
-## 9. Persistence Threshold
+Jika Dynamic NPC menjadi material, generator harus memberi stable identity, origin, generation data, current state, dan history sesuai persistence requirement.
+
+## 10. Population Model
+
+Population tidak sama dengan NPC database.
+
+Settlement dapat memiliki populasi sangat besar tanpa setiap individu memiliki record repository.
+
+Population model menentukan distribusi/karakteristik umum yang relevan, sedangkan individual Dynamic NPC dimaterialisasi hanya ketika diperlukan oleh simulation.
+
+## 11. Persistence Threshold
 
 NPC background yang tidak material dapat direpresentasikan secara abstrak.
 
 NPC harus menjadi persistent entity ketika memiliki dampak material melalui interaction, quest, relationship, transaction, combat, faction activity, information, atau konsekuensi dunia.
 
-## 10. Lifecycle
+Persistent Dynamic NPC tetap dibedakan dari Canon NPC Admin.
+
+## 12. Lifecycle
 
 NPC dapat mengalami lifecycle seperti:
 
@@ -145,7 +202,7 @@ CREATED / BORN
 
 State aktual menentukan lifecycle; tidak ada automatic resurrection atau replacement tanpa mekanisme sah.
 
-## 11. World Interaction
+## 13. World Interaction
 
 NPC dapat memengaruhi dan dipengaruhi oleh:
 
@@ -162,7 +219,7 @@ NPC dapat memengaruhi dan dipengaruhi oleh:
 
 Module Router wajib memuat module yang relevan terhadap konsekuensi.
 
-## 12. NPC Actions
+## 14. NPC Actions
 
 NPC action mengikuti pipeline yang sama dengan actor lain:
 
@@ -182,7 +239,7 @@ ATOMIC PERSISTENCE
 HISTORY + ORIGIN
 ```
 
-## 13. Anti-Plot Behavior
+## 15. Anti-Plot Behavior
 
 AI GM dilarang membuat NPC:
 
@@ -195,24 +252,24 @@ AI GM dilarang membuat NPC:
 
 Perubahan perilaku harus memiliki cause yang relevan.
 
-## 14. Information & Narrative
+## 16. Information & Narrative
 
 Narrative hanya mengungkap NPC berdasarkan informasi yang Character dapat akses.
 
 Internal NPC state dapat tetap hidden jika belum diketahui.
 
-## 15. Canon Safety
+## 17. Canon Safety
 
-Module ini tidak menetapkan katalog NPC, personality template wajib, moral alignment universal, atau outcome sosial universal.
+Canon NPC adalah data resmi Admin. Dynamic NPC tidak boleh dipromosikan menjadi Canon hanya melalui narasi AI GM.
 
-NPC spesifik berasal dari repository, persistent state, atau dynamic generation yang sah.
+Jika Dynamic NPC menjadi penting, ia dapat menjadi **Persistent Dynamic NPC** melalui persistence pipeline tanpa otomatis mengubah Canon.
 
-## 16. Dependencies
+## 18. Dependencies
 
 `03_CITIES_AND_SETTLEMENTS` + `04_FACTIONS` + `05_CHARACTER_SYSTEM` + `06_ATTRIBUTES` + `07_CLASSES` + `08_SKILLS` + `09_MAGIC_SYSTEM` + `10_EQUIPMENT_SYSTEM` + `11_ECONOMY` + `12_VITALITY_SURVIVAL`.
 
 Integrasi: `14_MONSTER_ECOSYSTEM`, `17_QUEST_SYSTEM`, `18_WORLD_EVENTS`, `19_FACTION_SYSTEM`, `20_REPUTATION`, `25_WORLD_STATE`, `27_NPC_STATE`, `32_MODULE_ROUTER`, `33_ACTION_RESOLVER`, `34_STATE_VALIDATOR`, `35_SAVE_PIPELINE`.
 
-## 17. Final Principle
+## 19. Final Principle
 
-> **NPC adalah agen dunia yang hidup; mereka memiliki tujuan dan pengetahuan sendiri, sehingga hubungan dengan Player harus menjadi hasil simulasi, bukan skrip.**
+> **Canon NPC menyediakan tokoh penting resmi dunia; Population Model menyediakan skala populasi; Dynamic NPC mengisi kehidupan sehari-hari; Persistence menjaga kontinuitas tanpa memaksa seluruh populasi menjadi database individual.**
