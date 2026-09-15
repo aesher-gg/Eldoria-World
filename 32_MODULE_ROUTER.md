@@ -6,13 +6,11 @@
 
 ## 0. PURPOSE
 
-Module Router menentukan module, state, history, dan origin yang wajib dimuat untuk satu Turn Transaction berdasarkan intent, entity yang terlibat, dan konsekuensi yang mungkin disentuh.
+Module Router menentukan module, state, history, origin, dan entity records yang wajib dimuat untuk satu Turn Transaction berdasarkan intent, entity yang terlibat, dan konsekuensi yang mungkin disentuh.
 
-Router **tidak menentukan outcome** dan tidak mengubah state. Router hanya menghasilkan Routing Plan untuk Action Resolver.
+Router tidak menentukan outcome dan tidak mengubah state. Router hanya menghasilkan Routing Plan untuk Action Resolver.
 
 ## 1. INPUT
-
-Router menerima:
 
 ```text
 TURN_ID
@@ -36,11 +34,57 @@ CURRENT RELEVANT STATE
 RELEVANT HISTORY / ORIGIN
 ```
 
+Untuk Player Character, Router harus memastikan Character Registry/Record resmi ditemukan sebelum memakai identity dasar karakter.
+
 State yang relevan ditentukan dari actor, target, lokasi, action, dan konsekuensi yang dapat disentuh.
 
 Module yang pernah dimuat pada turn sebelumnya tidak dianggap masih authoritative.
 
-## 3. ROUTING PRINCIPLE
+## 3. ENTITY DISCOVERY & AUTHORITY
+
+Sebelum membuat entity baru, Router wajib memeriksa sumber entity resmi yang relevan.
+
+### Player Character
+
+```text
+PLAYER/CHARACTER REFERENCE
+↓
+PLAYER REGISTRY / CHARACTER RECORD
+↓
+CURRENT CHARACTER STATE
+```
+
+Jika Player Character belum terdaftar, jangan membuat identity baru secara otomatis. Resolution yang membutuhkan identity resmi harus ditahan sampai authority tersedia.
+
+### Canon NPC
+
+```text
+NPC REFERENCE
+↓
+CANON NPC RECORD
+↓
+NPC STATE bila tersedia
+```
+
+Jika Canon NPC dengan identity yang sesuai ditemukan, AI GM wajib menggunakannya dan dilarang membuat duplicate Dynamic NPC sebagai pengganti.
+
+### Monster Canon
+
+```text
+MONSTER SPECIES REFERENCE
+↓
+MONSTER CANON REGISTRY / DEFINITION
+↓
+INDIVIDUAL MONSTER STATE bila ada
+```
+
+Jika species Canon ditemukan, gunakan definition Canon sebagai authority untuk identity/lore/tier dasarnya.
+
+### Dynamic NPC / Monster
+
+Jika tidak ada authoritative entity yang cocok dan module mengizinkan generation, AI GM dapat membuat Dynamic entity sesuai generation rules. Entity yang menjadi material mengikuti persistence threshold dan stable identity requirements.
+
+## 4. ROUTING PRINCIPLE
 
 Router menggunakan **domain yang benar-benar disentuh oleh action**, bukan sekadar pencocokan kata pada Player Message.
 
@@ -58,14 +102,14 @@ Contoh:
 | Faction action | 19 Faction | 04 Factions, 16 NPC, 18 Events, 20 Reputation |
 | Companion | 24 Pets/Companions | 23 Party, 12 Vitality, 13 Combat, 26/27/28 State |
 | Party | 23 Party | relevant member state, 13 Combat or 02 Travel when applicable |
-| Monster/ecology | 14 Monster Ecosystem | 28 Monster State, 12/13, 15 Loot when applicable |
+| Monster/ecology | 14 Monster Ecosystem | 28 Monster State, Monster Canon definition bila species Canon, 12/13, 15 Loot when applicable |
 | Loot | 15 Loot | 10 Equipment, 11 Economy, source state, 30/31 |
 | World event | 18 World Events | 25 World State, affected entity states, 30/31 |
 | Reputation | 20 Reputation | 04 Factions, 16 NPC, 26 Character State |
 
 Tabel adalah panduan domain, bukan daftar module yang selalu wajib dimuat seluruhnya. Konsekuensi aktual menentukan load final.
 
-## 4. DEPENDENCY LOADING
+## 5. DEPENDENCY LOADING
 
 Dependency module dimuat secara rekursif sampai seluruh requirement terpenuhi.
 
@@ -78,11 +122,9 @@ Runtime harus menggunakan mekanisme `VISITED_SET` atau ekuivalen untuk:
 
 Dependency reference tidak memberi module hak untuk mengubah authority layer module lain.
 
-## 5. STATE AUTHORITY
+## 6. STATE AUTHORITY
 
 Jika action menyentuh state, state module yang sesuai adalah authority untuk kondisi terkini.
-
-Contoh:
 
 ```text
 CHARACTER_STATE → kondisi karakter
@@ -92,9 +134,11 @@ WORLD_STATE     → kondisi dunia bersama
 EVENT_STATE     → kondisi event persisten
 ```
 
+Canon Definition/Registry menjadi authority untuk identity dan fakta Canon. Current State menjadi authority untuk kondisi saat ini.
+
 Narrative tidak boleh menggantikan state.
 
-## 6. HISTORY & ORIGIN
+## 7. HISTORY & ORIGIN
 
 Untuk entity atau perubahan material, Router wajib memasukkan:
 
@@ -107,7 +151,7 @@ sebagai context persistence yang relevan.
 
 Router tidak membuat record History/Origin; pembuatan dilakukan setelah resolution dan validation sesuai Save Pipeline.
 
-## 7. UNKNOWN / AMBIGUOUS INTENT
+## 8. UNKNOWN / AMBIGUOUS INTENT
 
 Jika intent tidak dapat ditentukan secara sah:
 
@@ -119,17 +163,6 @@ OUTCOME = UNRESOLVED
 Router tidak boleh menebak action hanya untuk menghindari `???`.
 
 Jika informasi tambahan diperlukan, Action Resolver menangani kebutuhan klarifikasi/resolution tanpa membuat fakta baru.
-
-## 8. ENTITY DISCOVERY
-
-Jika Player merujuk entity yang belum memiliki ID persisten:
-
-1. cek state persisten yang relevan;
-2. cek History/Origin bila diperlukan;
-3. gunakan dynamic generation hanya jika module mengizinkan dan resolution memerlukannya;
-4. generated entity material harus mendapat identity, Origin, Generation Data, State, dan History.
-
-Jangan membuat entity pengganti jika entity persisten sudah ditemukan.
 
 ## 9. TIME-AWARE ROUTING
 
@@ -160,6 +193,7 @@ ROUTE_STATUS
 PRIMARY_MODULES
 SECONDARY_MODULES
 STATE_SOURCES
+CANON_SOURCES
 HISTORY_SOURCES
 ORIGIN_SOURCES
 ENTITY_IDS
@@ -176,6 +210,9 @@ Output ini adalah data runtime, bukan narrative.
 Router wajib:
 
 - fetch/verify INDEX setiap turn;
+- resolve Player Character identity dari registry/record resmi;
+- check Canon NPC sebelum dynamic NPC generation;
+- check Monster Canon sebelum dynamic creature interpretation;
 - tidak resolve outcome;
 - tidak mutate state;
 - tidak mengarang module/data;
@@ -188,7 +225,7 @@ Router wajib:
 
 ## 13. FAILURE
 
-Jika required module atau authoritative state tidak tersedia:
+Jika required module, Canon record, atau authoritative state tidak tersedia:
 
 ```text
 ROUTE FAILURE
@@ -200,7 +237,7 @@ NO STATE CHANGE
 NO FALSE HISTORY / ORIGIN
 ```
 
-Jangan mengganti module yang hilang dengan asumsi.
+Jangan mengganti source yang hilang dengan asumsi.
 
 ## 14. HANDOFF
 
@@ -220,4 +257,4 @@ ACTION RESOLVER
 
 Final principle:
 
-> **Module Router menentukan apa yang harus dibaca; bukan apa yang harus terjadi.**
+> **Module Router menentukan apa yang harus dibaca dan source authority mana yang harus diperiksa; bukan apa yang harus terjadi.**
