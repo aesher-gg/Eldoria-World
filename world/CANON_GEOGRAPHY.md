@@ -1,7 +1,7 @@
 # ELDORIA WORLD — CANON GEOGRAPHY REGISTRY
 
 > **Authority:** Admin
-> **Status:** Admin Canon v1.6
+> **Status:** Admin Canon v1.7
 > **Purpose:** Registry resmi struktur geografis-politik Eldoria sebagai dasar settlement, population model, faction, dan Canon NPC.
 
 ## 1. Authority
@@ -21,7 +21,7 @@ WORLD
 ```text
 CONTINENT_COUNT: 1 (main continent)
 EMPIRE_COUNT: 1
-KINGDOM_COUNT: 2+ (KINGDOM-001 and KINGDOM-002 established; future count remains open)
+KINGDOM_COUNT: 5 (KINGDOM-001 through KINGDOM-005 established)
 KINGDOM-001_REGION_COUNT: 4
 KINGDOM-001_CITY_COUNT: 4
 KINGDOM-001_VILLAGE_SETTLEMENT_COUNT: 8
@@ -30,7 +30,19 @@ KINGDOM-002_REGION_COUNT: 4
 KINGDOM-002_CITY_COUNT: 4
 KINGDOM-002_VILLAGE_SETTLEMENT_COUNT: 8
 KINGDOM-002_POPULATION_MODEL: ACTIVE
-KINGDOM-003+: PENDING
+KINGDOM-003_REGION_COUNT: 4
+KINGDOM-003_CITY_COUNT: 4
+KINGDOM-003_VILLAGE_SETTLEMENT_COUNT: 8
+KINGDOM-003_POPULATION_MODEL: ACTIVE
+KINGDOM-004_REGION_COUNT: 4
+KINGDOM-004_CITY_COUNT: 4
+KINGDOM-004_VILLAGE_SETTLEMENT_COUNT: 8
+KINGDOM-004_POPULATION_MODEL: ACTIVE
+KINGDOM-005_REGION_COUNT: 4
+KINGDOM-005_CITY_COUNT: 4
+KINGDOM-005_VILLAGE_SETTLEMENT_COUNT: 8
+KINGDOM-005_POPULATION_MODEL: ACTIVE
+KINGDOM-006+: PENDING
 ```
 
 ## 3. Empire Registry
@@ -50,11 +62,7 @@ ORIGIN: ???
 HISTORY: ???
 ```
 
-### 3.1 Empire Identity
-
-Kekaisaran Valthera adalah satu-satunya entitas kekaisaran utama dalam struktur politik Canon Eldoria dan menjadi otoritas politik tertinggi atas kerajaan-kerajaan di bawahnya. Aurelis adalah ibu kota kekaisaran.
-
-### 3.2 Political Identity
+### 3.1 Political Identity
 
 ```text
 POLITICAL_SYSTEM: Monarki Kekaisaran Terdesentralisasi
@@ -67,61 +75,35 @@ LOCAL_SCOPE: Pemerintahan kerajaan dan administrasi lokal berada pada kerajaan m
 
 Nama pribadi Kaisar, struktur kementerian/dewan rinci, hukum spesifik, dan batas kewenangan yang belum ditetapkan tetap `???`.
 
-### 3.3 Administrative Framework
-
-```text
-KEKAISARAN VALTHERA
-        │
-        ├── Otoritas Imperial
-        │
-        └── KERAJAAN
-              │
-              ├── Pemerintahan Kerajaan
-              │
-              └── KOTA
-                    │
-                    └── DESA / SETTLEMENT
-```
-
-### 3.4 Territorial Framework
+### 3.2 Territorial Framework
 
 ```text
 EMPIRE-001
     ↓
 KINGDOM-001 — Valedorn
 KINGDOM-002 — Brannor
-KINGDOM-003 ... KINGDOM-???
+KINGDOM-003 — Mariselle
+KINGDOM-004 — Sylvaran
+KINGDOM-005 — Sahrad
+KINGDOM-006+ — future kingdoms, count open
 ```
 
 Integrity rules:
-
 1. Setiap Kingdom wajib memiliki `EMPIRE_ID: EMPIRE-001`.
 2. Setiap Region wajib memiliki parent Kingdom yang valid.
 3. Setiap City wajib memiliki `KINGDOM_ID` dan `REGION_ID` valid.
 4. Setiap Settlement wajib memiliki `CITY_ID` dan `REGION_ID` valid kecuali Canon secara eksplisit menetapkan struktur lain.
 5. Tidak ada Canon geography yang boleh menunjuk parent `???`.
-6. Jumlah Kingdom tidak dibuat hanya untuk memenuhi quota NPC.
+6. Kingdom baru harus memiliki fungsi geografis/politik/ekonomi yang jelas dan tidak dibuat hanya untuk memenuhi quota NPC.
 
-### 3.5 Imperial Authority Boundary
-
-Domain prinsipil tingkat kekaisaran:
-
-- legitimasi dan hukum kekaisaran,
-- pertahanan dan keamanan strategis tingkat kekaisaran,
-- hubungan resmi antar-kerajaan,
-- kepentingan strategis lintas kerajaan,
-- urusan lain yang ditetapkan Canon Imperial.
-
-Domain kerajaan dan lokal tetap berada pada pemerintahan masing-masing selama tidak bertentangan dengan kewenangan imperial yang sah.
-
-### 3.6 Empire Canon Boundaries
+### 3.3 Empire Canon Boundaries
 
 ```text
 EMPIRE_ID: EMPIRE-001
 NAME: Kekaisaran Valthera
 CAPITAL: Aurelis
 CONTINENT: Benua Utama Eldoria
-KINGDOMS: KINGDOM-001 + KINGDOM-002 + future kingdoms (count open)
+KINGDOMS: KINGDOM-001 through KINGDOM-005 + future kingdoms
 MAJOR_REGIONS: ???
 POLITICAL_SYSTEM: Monarki Kekaisaran Terdesentralisasi
 RULER: Kaisar Valthera (nama pribadi: ???)
@@ -134,23 +116,7 @@ EXTERNAL_RELATIONS: ???
 CURRENT_POLITICAL_STATE: Stabil secara administratif; detail politik aktif = ???
 ```
 
-### 3.7 Empire Population Boundary
-
-Population kekaisaran direpresentasikan secara agregat. Population Model dibangun bertahap setelah geography Kingdom/Region/City/Settlement tersedia. Tidak ada kewajiban membuat file untuk setiap penduduk.
-
-### 3.8 Empire Construction Rule
-
-```text
-EMPIRE-001
-↓
-KINGDOM
-↓
-REGION / CITY / SETTLEMENT
-↓
-POPULATION MODEL
-↓
-CANON NPC
-```
+Population kekaisaran direpresentasikan secara agregat. Tidak ada kewajiban membuat file untuk setiap penduduk.
 
 ## 4. Kingdom Registry
 
@@ -162,16 +128,9 @@ EMPIRE_ID: EMPIRE-001
 NAME: Kerajaan Valedorn
 TYPE: Kerajaan Heartland Agraris-Riverine
 CAPITAL: Varenhold
-BOUNDARY: Heartland tengah Valthera; detail batas fisik dibangun melalui Region Canon
 REGIONS: REGION-001, REGION-002, REGION-003, REGION-004
-CURRENT_STATE: Stabil; detail politik, keamanan, dan ekonomi aktif = ???
-ORIGIN: Berkembang sebagai kerajaan agraris dan jalur sungai yang kemudian berada di bawah struktur Kekaisaran Valthera; detail sejarah pendirian = ???
-HISTORY: ???
 ```
-
-Valedorn berfungsi sebagai heartland pangan, perdagangan darat, koridor sungai, dan konektivitas internal. Karakter regional: **subur, produktif, terhubung, dan pragmatis**.
-
-Detail Region → City → Village/Settlement → Population Model berada di `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+Detail geography/population: `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
 
 ### 4.2 KINGDOM-002 — Kerajaan Brannor
 
@@ -181,54 +140,98 @@ EMPIRE_ID: EMPIRE-001
 NAME: Kerajaan Brannor
 TYPE: Kerajaan Highland-Mineral
 CAPITAL: Durnhaven
-BOUNDARY: Wilayah dataran tinggi dan pegunungan di luar heartland Valedorn; batas fisik rinci = ???
 REGIONS: REGION-005, REGION-006, REGION-007, REGION-008
-CURRENT_STATE: Stabil secara administratif; kondisi politik, keamanan, dan ekonomi aktif = ???
-ORIGIN: Berkembang sebagai pusat dataran tinggi, sumber daya mineral, dan jalur lintas pegunungan; detail pendirian = ???
-HISTORY: ???
 ```
+Detail geography/population: `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
 
-Brannor menjadi pelengkap geografis Valedorn melalui fungsi dataran tinggi, pegunungan, mineral, jalur lintas pegunungan, perdagangan, dan frontier transport.
-
-Detail Region → City → Village/Settlement → Population Model berada di `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
-
-### 4.3 Future Kingdoms
+### 4.3 KINGDOM-003 — Kerajaan Mariselle
 
 ```text
-KINGDOM-003: ???
-KINGDOM-004: ???
-...
+KINGDOM_ID: KINGDOM-003
+EMPIRE_ID: EMPIRE-001
+NAME: Kerajaan Mariselle
+TYPE: Kerajaan Coastal-Maritime
+CAPITAL: Port Aureon
+REGIONS: REGION-009, REGION-010, REGION-011, REGION-012
+```
+Detail geography/population: `world/kingdoms/KINGDOM-003_GEOGRAPHY.md`.
+
+Mariselle menjadi pusat pesisir, pelabuhan, pelayaran, perikanan, perdagangan laut, galangan kapal, dan konektivitas antarpantai.
+
+### 4.4 KINGDOM-004 — Kerajaan Sylvaran
+
+```text
+KINGDOM_ID: KINGDOM-004
+EMPIRE_ID: EMPIRE-001
+NAME: Kerajaan Sylvaran
+TYPE: Kerajaan Forest-Border
+CAPITAL: Elaris
+REGIONS: REGION-013, REGION-014, REGION-015, REGION-016
+```
+Detail geography/population: `world/kingdoms/KINGDOM-004_GEOGRAPHY.md`.
+
+Sylvaran menjadi wilayah hutan, sungai hulu, hasil hutan, pertanian, kerajinan, jalur darat, dan frontier ekologis.
+
+### 4.5 KINGDOM-005 — Kerajaan Sahrad
+
+```text
+KINGDOM_ID: KINGDOM-005
+EMPIRE_ID: EMPIRE-001
+NAME: Kerajaan Sahrad
+TYPE: Kerajaan Arid-Steppe
+CAPITAL: Qasrane
+REGIONS: REGION-017, REGION-018, REGION-019, REGION-020
+```
+Detail geography/population: `world/kingdoms/KINGDOM-005_GEOGRAPHY.md`.
+
+Sahrad menjadi wilayah oasis, padang rumput kering, jalur kafilah, peternakan, perdagangan darat jarak jauh, dan frontier arid.
+
+### 4.6 Future Kingdoms
+
+```text
+KINGDOM-006+: PENDING
 ```
 
-Kerajaan berikutnya dibangun satu per satu berdasarkan fungsi geografis, politik, ekonomi, dan karakter yang berbeda atau saling melengkapi dengan Kingdom yang sudah ada.
+Kerajaan berikutnya dibangun hanya jika diperlukan oleh desain dunia dan memiliki fungsi yang jelas.
 
 ## 5. City Registry
 
-Current Canon City Registry Kingdom-001:
-
 ```text
-CITY-001 → Varenhold → REGION-001 → KINGDOM-001
-CITY-002 → Averen → REGION-002 → KINGDOM-001
-CITY-003 → Goldmere → REGION-003 → KINGDOM-001
-CITY-004 → Thornwick → REGION-004 → KINGDOM-001
+KINGDOM-001:
+CITY-001 → Varenhold → REGION-001
+CITY-002 → Averen → REGION-002
+CITY-003 → Goldmere → REGION-003
+CITY-004 → Thornwick → REGION-004
+
+KINGDOM-002:
+CITY-005 → Durnhaven → REGION-005
+CITY-006 → Kharhold → REGION-006
+CITY-007 → Ferren → REGION-007
+CITY-008 → Frostwatch → REGION-008
+
+KINGDOM-003:
+CITY-009 → Port Aureon → REGION-009
+CITY-010 → Southport → REGION-010
+CITY-011 → Azurehold → REGION-011
+CITY-012 → Westhaven → REGION-012
+
+KINGDOM-004:
+CITY-013 → Elaris → REGION-013
+CITY-014 → Sylford → REGION-014
+CITY-015 → Riverwyn → REGION-015
+CITY-016 → Wildmere → REGION-016
+
+KINGDOM-005:
+CITY-017 → Qasrane → REGION-017
+CITY-018 → Sarakh → REGION-018
+CITY-019 → Caravanser → REGION-019
+CITY-020 → Sunscar → REGION-020
 ```
-
-Kingdom-002:
-
-```text
-CITY-005 → Durnhaven → REGION-005 → KINGDOM-002
-CITY-006 → Kharhold → REGION-006 → KINGDOM-002
-CITY-007 → Ferren → REGION-007 → KINGDOM-002
-CITY-008 → Frostwatch → REGION-008 → KINGDOM-002
-```
-
-Detail City Canon berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md` dan `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
 
 ## 6. Village / Settlement Registry
 
-Current Canon Settlement Registry Kingdom-001:
-
 ```text
+KINGDOM-001:
 SETTLEMENT-001 → Bellmere → CITY-001 → REGION-001
 SETTLEMENT-002 → Oakrest → CITY-001 → REGION-001
 SETTLEMENT-003 → Rivergate → CITY-002 → REGION-002
@@ -237,11 +240,8 @@ SETTLEMENT-005 → Wheatcross → CITY-003 → REGION-003
 SETTLEMENT-006 → Sunfield → CITY-003 → REGION-003
 SETTLEMENT-007 → Briarford → CITY-004 → REGION-004
 SETTLEMENT-008 → Greenhollow → CITY-004 → REGION-004
-```
 
-Kingdom-002:
-
-```text
+KINGDOM-002:
 SETTLEMENT-009 → Stonepass → CITY-005 → REGION-005
 SETTLEMENT-010 → Highmere → CITY-005 → REGION-005
 SETTLEMENT-011 → Valecrest → CITY-006 → REGION-006
@@ -250,95 +250,101 @@ SETTLEMENT-013 → Blackridge → CITY-007 → REGION-007
 SETTLEMENT-014 → Redstone → CITY-007 → REGION-007
 SETTLEMENT-015 → Pinewatch → CITY-008 → REGION-008
 SETTLEMENT-016 → Coldmere → CITY-008 → REGION-008
+
+KINGDOM-003:
+SETTLEMENT-017 → Seabridge → CITY-009 → REGION-009
+SETTLEMENT-018 → Tidemere → CITY-009 → REGION-009
+SETTLEMENT-019 → Saltmere → CITY-010 → REGION-010
+SETTLEMENT-020 → Gullhaven → CITY-010 → REGION-010
+SETTLEMENT-021 → Pearlwatch → CITY-011 → REGION-011
+SETTLEMENT-022 → Windrest → CITY-011 → REGION-011
+SETTLEMENT-023 → Driftwood → CITY-012 → REGION-012
+SETTLEMENT-024 → Stormbay → CITY-012 → REGION-012
+
+KINGDOM-004:
+SETTLEMENT-025 → Greenford → CITY-013 → REGION-013
+SETTLEMENT-026 → Mossvale → CITY-013 → REGION-013
+SETTLEMENT-027 → Oakmere → CITY-014 → REGION-014
+SETTLEMENT-028 → Fernwatch → CITY-014 → REGION-014
+SETTLEMENT-029 → Brookrest → CITY-015 → REGION-015
+SETTLEMENT-030 → Alderbank → CITY-015 → REGION-015
+SETTLEMENT-031 → Pinecross → CITY-016 → REGION-016
+SETTLEMENT-032 → Thornrest → CITY-016 → REGION-016
+
+KINGDOM-005:
+SETTLEMENT-033 → Wellspring → CITY-017 → REGION-017
+SETTLEMENT-034 → Datehaven → CITY-017 → REGION-017
+SETTLEMENT-035 → Grassrest → CITY-018 → REGION-018
+SETTLEMENT-036 → Herdwatch → CITY-018 → REGION-018
+SETTLEMENT-037 → Dustgate → CITY-019 → REGION-019
+SETTLEMENT-038 → Redwell → CITY-019 → REGION-019
+SETTLEMENT-039 → Sandmere → CITY-020 → REGION-020
+SETTLEMENT-040 → Farwatch → CITY-020 → REGION-020
 ```
 
 ## 7. Region Registry
 
-Current Canon Region Registry Kingdom-001:
-
 ```text
-REGION-001 → Cekungan Varenhold → KINGDOM-001
-REGION-002 → Koridor Sungai Averen → KINGDOM-001
-REGION-003 → Dataran Ladang Emas → KINGDOM-001
-REGION-004 → Perbatasan Hutan Thorn → KINGDOM-001
+KINGDOM-001:
+REGION-001 → Cekungan Varenhold
+REGION-002 → Koridor Sungai Averen
+REGION-003 → Dataran Ladang Emas
+REGION-004 → Perbatasan Hutan Thorn
+
+KINGDOM-002:
+REGION-005 → Pegunungan Durn
+REGION-006 → Lembah Kharven
+REGION-007 → Punggung Besi
+REGION-008 → Perbatasan Frostpine
+
+KINGDOM-003:
+REGION-009 → Teluk Aureon
+REGION-010 → Pantai Selatan
+REGION-011 → Kepulauan Azure
+REGION-012 → Pesisir Barat
+
+KINGDOM-004:
+REGION-013 → Hutan Elaris
+REGION-014 → Lembah Silvan
+REGION-015 → Sungai Elden
+REGION-016 → Perbatasan Wildmere
+
+KINGDOM-005:
+REGION-017 → Oasis Qasrane
+REGION-018 → Padang Rumput Sahr
+REGION-019 → Koridor Kafilah Timur
+REGION-020 → Perbatasan Sunscar
 ```
 
-Kingdom-002:
+## 8. Population Registry
+
+Population Model adalah agregat; exact race percentages, migration balance, dan occupational percentages tetap `???` bila belum ditetapkan.
 
 ```text
-REGION-005 → Pegunungan Durn → KINGDOM-002
-REGION-006 → Lembah Kharven → KINGDOM-002
-REGION-007 → Punggung Besi → KINGDOM-002
-REGION-008 → Perbatasan Frostpine → KINGDOM-002
+KINGDOM-001 → POP-VAL-001 → RANGE 650,000–900,000 → ACTIVE
+KINGDOM-002 → POP-BRA-001 → RANGE 450,000–700,000 → ACTIVE
+KINGDOM-003 → POP-MAR-001 → RANGE 500,000–800,000 → ACTIVE
+KINGDOM-004 → POP-SYL-001 → RANGE 400,000–650,000 → ACTIVE
+KINGDOM-005 → POP-SAH-001 → RANGE 300,000–500,000 → ACTIVE
 ```
 
-Detail Region Kingdom-002 berada pada `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
+Detail regional distribution dan population logic berada di masing-masing Kingdom Geography file.
 
-## 8. Parent-Child Integrity
+## 9. Parent-Child Integrity
 
 ```text
 EMPIRE-001
 ↓
-KINGDOM-001 / KINGDOM-002 → existing EMPIRE-001
+KINGDOM-001..005
 ↓
-REGION → existing parent Kingdom
+REGION-001..020
 ↓
-CITY → existing Kingdom + Region
+CITY-001..020
 ↓
-SETTLEMENT → existing City + Region
+SETTLEMENT-001..040
 ```
 
-Semua Region/City/Settlement Kingdom-002 yang tercantum di registry ini memiliki parent Canon yang valid.
-
-## 9. Population Boundary
-
-Population Model menangani penduduk massal secara agregat. Tidak semua penduduk menjadi Canon NPC atau record individual.
-
-Kingdom-001 Population Model:
-
-```text
-POPULATION_MODEL_ID: POP-VAL-001
-TOTAL_POPULATION: RANGE 650,000–900,000
-URBANIZATION: MODERATE
-PRIMARY_POPULATION_BASE: AGRICULTURAL + RIVERINE
-EXACT_RACE_PERCENTAGES: ???
-MIGRATION_BALANCE: ???
-SEASONAL_MOBILITY: MODERATE
-```
-
-Regional distribution model Kingdom-001:
-
-```text
-REGION-001 → 20–25%
-REGION-002 → 20–25%
-REGION-003 → 35–40%
-REGION-004 → 15–20%
-```
-
-Kingdom-002 Population Model:
-
-```text
-POPULATION_MODEL_ID: POP-BRA-001
-TOTAL_POPULATION: RANGE 450,000–700,000
-URBANIZATION: LOW-MODERATE
-PRIMARY_POPULATION_BASE: MINING + HIGHLAND AGRICULTURE + TRADE + FORESTRY
-SEASONAL_MOBILITY: MODERATE-HIGH
-MIGRATION_BALANCE: ???
-EXACT_RACE_PERCENTAGES: ???
-```
-
-Regional distribution model Kingdom-002:
-
-```text
-REGION-005 → 20–25%
-REGION-006 → 25–30%
-REGION-007 → 30–35%
-REGION-008 → 15–20%
-```
-
-Settlement population mengikuti kapasitas ekonomi, terrain, akses, keamanan, musim, migrasi, dan kebutuhan simulasi. Tidak harus mengisi batas atas setiap settlement.
-
-Exact race percentages dan occupational percentages tetap `???` bila belum ditetapkan. Population Model tidak membuat individu massal menjadi file repository.
+Setiap child memiliki parent Canon yang valid. Tidak ada parent `???` pada struktur yang telah didaftarkan.
 
 ## 10. Canon NPC Build Gate
 
@@ -350,8 +356,7 @@ CANON GEOGRAPHY
 → CANON NPC
 ```
 
-Minimum Canon NPC:
-
+Minimum coverage:
 ```text
 DESA → ≥ 3 Canon NPC
 KOTA → ≥ 5 Canon NPC
@@ -359,13 +364,13 @@ KERAJAAN → ≥ 10 Canon NPC per kingdom
 KEKAISARAN → ≥ 25 Canon NPC
 ```
 
-Kingdom-001 dan Kingdom-002 geography serta Population Model sekarang tersedia; Canon NPC belum dibangun.
+Kingdom-001 through Kingdom-005 geography dan Population Model sekarang tersedia. Canon NPC belum dibangun.
 
 ## 11. Canon Safety
 
-- `Kekaisaran Valthera`, `Aurelis`, `Monarki Kekaisaran Terdesentralisasi`, `Kerajaan Valedorn`, `Varenhold`, `Kerajaan Brannor`, dan `Durnhaven` adalah Canon resmi.
-- Region/City/Settlement Kingdom-001 dan Kingdom-002 yang tercantum adalah Admin Canon.
-- Population Model adalah model agregat, bukan daftar individu.
+- Semua Kingdom-001 through Kingdom-005 resmi berada di bawah EMPIRE-001.
+- Semua Region, City, dan Settlement terdaftar adalah Admin Canon.
+- Population Model tidak membuat penduduk massal menjadi file individual.
 - `???` tetap Unknown/Unresolved dan tidak boleh ditebak AI GM.
 - Race tidak boleh ditebak dari nama, penampilan, lokasi, class, faction, atau stereotype.
 - Dynamic NPC tidak otomatis menjadi Canon NPC.
@@ -376,20 +381,15 @@ Kingdom-001 dan Kingdom-002 geography serta Population Model sekarang tersedia; 
 ```text
 PHASE 1 — STRUCTURE: COMPLETE
 PHASE 2 — EMPIRE IDENTITY: COMPLETE
-PHASE 3 — KINGDOM-001 IDENTITY: COMPLETE
-PHASE 4 — KINGDOM-001 REGIONS: COMPLETE
-PHASE 5 — KINGDOM-001 CITIES: COMPLETE
-PHASE 6 — KINGDOM-001 VILLAGES / SETTLEMENTS: COMPLETE
-PHASE 7 — KINGDOM-001 POPULATION MODEL: COMPLETE
-PHASE 8 — KINGDOM-001 CANON NPC: READY / NOT YET BUILT
-PHASE 9 — KINGDOM-002 IDENTITY: COMPLETE
-PHASE 10 — KINGDOM-002 REGIONS: COMPLETE
-PHASE 11 — KINGDOM-002 CITIES: COMPLETE
-PHASE 12 — KINGDOM-002 VILLAGES / SETTLEMENTS: COMPLETE
-PHASE 13 — KINGDOM-002 POPULATION MODEL: COMPLETE
-PHASE 14 — KINGDOM-001 + KINGDOM-002 CANON NPC: NEXT
+PHASE 3 — KINGDOM-001 GEOGRAPHY + POPULATION: COMPLETE
+PHASE 4 — KINGDOM-002 GEOGRAPHY + POPULATION: COMPLETE
+PHASE 5 — KINGDOM-003 IDENTITY + GEOGRAPHY + POPULATION: COMPLETE
+PHASE 6 — KINGDOM-004 IDENTITY + GEOGRAPHY + POPULATION: COMPLETE
+PHASE 7 — KINGDOM-005 IDENTITY + GEOGRAPHY + POPULATION: COMPLETE
+PHASE 8 — FACTION / GOVERNANCE CONTEXT: PENDING
+PHASE 9 — CANON NPC KINGDOM-001..005: NEXT AFTER FACTION/GOVERNANCE CONTEXT
 ```
 
 ## 13. Final Principle
 
-> **Bangun hierarchy geography terlebih dahulu, kemudian Population Model, lalu faction/governance context dan Canon NPC. Kingdom baru hanya dibuat setelah memiliki fungsi geografis, politik, ekonomi, dan regional yang sah.**
+> **Bangun hierarchy geography terlebih dahulu, kemudian Population Model, lalu faction/governance context dan Canon NPC. Kingdom baru hanya dibuat setelah memiliki fungsi geografis, politik, ekonomi, dan population model yang masuk akal.**
