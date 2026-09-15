@@ -30,7 +30,7 @@ CREATE TURN_ID
 ↓
 FETCH / VERIFY INDEX
 ↓
-LOAD STATE + MODULES
+LOAD REGISTRY / CANON / STATE + MODULES
 ↓
 CHECK STATE_VERSION
 ↓
@@ -55,7 +55,28 @@ COMMIT ACK / RECEIPT
 NARRATE
 ```
 
-## 3. ATOMIC BUNDLE
+## 3. AUTHORITY BOUNDARY
+
+Save Pipeline membedakan persistence runtime dari perubahan Canon/Registry.
+
+### Runtime state
+
+Perubahan kondisi Player, NPC, Monster, Event, Quest, Item, Economy, Party, atau entity persisten lain dapat masuk atomic transaction sesuai module.
+
+### Canon / Registry
+
+Perubahan berikut membutuhkan Admin authority:
+
+```text
+PLAYER REGISTRATION
+CANON NPC REGISTRATION / DEFINITION
+MONSTER CANON REGISTRATION / DEFINITION
+WORLD CANON CHANGES
+```
+
+AI GM tidak boleh mengklaim Canon Registry berubah hanya karena narrative atau runtime generation.
+
+## 4. ATOMIC BUNDLE
 
 Semua perubahan yang merupakan satu transaction harus dipersiapkan sebagai satu bundle, termasuk bila relevan:
 
@@ -74,7 +95,7 @@ COMMIT METADATA
 
 Bundle harus konsisten dan dapat divalidasi sebagai satu kesatuan.
 
-## 4. FINAL CONFLICT CHECK
+## 5. FINAL CONFLICT CHECK
 
 Sebelum commit, current persistent version harus masih sama dengan version yang digunakan saat resolution.
 
@@ -88,7 +109,7 @@ EXPECTED VERSION != CURRENT VERSION
 
 Jangan pernah melakukan silent overwrite terhadap state yang lebih baru.
 
-## 5. ATOMIC COMMIT
+## 6. ATOMIC COMMIT
 
 Commit harus memperlakukan seluruh bundle sebagai satu transaction:
 
@@ -108,7 +129,7 @@ Semua berhasil atau tidak ada perubahan persistent yang dianggap terjadi.
 
 Jika storage tidak mampu menjamin atomicity yang dibutuhkan, transaction harus di-abort daripada mengklaim success.
 
-## 6. STATE VERSION UPDATE
+## 7. STATE VERSION UPDATE
 
 Setiap affected persistent state harus memperoleh version baru sesuai mekanisme state module.
 
@@ -126,7 +147,7 @@ v18
 
 Version update tidak boleh dilewati atau dilakukan dua kali untuk transaction yang sama.
 
-## 7. COMMIT RECORD & IDEMPOTENCY
+## 8. COMMIT RECORD & IDEMPOTENCY
 
 Setelah successful commit, sistem harus dapat mengenali bahwa `TURN_ID` telah committed.
 
@@ -143,7 +164,7 @@ COMMIT TIMESTAMP
 
 Retry dengan TURN_ID yang sudah committed tidak boleh membuat duplicate state change, History, Origin, loot, reward, atau entity.
 
-## 8. HISTORY & ORIGIN INTEGRITY
+## 9. HISTORY & ORIGIN INTEGRITY
 
 History dan Origin yang menyertai State Change harus menjadi bagian dari transaction yang sama.
 
@@ -165,7 +186,7 @@ STATE FAILED
 
 Tidak boleh ada Origin yang menunjukkan transaction berhasil jika atomic commit tidak berhasil.
 
-## 9. FAILURE & ROLLBACK
+## 10. FAILURE & ROLLBACK
 
 Jika validation, conflict check, atau commit gagal:
 
@@ -181,7 +202,7 @@ NO FALSE ORIGIN
 
 Transaction yang gagal dapat di-re-resolve setelah reload state terbaru jika penyebabnya stale state atau transient conflict.
 
-## 10. CRASH RECOVERY
+## 11. CRASH RECOVERY
 
 ### Crash sebelum commit
 
@@ -195,7 +216,7 @@ Runtime harus membaca commit record/current state dan menghasilkan narrative dar
 
 Jangan langsung retry. Periksa commit record dan authoritative state terlebih dahulu.
 
-## 11. RETRY RULE
+## 12. RETRY RULE
 
 Retry hanya sah setelah:
 
@@ -215,7 +236,7 @@ NEW ATOMIC COMMIT ATTEMPT
 
 Transaction lama tidak boleh dipaksa terhadap state baru.
 
-## 12. PERSISTENCE ORDER
+## 13. PERSISTENCE ORDER
 
 Urutan konseptual internal:
 
@@ -233,7 +254,7 @@ ACK
 
 History dan Origin tidak dianggap committed sebelum atomic commit berhasil.
 
-## 13. NARRATIVE GATE
+## 14. NARRATIVE GATE
 
 Narrative final hanya boleh dibuat setelah:
 
@@ -243,11 +264,13 @@ VALIDATION = PASS
 PERSISTENCE = COMMITTED
 ```
 
-Narrative harus berasal dari committed result dan tidak boleh menambahkan state yang tidak ada di commit.
+Untuk runtime-only turn yang tidak memenuhi persistence threshold, narrative boleh dibuat setelah resolution + validation sesuai runtime contract, tanpa mengklaim repository commit.
 
-## 14. AUDITABILITY
+Narrative harus berasal dari committed/runtime-accepted result dan tidak boleh menambahkan state yang tidak ada pada result.
 
-Setiap successful transaction harus dapat ditelusuri melalui:
+## 15. AUDITABILITY
+
+Setiap successful persistent transaction harus dapat ditelusuri melalui:
 
 ```text
 TURN_ID
@@ -260,13 +283,15 @@ TURN_ID
 
 Koreksi dilakukan melalui record koreksi sesuai History/Origin rules, bukan silent deletion.
 
-## 15. TRANSIENT VS PERSISTENT DATA
+## 16. TRANSIENT VS PERSISTENT DATA
 
 Data sementara yang tidak memenuhi persistence threshold boleh tetap transient.
 
 Begitu entity atau perubahan menjadi material/persistent, identity, state, History, dan Origin harus mengikuti aturan persistent system yang relevan.
 
-## 16. SAVE INVARIANTS
+Canon NPC, Monster Canon, dan Registered Player Character memiliki identity resmi repository dan tidak boleh diperlakukan sebagai transient generated entity.
+
+## 17. SAVE INVARIANTS
 
 Save Pipeline wajib menjamin:
 
@@ -279,8 +304,9 @@ Save Pipeline wajib menjamin:
 - atomic multi-entity consistency,
 - version integrity,
 - deterministic retry behavior,
-- narrative hanya setelah commit.
+- narrative hanya setelah valid runtime result atau commit sesuai persistence mode,
+- Canon/Registry tidak berubah melalui runtime generation tanpa Admin authority.
 
 Final principle:
 
-> **Continuity Eldoria berasal dari transaction yang benar-benar committed, bukan dari narasi yang diklaim telah terjadi.**
+> **Continuity Eldoria berasal dari transaction yang benar-benar accepted/committed, sementara Canon dan Registry hanya berubah melalui authority yang sah.**
