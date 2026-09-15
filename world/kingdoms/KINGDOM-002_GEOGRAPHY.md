@@ -1,7 +1,7 @@
 # ELDORIA WORLD — KINGDOM-002 GEOGRAPHY
 
 > **Authority:** Admin
-> **Canon:** Admin Canon v1.0
+> **Canon:** Admin Canon v1.1
 > **Kingdom:** KINGDOM-002 — Kerajaan Brannor
 > **Empire:** EMPIRE-001 — Kekaisaran Valthera
 > **Purpose:** Registry resmi Region → City → Village/Settlement dan Population Model Kingdom-002.
