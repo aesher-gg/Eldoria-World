@@ -71,10 +71,27 @@ Perubahan berikut membutuhkan Admin authority:
 PLAYER REGISTRATION
 CANON NPC REGISTRATION / DEFINITION
 MONSTER CANON REGISTRATION / DEFINITION
+RACE CANON REGISTRATION / DEFINITION
 WORLD CANON CHANGES
 ```
 
 AI GM tidak boleh mengklaim Canon Registry berubah hanya karena narrative atau runtime generation.
+
+### Race runtime assignment
+
+`RACE_CANON_ID` pada Character/NPC/entity adalah reference terhadap Race Canon, bukan perubahan Race Canon.
+
+Runtime boleh menyimpan assignment `RACE_CANON_ID` sebagai bagian dari entity state hanya jika:
+
+```text
+RACE_CANON_ID
+↓
+VALID MATCH IN races/CANON_REGISTRY.md
+↓
+VALIDATED BY 34_STATE_VALIDATOR.md
+```
+
+Runtime tidak boleh mendaftarkan Race baru, mengubah Race Canon definition, atau mengubah `RACE_CANON_ID` secara diam-diam untuk mengganti identity dasar entity.
 
 ## 4. ATOMIC BUNDLE
 
@@ -88,12 +105,15 @@ MONSTER STATE CHANGES
 EVENT / QUEST STATE CHANGES
 ITEM / ECONOMY CHANGES
 PARTY / COMPANION CHANGES
+RACE-RELATED RUNTIME STATE CHANGES
 HISTORY RECORDS
 ORIGIN RECORDS
 COMMIT METADATA
 ```
 
 Bundle harus konsisten dan dapat divalidasi sebagai satu kesatuan.
+
+Jika transaction memperkenalkan atau menetapkan `RACE_CANON_ID` pada persistent entity, bundle harus membawa reference Race Canon yang tervalidasi; Race Registry definition itu sendiri tidak ikut berubah kecuali ini adalah Admin Canon transaction terpisah.
 
 ## 5. FINAL CONFLICT CHECK
 
@@ -289,7 +309,7 @@ Data sementara yang tidak memenuhi persistence threshold boleh tetap transient.
 
 Begitu entity atau perubahan menjadi material/persistent, identity, state, History, dan Origin harus mengikuti aturan persistent system yang relevan.
 
-Canon NPC, Monster Canon, dan Registered Player Character memiliki identity resmi repository dan tidak boleh diperlakukan sebagai transient generated entity.
+Canon NPC, Monster Canon, Registered Player Character, dan Race Canon memiliki identity/definition resmi repository dan tidak boleh diperlakukan sebagai transient generated entity.
 
 ## 17. SAVE INVARIANTS
 
@@ -305,8 +325,10 @@ Save Pipeline wajib menjamin:
 - version integrity,
 - deterministic retry behavior,
 - narrative hanya setelah valid runtime result atau commit sesuai persistence mode,
+- `RACE_CANON_ID` yang dipersistenkan selalu registry-valid,
+- Race Canon Registry hanya berubah melalui Admin authority,
 - Canon/Registry tidak berubah melalui runtime generation tanpa Admin authority.
 
 Final principle:
 
-> **Continuity Eldoria berasal dari transaction yang benar-benar accepted/committed, sementara Canon dan Registry hanya berubah melalui authority yang sah.**
+> **Continuity Eldoria berasal dari transaction yang benar-benar accepted/committed, sementara Canon dan Registry — termasuk Race Canon — hanya berubah melalui authority yang sah.**
