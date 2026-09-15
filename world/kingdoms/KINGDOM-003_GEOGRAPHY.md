@@ -32,6 +32,7 @@ EMPIRE-001 — Kekaisaran Valthera
 ```
 
 ## 3. Region Registry
+
 ### REGION-009 — Teluk Aureon
 ```text
 REGION_ID: REGION-009
@@ -45,7 +46,7 @@ CURRENT_STATE: Aktif secara ekonomi; kapasitas pelabuhan, arus, dan pertahanan =
 ORIGIN: Berkembang sebagai pusat pelabuhan dan perdagangan laut
 HISTORY: ???
 ```
-**Regional role:** pelabuhan utama, perdagangan maritim, perikanan, administrasi, dan konektivitas pesisir.
+Regional role: pelabuhan utama, perdagangan maritim, perikanan, administrasi, dan konektivitas pesisir.
 
 ### REGION-010 — Pantai Selatan
 ```text
@@ -60,7 +61,7 @@ CURRENT_STATE: Produktif; kondisi perikanan, garam, pertanian, dan transportasi 
 ORIGIN: Berkembang dari jaringan desa pesisir dan produksi pantai
 HISTORY: ???
 ```
-**Regional role:** perikanan, produksi garam, pertanian pesisir, transportasi, dan suplai kota.
+Regional role: perikanan, produksi garam, pertanian pesisir, transportasi, dan suplai kota.
 
 ### REGION-011 — Kepulauan Azure
 ```text
@@ -75,7 +76,7 @@ CURRENT_STATE: Aktif; kondisi navigasi, perdagangan, dan perikanan = ???
 ORIGIN: Berkembang dari jaringan pulau dan rute pelayaran antarpulau
 HISTORY: ???
 ```
-**Regional role:** perdagangan antarpulau, perikanan, navigasi, jasa kapal, dan konektivitas maritim.
+Regional role: perdagangan antarpulau, perikanan, navigasi, jasa kapal, dan konektivitas maritim.
 
 ### REGION-012 — Pesisir Barat
 ```text
@@ -90,7 +91,7 @@ CURRENT_STATE: Settled but storm-exposed; ancaman cuaca dan keamanan = ???
 ORIGIN: Berkembang dari settlement pesisir, kehutanan, dan jalur pantai
 HISTORY: ???
 ```
-**Regional role:** perikanan, kehutanan, jalur pesisir, logistik, dan settlement frontier.
+Regional role: perikanan, kehutanan, jalur pesisir, logistik, dan settlement frontier.
 
 ## 4. City Registry
 ### CITY-009 — Port Aureon
@@ -105,7 +106,7 @@ CURRENT_STATE: Stabil; detail administrasi, perdagangan, dan keamanan pelabuhan 
 ORIGIN: Pusat pemerintahan dan pelabuhan utama Mariselle
 HISTORY: ???
 ```
-**Role:** administrasi kerajaan, pelabuhan utama, perdagangan, pelayaran, dan jasa maritim.
+Role: administrasi kerajaan, pelabuhan utama, perdagangan, pelayaran, dan jasa maritim.
 
 ### CITY-010 — Southport
 ```text
@@ -119,7 +120,7 @@ CURRENT_STATE: Aktif; detail perikanan, garam, pertanian, dan transportasi = ???
 ORIGIN: Berkembang sebagai pusat produksi dan transportasi Pantai Selatan
 HISTORY: ???
 ```
-**Role:** perikanan, garam, pertanian, perdagangan pesisir, dan transportasi.
+Role: perikanan, garam, pertanian, perdagangan pesisir, dan transportasi.
 
 ### CITY-011 — Azurehold
 ```text
@@ -133,7 +134,7 @@ CURRENT_STATE: Aktif; detail navigasi, perdagangan antarpulau, dan perikanan = ?
 ORIGIN: Berkembang sebagai pusat kepulauan dan navigasi Azure
 HISTORY: ???
 ```
-**Role:** navigasi, perdagangan antarpulau, perikanan, jasa kapal, dan distribusi maritim.
+Role: navigasi, perdagangan antarpulau, perikanan, jasa kapal, dan distribusi maritim.
 
 ### CITY-012 — Westhaven
 ```text
@@ -147,7 +148,7 @@ CURRENT_STATE: Stabil tetapi frontier-sensitive; detail keamanan dan cuaca = ???
 ORIGIN: Pos perdagangan dan keamanan pesisir barat yang berkembang menjadi kota
 HISTORY: ???
 ```
-**Role:** keamanan pesisir, perikanan, kehutanan, logistik, dan rute pantai.
+Role: keamanan pesisir, perikanan, kehutanan, logistik, dan rute pantai.
 
 ## 5. Village / Settlement Registry
 ### SETTLEMENT-017 — Seabridge
@@ -161,7 +162,6 @@ CURRENT_STATE: Active; fishing and harbor-support activity = ???
 ORIGIN: Settlement pesisir yang mendukung Port Aureon
 HISTORY: ???
 ```
-
 ### SETTLEMENT-018 — Tidemere
 ```text
 SETTLEMENT_ID: SETTLEMENT-018
@@ -173,7 +173,6 @@ CURRENT_STATE: Productive; fisheries, processing, and coastal agriculture = ???
 ORIGIN: Settlement di sekitar muara dan kegiatan perikanan
 HISTORY: ???
 ```
-
 ### SETTLEMENT-019 — Saltmere
 ```text
 SETTLEMENT_ID: SETTLEMENT-019
@@ -185,7 +184,6 @@ CURRENT_STATE: Active; salt production and fishing conditions = ???
 ORIGIN: Settlement produksi garam dan perikanan Pantai Selatan
 HISTORY: ???
 ```
-
 ### SETTLEMENT-020 — Gullhaven
 ```text
 SETTLEMENT_ID: SETTLEMENT-020
@@ -197,7 +195,6 @@ CURRENT_STATE: Productive; fisheries and boat services = ???
 ORIGIN: Settlement perikanan yang memasok Southport
 HISTORY: ???
 ```
-
 ### SETTLEMENT-021 — Pearlwatch
 ```text
 SETTLEMENT_ID: SETTLEMENT-021
@@ -209,7 +206,6 @@ CURRENT_STATE: Active; fishing and navigation support = ???
 ORIGIN: Settlement pulau pada jaringan Kepulauan Azure
 HISTORY: ???
 ```
-
 ### SETTLEMENT-022 — Windrest
 ```text
 SETTLEMENT_ID: SETTLEMENT-022
@@ -221,7 +217,6 @@ CURRENT_STATE: Active; livestock, fishing, and maritime logistics = ???
 ORIGIN: Settlement pulau yang mendukung lalu lintas maritim
 HISTORY: ???
 ```
-
 ### SETTLEMENT-023 — Driftwood
 ```text
 SETTLEMENT_ID: SETTLEMENT-023
@@ -233,7 +228,6 @@ CURRENT_STATE: Active; forestry, fishing, and crafts = ???
 ORIGIN: Settlement pertemuan hutan pesisir dan jalur laut
 HISTORY: ???
 ```
-
 ### SETTLEMENT-024 — Stormbay
 ```text
 SETTLEMENT_ID: SETTLEMENT-024
@@ -247,7 +241,6 @@ HISTORY: ???
 ```
 
 ## 6. Population Model
-### 6.1 Kingdom-Level Model
 ```text
 KINGDOM_ID: KINGDOM-003
 POPULATION_MODEL_ID: POP-MAR-001
@@ -260,16 +253,15 @@ MIGRATION_BALANCE: ???
 SEASONAL_MOBILITY: HIGH
 ```
 
-### 6.2 Regional Distribution
+### Regional Distribution
 ```text
-REGION-009 Teluk Aureon       → 25–30% of kingdom population
-REGION-010 Pantai Selatan     → 25–30%
-REGION-011 Kepulauan Azure    → 15–20%
-REGION-012 Pesisir Barat      → 20–25%
+REGION-009 → 25–30%
+REGION-010 → 25–30%
+REGION-011 → 15–20%
+REGION-012 → 20–25%
 ```
-Persentase adalah rentang model, bukan jumlah individu tetap. Distribusi aktual dapat berubah melalui migration, birth/death, disaster, war, economy, dan world events yang tervalidasi.
 
-### 6.3 Settlement Scale Bands
+### Settlement Scale Bands
 ```text
 KINGDOM CAPITAL / MAJOR CITY → 40,000–120,000
 SECONDARY CITY               → 15,000–60,000
@@ -277,9 +269,8 @@ LARGE VILLAGE                → 2,000–8,000
 SMALL VILLAGE                → 300–2,000
 FRONTIER SETTLEMENT          → 200–3,000
 ```
-Band digunakan sebagai model skala, bukan angka otomatis untuk setiap settlement.
 
-### 6.4 Occupational Distribution
+### Occupational Distribution
 ```text
 MARITIME TRADE / SHIPPING → MAJOR SHARE, REGION-DEPENDENT
 FISHERIES / AQUATIC WORK  → SIGNIFICANT SHARE
@@ -292,10 +283,10 @@ OTHER                     → REMAINDER
 ```
 Exact percentages remain `???` until an economy/faction model requires a more precise local distribution.
 
-### 6.5 Race Distribution Rule
-Population Model boleh mengelompokkan penduduk berdasarkan Race Canon, tetapi hanya Race Canon aktif yang terdaftar. Tidak boleh membuat ras baru untuk mengisi populasi. Persentase ras lokal tetap `???` sampai ditetapkan secara sah. Race tidak otomatis menentukan class, profession, faction, morality, personality, atau outcome.
+### Race Distribution Rule
+Population Model hanya menggunakan Race Canon aktif. Tidak boleh membuat ras baru. Persentase ras lokal tetap `???` sampai ditetapkan secara sah. Race tidak otomatis menentukan class, profession, faction, morality, personality, atau outcome.
 
-### 6.6 Dynamic NPC Generation Boundary
+### Dynamic NPC Generation Boundary
 ```text
 POPULATION MODEL
 ↓
@@ -307,7 +298,6 @@ RACE_CANON_ID FROM RACE REGISTRY
 ↓
 PERSIST ONLY IF MATERIAL
 ```
-Dynamic NPC tidak otomatis menjadi Canon NPC.
 
 ## 7. Geography → Population → NPC Gate
 ```text
