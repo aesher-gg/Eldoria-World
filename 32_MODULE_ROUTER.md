@@ -56,6 +56,28 @@ CURRENT CHARACTER STATE
 
 Jika Player Character belum terdaftar, jangan membuat identity baru secara otomatis. Resolution yang membutuhkan identity resmi harus ditahan sampai authority tersedia.
 
+### Race Canon
+
+Race adalah authority identity Canon yang terpisah dari Character, NPC, Monster, Culture, dan Faction.
+
+Jika identity atau state entity memiliki `RACE_CANON_ID`, atau action menyentuh ras, lineage/subrace, race capability, race-based population, migration, race relationship, atau race-dependent rule, Router wajib memuat:
+
+```text
+36_RACE_SYSTEM.md
+↓
+races/CANON_REGISTRY.md
+↓
+RACE_CANON_ID / RACE DEFINITION
+```
+
+Aturan routing:
+
+- `RACE_CANON_ID` hanya boleh berasal dari `races/CANON_REGISTRY.md`;
+- jangan menebak Race dari nama, penampilan, lokasi, class, faction, atau stereotype;
+- jika Race belum diketahui atau tidak dapat diverifikasi, gunakan `???` dan jangan membuat identity Race baru;
+- Dynamic NPC/Character runtime yang membutuhkan Race hanya boleh menggunakan Race Canon yang aktif/terdaftar;
+- Router tidak mengubah registry atau definition Race Canon.
+
 ### Canon NPC
 
 ```text
@@ -84,6 +106,8 @@ Jika species Canon ditemukan, gunakan definition Canon sebagai authority untuk i
 
 Jika tidak ada authoritative entity yang cocok dan module mengizinkan generation, AI GM dapat membuat Dynamic entity sesuai generation rules. Entity yang menjadi material mengikuti persistence threshold dan stable identity requirements.
 
+Untuk Dynamic NPC yang memiliki Race, generation wajib memilih `RACE_CANON_ID` dari Race Canon Registry; generation tidak boleh menciptakan Race baru.
+
 ## 4. ROUTING PRINCIPLE
 
 Router menggunakan **domain yang benar-benar disentuh oleh action**, bukan sekadar pencocokan kata pada Player Message.
@@ -106,6 +130,8 @@ Contoh:
 | Loot | 15 Loot | 10 Equipment, 11 Economy, source state, 30/31 |
 | World event | 18 World Events | 25 World State, affected entity states, 30/31 |
 | Reputation | 20 Reputation | 04 Factions, 16 NPC, 26 Character State |
+| Race / racial identity | 36 Race System | Race Canon Registry, 05 Character, 16 NPC, 25 World, 26/27 State bila relevan |
+| Population / migration by race | 36 Race System | 02 Regions, 03 Settlements, 25 World State, 16 NPC bila individual material |
 
 Tabel adalah panduan domain, bukan daftar module yang selalu wajib dimuat seluruhnya. Konsekuensi aktual menentukan load final.
 
@@ -136,7 +162,18 @@ EVENT_STATE     → kondisi event persisten
 
 Canon Definition/Registry menjadi authority untuk identity dan fakta Canon. Current State menjadi authority untuk kondisi saat ini.
 
-Narrative tidak boleh menggantikan state.
+Untuk Race:
+
+```text
+RACE_CANON_REGISTRY / 36_RACE_SYSTEM
+→ Race identity + official Race definition
+CHARACTER/NPC/POPULATION STATE
+→ current race assignment/context yang tersimpan
+```
+
+Current state tidak boleh menciptakan atau mengubah definisi Race Canon.
+
+Narrative tidak boleh menggantikan state atau Race Registry.
 
 ## 7. HISTORY & ORIGIN
 
@@ -211,6 +248,9 @@ Router wajib:
 
 - fetch/verify INDEX setiap turn;
 - resolve Player Character identity dari registry/record resmi;
+- jika `RACE_CANON_ID` relevan, load `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md`;
+- tidak menebak atau mengarang `RACE_CANON_ID`;
+- menggunakan hanya Race Canon yang terdaftar;
 - check Canon NPC sebelum dynamic NPC generation;
 - check Monster Canon sebelum dynamic creature interpretation;
 - tidak resolve outcome;
@@ -238,6 +278,18 @@ NO FALSE HISTORY / ORIGIN
 ```
 
 Jangan mengganti source yang hilang dengan asumsi.
+
+Jika `RACE_CANON_ID` diwajibkan oleh entity/action tetapi Race Registry atau Race definition tidak tersedia/valid:
+
+```text
+RACE AUTHORITY FAILURE
+↓
+NO RESOLUTION THAT DEPENDS ON RACE
+↓
+NO RACE ID GUESS
+↓
+NO STATE CHANGE
+```
 
 ## 14. HANDOFF
 
