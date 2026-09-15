@@ -91,6 +91,34 @@ RELEVANT FACTION STATE bila tersedia
 
 Membership, rank, authority, access, resources, knowledge, reputation, dan loyalty tidak boleh diasumsikan dari registry saja.
 
+### Nobility / Title / Noble House
+
+Jika action menyentuh noble title, Noble House, domain, vassalage, succession, inheritance, royal family, noble privilege, noble obligation, atau political authority yang bersumber dari status bangsawan:
+
+```text
+37_NOBILITY_SYSTEM.md
+↓
+GOVERNANCE_FACTION_MASTER.md
+↓
+04_FACTIONS.md + 19_FACTION_SYSTEM.md bila Noble House/faction relevan
+↓
+RELEVANT TITLE / HOUSE / NPC / LAW / STATE RECORDS
+```
+
+Title, House membership, succession, domain, authority, dan family relationship tidak boleh ditebak dari genre, gelar, atau hubungan darah semata.
+
+### Magic
+
+Jika action menyentuh magic atau magical capability:
+
+```text
+09_MAGIC_SYSTEM.md
+↓
+RELEVANT MAGIC IDENTITY / STATE
+```
+
+Jika magic berhubungan dengan Noble House/title/domain, `37_NOBILITY_SYSTEM.md` juga wajib dimuat.
+
 ### Dynamic Entity
 
 Jika tidak ada authoritative entity yang cocok dan generation diizinkan, Dynamic entity dapat dibuat sesuai rules. Material entity mengikuti persistence threshold dan stable identity requirements.
@@ -102,6 +130,8 @@ Router menggunakan domain yang benar-benar disentuh action, bukan sekadar keywor
 | Intent | Module utama | Registry / support |
 |---|---|---|
 | Faction action | `19_FACTION_SYSTEM.md` | `04_FACTIONS.md` + `factions/CANON_REGISTRY.md` + relevant state |
+| Nobility / Title / Noble House / Domain / Succession | `37_NOBILITY_SYSTEM.md` | `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/law/state |
+| Magic | `09_MAGIC_SYSTEM.md` | relevant magic identity/state; `37_NOBILITY_SYSTEM.md` bila noble context |
 | NPC / social interaction | `16_NPC_SYSTEM.md` | `npcs/CANON_REGISTRY.md` + `27_NPC_STATE.md` bila persistent |
 | Race | `36_RACE_SYSTEM.md` | `races/CANON_REGISTRY.md` + relevant state |
 | Combat | `13_COMBAT.md` | relevant state + equipment/vitality |
@@ -170,7 +200,9 @@ Router wajib:
 - resolve Player Character dari authority resmi;
 - load Race authority bila relevan;
 - check Canon NPC sebelum Dynamic NPC generation;
-- check specific Faction Canon Registry sebelum faction interpretation/generation;
+- check Canon Faction Registry sebelum faction interpretation/generation;
+- load Nobility authority for title/house/domain/succession actions;
+- load Magic authority when magical capability is relevant;
 - tidak resolve outcome;
 - tidak mutate state;
 - tidak mengarang module/data;
