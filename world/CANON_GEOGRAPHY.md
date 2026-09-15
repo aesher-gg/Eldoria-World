@@ -1,7 +1,7 @@
 # ELDORIA WORLD — CANON GEOGRAPHY REGISTRY
 
 > **Authority:** Admin
-> **Status:** Admin Canon v1.0
+> **Status:** Admin Canon v1.1
 > **Purpose:** Registry resmi struktur geografis-politik Eldoria sebagai dasar pembangunan settlement, population model, faction, dan Canon NPC.
 
 ## 1. Authority
@@ -29,13 +29,13 @@ CITY_COUNT: ???
 VILLAGE_SETTLEMENT_COUNT: ???
 ```
 
-Detail individual wilayah saat ini belum ditetapkan dalam registry ini.
-
 ## 3. Empire Registry
 
+### EMPIRE-001
+
 ```text
-EMPIRE_ID: ???
-NAME: ???
+EMPIRE_ID: EMPIRE-001
+NAME: Kekaisaran Valthera
 TYPE: EMPIRE
 CAPITAL: ???
 BOUNDARY: ???
@@ -44,6 +44,71 @@ CURRENT_STATE: ???
 ORIGIN: ???
 HISTORY: ???
 ```
+
+### 3.1 Empire Identity
+
+**Kekaisaran Valthera** adalah satu-satunya entitas kekaisaran utama dalam struktur politik Canon Eldoria. Kekaisaran ini menjadi payung administratif dan geopolitik bagi beberapa kerajaan yang akan ditetapkan kemudian.
+
+Kekaisaran tidak dianggap sebagai satu kota raksasa. Struktur internalnya terdiri atas kerajaan-kerajaan dengan wilayah, pemerintahan, settlement, faction, dan kepentingan regional masing-masing.
+
+### 3.2 Administrative Role
+
+Kekaisaran Valthera menjadi tingkat administratif tertinggi dalam struktur daratan Canon Eldoria:
+
+```text
+KEKAISARAN VALTHERA
+└── KERAJAAN
+    └── KOTA
+        └── DESA / SETTLEMENT
+```
+
+Kewenangan kekaisaran, bentuk hubungan dengan kerajaan, dan pembagian administratif yang lebih rinci akan ditetapkan bersama Canon Kerajaan dan Region. Detail yang belum ditetapkan tetap `???`.
+
+### 3.3 Empire Canon Boundaries
+
+```text
+EMPIRE_ID: EMPIRE-001
+NAME: Kekaisaran Valthera
+CAPITAL: ???
+CONTINENT: 1 BENUA UTAMA
+KINGDOMS: ???
+MAJOR_REGIONS: ???
+POLITICAL_SYSTEM: ???
+RULER: ???
+MILITARY_STRUCTURE: ???
+ECONOMIC_STRUCTURE: ???
+CULTURAL_PROFILE: ???
+RELIGIOUS_STRUCTURE: ???
+MAJOR_FACTIONS: ???
+EXTERNAL_RELATIONS: ???
+CURRENT_POLITICAL_STATE: ???
+```
+
+Field `???` sengaja belum diisi. Tidak boleh diturunkan sebagai fakta oleh AI GM tanpa Canon atau state yang sah.
+
+### 3.4 Empire Population Boundary
+
+Population Kekaisaran Valthera tidak dicatat sebagai daftar individu. Population Model tingkat kekaisaran akan dibangun setelah struktur kerajaan, region, kota, dan settlement ditetapkan.
+
+Penduduk massal akan direpresentasikan secara agregat. Tokoh penting akan direpresentasikan melalui Canon NPC, sedangkan individu biasa dapat muncul melalui Dynamic NPC sesuai aturan generation.
+
+### 3.5 Empire Construction Rule
+
+Pembangunan Kerajaan wajib menggunakan:
+
+```text
+EMPIRE-001
+    ↓
+KINGDOM.EMPIRE_ID = EMPIRE-001
+    ↓
+REGION / CITY / SETTLEMENT
+    ↓
+POPULATION MODEL
+    ↓
+CANON NPC
+```
+
+Tidak boleh ada kerajaan Canon yang menunjuk ke Empire ID yang belum valid.
 
 ## 4. Kingdom Registry
 
@@ -224,22 +289,23 @@ Dynamic NPC dapat dimaterialisasi saat gameplay membutuhkan individu tertentu. D
 
 ```text
 PHASE 1 — STRUCTURE: COMPLETE
-PHASE 2 — EMPIRE IDENTITY: PENDING
+PHASE 2 — EMPIRE IDENTITY: COMPLETE
 PHASE 3 — KINGDOMS: PENDING
 PHASE 4 — REGIONS: PENDING
 PHASE 5 — CITIES: PENDING
 PHASE 6 — VILLAGES / SETTLEMENTS: PENDING
 PHASE 7 — POPULATION MODELS: PENDING
-PHASE 8 — CANON NPC BY REGION: LOCKED UNTIL PHASE 2–6 ARE DEFINED
+PHASE 8 — CANON NPC BY REGION: LOCKED UNTIL PHASE 3–6 ARE DEFINED
 ```
 
 ## 13. Canon Safety
 
-- Jangan mengarang nama wilayah untuk mengisi registry.
 - Jangan mengarang jumlah Kerajaan/Kota/Desa.
 - Jangan membuat Canon NPC yang parent wilayahnya belum Canon.
 - Jangan menganggap Dynamic Discovery sebagai Canon Geography.
 - Perubahan struktur geografis Canon adalah kewenangan Admin.
+- Detail Empire yang belum ditetapkan tetap `???`.
+- Nama Kekaisaran `Kekaisaran Valthera` adalah Canon resmi setelah commit ini.
 
 ## 14. Final Principle
 
