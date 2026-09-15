@@ -1,7 +1,7 @@
 # ELDORIA WORLD — CANON GEOGRAPHY REGISTRY
 
 > **Authority:** Admin
-> **Status:** Admin Canon v1.2
+> **Status:** Admin Canon v1.3
 > **Purpose:** Registry resmi struktur geografis-politik Eldoria sebagai dasar pembangunan settlement, population model, faction, dan Canon NPC.
 
 ## 1. Authority
@@ -25,7 +25,7 @@ Nama, jumlah, batas, parent, dan detail geografis hanya menjadi Canon setelah di
 ```text
 CONTINENT_COUNT: 1 (main continent)
 EMPIRE_COUNT: 1 (structural requirement)
-KINGDOM_COUNT: ???
+KINGDOM_COUNT: 1+ (Kingdom-001 established; total future count remains open)
 CITY_COUNT: ???
 VILLAGE_SETTLEMENT_COUNT: ???
 ```
@@ -140,7 +140,7 @@ EMPIRE_ID: EMPIRE-001
 NAME: Kekaisaran Valthera
 CAPITAL: Aurelis
 CONTINENT: Benua Utama Eldoria
-KINGDOMS: ???
+KINGDOMS: KINGDOM-001 + future kingdoms (count open)
 MAJOR_REGIONS: ???
 POLITICAL_SYSTEM: Monarki Kekaisaran Terdesentralisasi
 RULER: Kaisar Valthera (nama pribadi: ???)
@@ -196,16 +196,82 @@ ORIGIN
 HISTORY
 ```
 
-Daftar Kerajaan:
+### 4.1 KINGDOM-001 — Kerajaan Valedorn
+
+Kingdom-001 ditetapkan sebagai kerajaan **heartland agraris-riverine** yang berfungsi sebagai salah satu fondasi pangan, perdagangan darat, dan konektivitas internal Kekaisaran Valthera. Identitas ini sengaja dibangun dari fungsi wilayah terlebih dahulu agar wilayah, kota, ekonomi, faction, dan NPC berikutnya mempunyai konteks yang konsisten.
 
 ```text
-KINGDOM-001: ???
+KINGDOM_ID: KINGDOM-001
+EMPIRE_ID: EMPIRE-001
+NAME: Kerajaan Valedorn
+TYPE: Kerajaan Heartland Agraris-Riverine
+CAPITAL: Varenhold
+BOUNDARY: Heartland tengah Valthera; batas geografis rinci ditetapkan melalui Region Canon berikutnya
+REGIONS: Akan dibangun setelah Kingdom-001 identity ditetapkan
+CURRENT_STATE: Stabil; detail politik, keamanan, dan ekonomi aktif = ???
+ORIGIN: Berkembang sebagai kerajaan agraris dan jalur sungai yang kemudian berada di bawah struktur Kekaisaran Valthera; detail sejarah pendirian = ???
+HISTORY: ???
+```
+
+#### 4.1.1 Geographic Function
+
+Valedorn menempati fungsi **heartland**: wilayah yang secara konseptual menghubungkan produksi pangan pedalaman dengan jalur sungai dan jaringan perdagangan menuju wilayah lain. Posisi geografis rinci, sungai, pegunungan, hutan, dan batas fisik belum dibuat sebagai Canon sampai Region Registry dibangun.
+
+Fungsi geografis utama:
+
+- dataran produktif untuk pertanian,
+- koridor sungai untuk transportasi dan perdagangan,
+- jaringan jalan darat yang menghubungkan settlement,
+- zona transisi antara pusat produksi dan pasar kerajaan.
+
+#### 4.1.2 Political Function
+
+Valedorn berfungsi sebagai kerajaan administratif yang penting bagi kestabilan internal karena produksi pangan dan jaringan transportasinya mempunyai dampak lintas wilayah.
+
+Prinsip politik:
+
+- memiliki pemerintahan kerajaan sendiri,
+- tunduk pada hukum dan kewenangan imperial yang sah,
+- kepentingan kerajaan terutama berpusat pada stabilitas pangan, perdagangan, infrastruktur, dan keamanan wilayah,
+- hubungan politik dengan kerajaan lain belum ditetapkan dan tetap `???`.
+
+Nama penguasa, keluarga penguasa, struktur pemerintahan, hukum lokal, dan faction politik belum ditetapkan = `???`.
+
+#### 4.1.3 Economic Function
+
+Ekonomi Valedorn berorientasi pada:
+
+- pertanian dan pengolahan hasil pangan,
+- perdagangan sungai,
+- pasar antarkota,
+- transportasi dan pergudangan,
+- kerajinan yang mendukung kebutuhan pertanian dan perdagangan.
+
+Komoditas spesifik, volume produksi, pajak, mata uang lokal, jalur dagang rinci, dan perusahaan/guild tertentu belum ditetapkan = `???`.
+
+#### 4.1.4 Regional Character
+
+Karakter Valedorn adalah **subur, produktif, terhubung, dan pragmatis**. Kehidupan sosialnya secara konseptual dipengaruhi oleh siklus pertanian, perdagangan, transportasi, keamanan jalan, dan akses terhadap pasar.
+
+Karakter ini menjadi dasar generation berikutnya, tetapi tidak membatasi kemungkinan konflik, kemiskinan, kriminalitas, bencana, atau variasi lokal yang akan ditentukan oleh State/Resolution.
+
+#### 4.1.5 Canon Safety
+
+- `KINGDOM-001` resmi berada di bawah `EMPIRE-001`.
+- `Varenhold` ditetapkan sebagai ibu kota Kingdom-001.
+- Tidak ada Region, City, Village, faction, atau Canon NPC spesifik yang boleh dianggap sudah ada hanya karena disebut sebagai kebutuhan pembangunan berikutnya.
+- Detail yang belum ditentukan tetap `???`.
+- Kingdom-002 tidak boleh dibuat hanya untuk melengkapi angka; identitasnya harus memiliki fungsi geografis, politik, ekonomi, dan regional yang berbeda atau saling melengkapi dengan Kingdom-001.
+
+### 4.2 Future Kingdoms
+
+```text
 KINGDOM-002: ???
 KINGDOM-003: ???
 ...
 ```
 
-Jumlah aktual tidak boleh ditebak.
+Kerajaan berikutnya akan dibangun satu per satu berdasarkan kebutuhan struktur Kekaisaran Valthera, fungsi geografis, hubungan politik, ekonomi, dan karakter regional. Jumlah akhir kerajaan tetap terbuka sampai pembagian wilayah selesai.
 
 ## 5. City Registry
 
@@ -360,7 +426,9 @@ Dynamic NPC dapat dimaterialisasi saat gameplay membutuhkan individu tertentu. D
 ```text
 PHASE 1 — STRUCTURE: COMPLETE
 PHASE 2 — EMPIRE IDENTITY: COMPLETE
-PHASE 3 — KINGDOMS: READY
+PHASE 3 — KINGDOMS: IN PROGRESS
+PHASE 3.1 — KINGDOM-001 IDENTITY: COMPLETE
+PHASE 3.2 — KINGDOM-002+: PENDING
 PHASE 4 — REGIONS: PENDING
 PHASE 5 — CITIES: PENDING
 PHASE 6 — VILLAGES / SETTLEMENTS: PENDING
@@ -378,7 +446,8 @@ PHASE 8 — CANON NPC BY REGION: LOCKED UNTIL PHASE 3–6 ARE DEFINED
 - Nama Kekaisaran `Kekaisaran Valthera` adalah Canon resmi.
 - Ibu kota `Aurelis` adalah Canon resmi.
 - Identitas politik `Monarki Kekaisaran Terdesentralisasi` adalah Canon resmi.
+- `Kerajaan Valedorn` dan ibu kotanya `Varenhold` adalah Canon resmi Kingdom-001.
 
 ## 14. Final Principle
 
-> **Bangun identitas Kekaisaran terlebih dahulu, kemudian bentuk Kerajaan satu per satu berdasarkan kerangka politik dan parent geography yang sah. Setelah hierarchy wilayah lengkap, Population Model dan Canon NPC dibangun secara sistematis.**
+> **Bangun identitas Kekaisaran terlebih dahulu, kemudian bentuk Kerajaan satu per satu berdasarkan fungsi geografis, politik, ekonomi, dan karakter wilayah. Setelah hierarchy wilayah lengkap, Population Model dan Canon NPC dibangun secara sistematis.**
