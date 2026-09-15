@@ -3,11 +3,10 @@
 > **Authority:** Admin
 > **Canon:** ELDORIA CANON v1.0 — LOCKED
 > **Status:** Admin Canon v1.0
-> **Purpose:** Menetapkan arsitektur, prioritas, dan coverage plan Canon NPC sebelum pembuatan record NPC individual.
 
 ## 1. Scope
 
-Dokumen ini adalah master planning layer untuk Canon NPC. Dokumen ini tidak membuat NPC individual.
+Master planning layer for Canon NPC. Dokumen ini tidak membuat NPC individual.
 
 ## 2. Authority Chain
 
@@ -25,35 +24,28 @@ NPC COVERAGE MATRIX
 INDIVIDUAL CANON NPC
 ```
 
-NPC tidak boleh digunakan untuk mengisi kekosongan geography, governance, atau faction.
-
 ## 3. Coverage Requirements
 
-| Scope | Minimum Canon NPC |
-|---|---:|
-| Empire | ≥25 |
-| Setiap Kingdom | ≥10 |
-| Setiap City | ≥5 |
-| Setiap Settlement | ≥3 |
+- Empire ≥25
+- setiap Kingdom ≥10
+- setiap City ≥5
+- setiap Settlement ≥3
 
-Coverage adalah scope relevance, bukan kewajiban membuat jumlah NPC unik yang sama dengan total coverage. Target total scope coverage ditetapkan dalam `npcs/COVERAGE_MATRIX_v1.0.md`.
+Total kebutuhan adalah ≥295 **scope coverage**, bukan 295 NPC unik.
 
 ## 4. Faction Dependency
 
-NPC harus menggunakan konteks faction dari `factions/CANON_REGISTRY.md` bila faction relevan. Faction tidak otomatis memberikan membership, rank, authority, access, resources, reputation, knowledge, atau loyalty kepada NPC.
+NPC menggunakan faction Canon dari `factions/CANON_REGISTRY.md` bila relevan. Faction tidak otomatis memberikan membership, rank, authority, access, resources, reputation, knowledge, atau loyalty.
 
 ## 5. Design Rules
 
-1. Tidak ada NPC yang dibuat hanya untuk memenuhi angka coverage.
-2. NPC harus memiliki fungsi atau kepentingan material.
-3. NPC harus memiliki agency sendiri.
-4. Race wajib menggunakan `RACE_CANON_ID` aktif dari Race Registry.
-5. Race tidak menentukan morality, personality, class, faction, atau outcome secara otomatis.
-6. Canon NPC tidak boleh duplicate dari Canon NPC atau Persistent Dynamic NPC yang sudah ada.
-7. Dynamic NPC tidak otomatis menjadi Canon NPC.
-8. Identity/lore Canon tidak berubah hanya karena narrative runtime.
-9. Current state berada pada state layer terpisah.
-10. Knowledge boundary harus eksplisit.
+1. NPC bukan quota filler.
+2. NPC harus memiliki fungsi/kepentingan material dan agency.
+3. Race wajib berasal dari Race Canon aktif.
+4. Dynamic NPC tidak otomatis menjadi Canon.
+5. Canon NPC tidak boleh duplicate.
+6. Identity/lore Canon terpisah dari Current State.
+7. Knowledge boundary wajib jelas.
 
 ## 6. Individual NPC Schema
 
@@ -79,18 +71,10 @@ CANON_ORIGIN
 CANON_STATUS
 ```
 
-Field yang memang belum ditetapkan tetap `???`.
-
 ## 7. Creation Order
 
 ```text
-EMPIRE CONTEXT
-↓
-KINGDOM CONTEXT
-↓
-CITY CONTEXT
-↓
-SETTLEMENT CONTEXT
+EMPIRE → KINGDOM → CITY → SETTLEMENT
 ↓
 FACTION ASSIGNMENT
 ↓
@@ -98,14 +82,12 @@ NPC IDENTITY
 ↓
 RELATIONSHIPS / GOALS / CAPABILITIES
 ↓
-CANON VALIDATION
+VALIDATION
 ↓
 PERSISTENT RECORD
 ```
 
 ## 8. Validation Gate
-
-Sebelum individual NPC creation:
 
 ```text
 [ ] Geography authoritative
@@ -120,19 +102,17 @@ Sebelum individual NPC creation:
 [ ] Origin traceable
 ```
 
-## 9. Current Planning Status
+## 9. Current Status
 
 ```text
-EMPIRE COVERAGE TARGET: ≥25
-KINGDOM COVERAGE TARGET: ≥10 each × 5
-CITY COVERAGE TARGET: ≥5 each × 20
-SETTLEMENT COVERAGE TARGET: ≥3 each × 40
+EMPIRE TARGET: ≥25
+KINGDOM TARGET: ≥10 each × 5
+CITY TARGET: ≥5 each × 20
+SETTLEMENT TARGET: ≥3 each × 40
 TOTAL SCOPE COVERAGE TARGET: ≥295
 
-NPC COVERAGE MATRIX: npcs/COVERAGE_MATRIX_v1.0.md
+NPC COVERAGE MATRIX: npcs/COVERAGE_MATRIX_v1_0.md
 INDIVIDUAL CANON NPC CREATED BY THIS PLAN: 0
 ```
 
-## 10. Final Principle
-
-> **Canon NPC dibuat karena mereka penting bagi dunia; Coverage Matrix mengatur pemerataan dan validasi kebutuhan, bukan menciptakan alasan palsu untuk keberadaan NPC.**
+> Canon NPC dibuat karena penting bagi dunia; Coverage Matrix mengatur pemerataan kebutuhan, bukan menciptakan alasan palsu untuk NPC.
