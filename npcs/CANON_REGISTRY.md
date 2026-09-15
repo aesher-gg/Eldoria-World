@@ -69,6 +69,74 @@ CANON_STATUS: ACTIVE
 RECORD: npcs/canon/NPC-CANON-001.md
 ```
 
+### NPC-CANON-002 — Seraphine Darr
+```text
+NPC_ID: NPC-CANON-002
+NPC_CLASS: CANON
+NAME: Seraphine Darr
+RACE_CANON_ID: RACE-001
+ROLE: Pejabat Koordinasi Pertahanan Kekaisaran — Penghubung Antar-Kerajaan
+EMPIRE_ID: EMPIRE-001
+SETTLEMENT_ID: ???
+CITY_ID: ???
+REGION_ID: ???
+KINGDOM_ID: ???
+FACTION: FACTION-002 — Pertahanan Kekaisaran Valthera
+CANON_STATUS: ACTIVE
+RECORD: npcs/canon/NPC-CANON-002.md
+```
+
+### NPC-CANON-003 — Corvin Hale
+```text
+NPC_ID: NPC-CANON-003
+NPC_CLASS: CANON
+NAME: Corvin Hale
+RACE_CANON_ID: RACE-003
+ROLE: Koordinator Administrasi Perdagangan Kekaisaran — Penghubung Jalur Antar-Kerajaan
+EMPIRE_ID: EMPIRE-001
+SETTLEMENT_ID: ???
+CITY_ID: ???
+REGION_ID: ???
+KINGDOM_ID: ???
+FACTION: FACTION-003 — Administrasi Perdagangan Kekaisaran
+CANON_STATUS: ACTIVE
+RECORD: npcs/canon/NPC-CANON-003.md
+```
+
+### NPC-CANON-004 — Mirelle Ordan
+```text
+NPC_ID: NPC-CANON-004
+NPC_CLASS: CANON
+NAME: Mirelle Ordan
+RACE_CANON_ID: RACE-002
+ROLE: Pemeriksa Catatan Administrasi Kekaisaran — Verifikasi Antar-Wilayah
+EMPIRE_ID: EMPIRE-001
+SETTLEMENT_ID: ???
+CITY_ID: ???
+REGION_ID: ???
+KINGDOM_ID: ???
+FACTION: FACTION-001 — Pemerintahan Kekaisaran Valthera
+CANON_STATUS: ACTIVE
+RECORD: npcs/canon/NPC-CANON-004.md
+```
+
+### NPC-CANON-005 — Garran Voss
+```text
+NPC_ID: NPC-CANON-005
+NPC_CLASS: CANON
+NAME: Garran Voss
+RACE_CANON_ID: RACE-006
+ROLE: Koordinator Catatan dan Logistik Pertahanan Kekaisaran
+EMPIRE_ID: EMPIRE-001
+SETTLEMENT_ID: ???
+CITY_ID: ???
+REGION_ID: ???
+KINGDOM_ID: ???
+FACTION: FACTION-002 — Pertahanan Kekaisaran Valthera
+CANON_STATUS: ACTIVE
+RECORD: npcs/canon/NPC-CANON-005.md
+```
+
 ## 6. Registration Template
 
 ```text
@@ -91,9 +159,11 @@ CANON_ORIGIN: Admin Canon
 ## 7. Current Status
 
 ```text
-EMPIRE CANON NPC CREATED: 1 / ≥25 target coverage
+EMPIRE CANON NPC CREATED: 5 / ≥25 target coverage
 KINGDOM CANON NPC CREATED: 0
 CITY CANON NPC CREATED: 0
 SETTLEMENT CANON NPC CREATED: 0
-TOTAL INDIVIDUAL CANON NPC CREATED: 1
+TOTAL INDIVIDUAL CANON NPC CREATED: 5
 ```
+
+> Coverage target bukan alasan pembuatan NPC. Setiap NPC harus memiliki fungsi nyata, agency, konteks Canon, dan Origin yang dapat diverifikasi.
