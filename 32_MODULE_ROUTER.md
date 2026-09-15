@@ -36,10 +36,6 @@ RELEVANT HISTORY / ORIGIN
 
 Untuk Player Character, Router harus memastikan Character Registry/Record resmi ditemukan sebelum memakai identity dasar karakter.
 
-State yang relevan ditentukan dari actor, target, lokasi, action, dan konsekuensi yang dapat disentuh.
-
-Module yang pernah dimuat pada turn sebelumnya tidak dianggap masih authoritative.
-
 ## 3. ENTITY DISCOVERY & AUTHORITY
 
 Sebelum membuat entity baru, Router wajib memeriksa sumber entity resmi yang relevan.
@@ -54,13 +50,9 @@ PLAYER REGISTRY / CHARACTER RECORD
 CURRENT CHARACTER STATE
 ```
 
-Jika Player Character belum terdaftar, jangan membuat identity baru secara otomatis. Resolution yang membutuhkan identity resmi harus ditahan sampai authority tersedia.
-
 ### Race Canon
 
-Race adalah authority identity Canon yang terpisah dari Character, NPC, Monster, Culture, dan Faction.
-
-Jika identity atau state entity memiliki `RACE_CANON_ID`, atau action menyentuh ras, lineage/subrace, race capability, race-based population, migration, race relationship, atau race-dependent rule, Router wajib memuat:
+Jika identity atau state entity memiliki `RACE_CANON_ID`, atau action menyentuh race, Router wajib memuat:
 
 ```text
 36_RACE_SYSTEM.md
@@ -70,18 +62,12 @@ races/CANON_REGISTRY.md
 RACE_CANON_ID / RACE DEFINITION
 ```
 
-Aturan routing:
-
-- `RACE_CANON_ID` hanya boleh berasal dari `races/CANON_REGISTRY.md`;
-- jangan menebak Race dari nama, penampilan, lokasi, class, faction, atau stereotype;
-- jika Race belum diketahui atau tidak dapat diverifikasi, gunakan `???` dan jangan membuat identity Race baru;
-- Dynamic NPC/Character runtime yang membutuhkan Race hanya boleh menggunakan Race Canon yang aktif/terdaftar;
-- Router tidak mengubah registry atau definition Race Canon.
-
 ### Canon NPC
 
 ```text
 NPC REFERENCE
+↓
+npcs/CANON_REGISTRY.md
 ↓
 CANON NPC RECORD
 ↓
@@ -89,6 +75,26 @@ NPC STATE bila tersedia
 ```
 
 Jika Canon NPC dengan identity yang sesuai ditemukan, AI GM wajib menggunakannya dan dilarang membuat duplicate Dynamic NPC sebagai pengganti.
+
+### Faction Canon
+
+Jika action menyentuh faction, organization, membership, authority, faction relationship, faction action, atau NPC yang memiliki faction Canon:
+
+```text
+04_FACTIONS.md
+↓
+19_FACTION_SYSTEM.md
+↓
+factions/CANON_REGISTRY.md
+↓
+RELEVANT FACTION STATE bila tersedia
+```
+
+`04_FACTIONS.md` adalah authority identity/framework; `19_FACTION_SYSTEM.md` adalah authority operational behavior; `factions/CANON_REGISTRY.md` adalah authority untuk faction spesifik yang telah di-Canonize.
+
+Planning documents seperti `world/GOVERNANCE_FACTION_MASTER.md` dan `npcs/COVERAGE_MATRIX_v1.0.md` memberi konteks planning tetapi tidak menggantikan faction identity/state authority.
+
+Membership, rank, authority, access, resources, knowledge, reputation, dan loyalty tidak boleh diasumsikan dari faction registry saja.
 
 ### Monster Canon
 
@@ -100,53 +106,30 @@ MONSTER CANON REGISTRY / DEFINITION
 INDIVIDUAL MONSTER STATE bila ada
 ```
 
-Jika species Canon ditemukan, gunakan definition Canon sebagai authority untuk identity/lore/tier dasarnya.
-
-### Dynamic NPC / Monster
+### Dynamic Entity
 
 Jika tidak ada authoritative entity yang cocok dan module mengizinkan generation, AI GM dapat membuat Dynamic entity sesuai generation rules. Entity yang menjadi material mengikuti persistence threshold dan stable identity requirements.
 
-Untuk Dynamic NPC yang memiliki Race, generation wajib memilih `RACE_CANON_ID` dari Race Canon Registry; generation tidak boleh menciptakan Race baru.
-
 ## 4. ROUTING PRINCIPLE
 
-Router menggunakan **domain yang benar-benar disentuh oleh action**, bukan sekadar pencocokan kata pada Player Message.
-
-Contoh:
+Router menggunakan domain yang benar-benar disentuh oleh action, bukan sekadar pencocokan kata.
 
 | Intent | Module utama | Module pendukung |
 |---|---|---|
-| Attack | 13 Combat | 12 Vitality, 10 Equipment, 26/27/28 State, 30/31 |
-| Travel | 02 Regions, 25 World State | 12 Vitality, 26 Character State, 18 Events, 30/31 |
-| Trade | 11 Economy | 10 Equipment, 16 NPC, 20 Reputation, 26/27 State |
-| Craft | 21 Crafting | 08 Skills, 10 Equipment, 11 Economy, 26 State |
-| Alchemy | 22 Alchemy | 08 Skills, 09 Magic, 10 Equipment, 12 Vitality, 26 State |
-| Magic | 09 Magic | 08 Skills, 10 Equipment, 12 Vitality, 26 State |
-| Quest | 17 Quest | 16 NPC, 19 Faction, 18 Events, 20 Reputation, state modules |
-| Faction action | 19 Faction | 04 Factions, 16 NPC, 18 Events, 20 Reputation |
-| Companion | 24 Pets/Companions | 23 Party, 12 Vitality, 13 Combat, 26/27/28 State |
-| Party | 23 Party | relevant member state, 13 Combat or 02 Travel when applicable |
-| Monster/ecology | 14 Monster Ecosystem | 28 Monster State, Monster Canon definition bila species Canon, 12/13, 15 Loot when applicable |
-| Loot | 15 Loot | 10 Equipment, 11 Economy, source state, 30/31 |
-| World event | 18 World Events | 25 World State, affected entity states, 30/31 |
-| Reputation | 20 Reputation | 04 Factions, 16 NPC, 26 Character State |
-| Race / racial identity | 36 Race System | Race Canon Registry, 05 Character, 16 NPC, 25 World, 26/27 State bila relevan |
-| Population / migration by race | 36 Race System | 02 Regions, 03 Settlements, 25 World State, 16 NPC bila individual material |
+| Faction action | `19_FACTION_SYSTEM.md` | `04_FACTIONS.md`, `factions/CANON_REGISTRY.md`, `16_NPC_SYSTEM.md`, `18_WORLD_EVENTS.md`, `20_REPUTATION.md` |
+| NPC / social interaction | `16_NPC_SYSTEM.md` | `npcs/CANON_REGISTRY.md`, `27_NPC_STATE.md`, faction registry bila relevan |
+| Attack | `13_COMBAT.md` | `12_VITALITY_SURVIVAL.md`, `10_EQUIPMENT_SYSTEM.md`, relevant state, `30_HISTORY_SYSTEM.md`, `31_ORIGIN_LOG.md` |
+| Travel | `02_REALMS_AND_REGIONS.md`, `25_WORLD_STATE.md` | `12_VITALITY_SURVIVAL.md`, `26_CHARACTER_STATE.md`, `18_WORLD_EVENTS.md` |
+| Trade | `11_ECONOMY.md` | `10_EQUIPMENT_SYSTEM.md`, NPC/faction context bila relevan, `20_REPUTATION.md`, state |
+| Quest | `17_QUEST_SYSTEM.md` | NPC, faction, event, reputation, state modules |
+| Race / racial identity | `36_RACE_SYSTEM.md` | Race Registry + relevant entity/population state |
+| Population / migration by race | `36_RACE_SYSTEM.md` | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md`, `25_WORLD_STATE.md` |
 
-Tabel adalah panduan domain, bukan daftar module yang selalu wajib dimuat seluruhnya. Konsekuensi aktual menentukan load final.
+Module lain tetap mengikuti routing table yang ditetapkan INDEX dan dependency module masing-masing.
 
 ## 5. DEPENDENCY LOADING
 
-Dependency module dimuat secara rekursif sampai seluruh requirement terpenuhi.
-
-Runtime harus menggunakan mekanisme `VISITED_SET` atau ekuivalen untuk:
-
-- mencegah duplicate load,
-- mencegah infinite recursion,
-- menangani referensi silang,
-- dan menjaga dependency graph tetap deterministik.
-
-Dependency reference tidak memberi module hak untuk mengubah authority layer module lain.
+Dependency module dimuat secara rekursif sampai seluruh requirement terpenuhi. Gunakan `VISITED_SET` atau ekuivalen untuk mencegah duplicate load dan infinite recursion.
 
 ## 6. STATE AUTHORITY
 
@@ -160,31 +143,11 @@ WORLD_STATE     → kondisi dunia bersama
 EVENT_STATE     → kondisi event persisten
 ```
 
-Canon Definition/Registry menjadi authority untuk identity dan fakta Canon. Current State menjadi authority untuk kondisi saat ini.
-
-Untuk Race:
-
-```text
-RACE_CANON_REGISTRY / 36_RACE_SYSTEM
-→ Race identity + official Race definition
-CHARACTER/NPC/POPULATION STATE
-→ current race assignment/context yang tersimpan
-```
-
-Current state tidak boleh menciptakan atau mengubah definisi Race Canon.
-
-Narrative tidak boleh menggantikan state atau Race Registry.
+Canon Definition/Registry adalah authority identity dan fakta Canon. Current State adalah authority kondisi saat ini.
 
 ## 7. HISTORY & ORIGIN
 
-Untuk entity atau perubahan material, Router wajib memasukkan:
-
-```text
-30_HISTORY_SYSTEM.md
-31_ORIGIN_LOG.md
-```
-
-sebagai context persistence yang relevan.
+Untuk entity atau perubahan material, Router wajib memasukkan `30_HISTORY_SYSTEM.md` dan `31_ORIGIN_LOG.md` sebagai context persistence yang relevan.
 
 Router tidak membuat record History/Origin; pembuatan dilakukan setelah resolution dan validation sesuai Save Pipeline.
 
@@ -197,30 +160,13 @@ ROUTE = MINIMAL SAFE CONTEXT
 OUTCOME = UNRESOLVED
 ```
 
-Router tidak boleh menebak action hanya untuk menghindari `???`.
+Router tidak boleh menebak action.
 
-Jika informasi tambahan diperlukan, Action Resolver menangani kebutuhan klarifikasi/resolution tanpa membuat fakta baru.
+## 9. INFORMATION BOUNDARY
 
-## 9. TIME-AWARE ROUTING
+Router harus memuat hanya information state yang sah untuk actor/resolution. Player knowledge tidak otomatis menjadi Character/NPC/Faction knowledge.
 
-Jika action mengubah atau bergantung pada waktu, Router wajib memuat module/state waktu yang relevan.
-
-Action yang memakan waktu harus dirutekan sehingga time delta diproses sebelum resolution lanjutan yang bergantung pada waktu tersebut.
-
-## 10. INFORMATION BOUNDARY
-
-Router harus memuat hanya information state yang sah untuk actor/resolution.
-
-```text
-WORLD KNOWLEDGE
-CHARACTER KNOWLEDGE
-NPC KNOWLEDGE
-PLAYER KNOWLEDGE
-```
-
-Pengetahuan Player tidak otomatis menjadi pengetahuan Character/NPC.
-
-## 11. ROUTING PLAN
+## 10. ROUTING PLAN
 
 Output internal Router minimal:
 
@@ -237,22 +183,18 @@ ENTITY_IDS
 DEPENDENCY_GRAPH / LOAD ORDER
 INFORMATION_SCOPE
 TIME_SCOPE
-FAILURE_REASON (jika ada)
+FAILURE_REASON
 ```
 
-Output ini adalah data runtime, bukan narrative.
-
-## 12. ROUTER INVARIANTS
+## 11. ROUTER INVARIANTS
 
 Router wajib:
 
 - fetch/verify INDEX setiap turn;
-- resolve Player Character identity dari registry/record resmi;
-- jika `RACE_CANON_ID` relevan, load `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md`;
-- tidak menebak atau mengarang `RACE_CANON_ID`;
-- menggunakan hanya Race Canon yang terdaftar;
+- resolve Player Character identity dari authority resmi;
+- load Race authority bila Race relevan;
 - check Canon NPC sebelum dynamic NPC generation;
-- check Monster Canon sebelum dynamic creature interpretation;
+- check specific Canon Faction Registry sebelum faction generation/interpretation;
 - tidak resolve outcome;
 - tidak mutate state;
 - tidak mengarang module/data;
@@ -263,9 +205,9 @@ Router wajib:
 - menghormati `???`;
 - membawa `TURN_ID` ke seluruh pipeline.
 
-## 13. FAILURE
+## 12. FAILURE
 
-Jika required module, Canon record, atau authoritative state tidak tersedia:
+Jika required module, Canon record, faction registry, atau authoritative state tidak tersedia:
 
 ```text
 ROUTE FAILURE
@@ -279,19 +221,7 @@ NO FALSE HISTORY / ORIGIN
 
 Jangan mengganti source yang hilang dengan asumsi.
 
-Jika `RACE_CANON_ID` diwajibkan oleh entity/action tetapi Race Registry atau Race definition tidak tersedia/valid:
-
-```text
-RACE AUTHORITY FAILURE
-↓
-NO RESOLUTION THAT DEPENDS ON RACE
-↓
-NO RACE ID GUESS
-↓
-NO STATE CHANGE
-```
-
-## 14. HANDOFF
+## 13. HANDOFF
 
 ```text
 PLAYER MESSAGE
@@ -306,7 +236,5 @@ ROUTING PLAN
 ↓
 ACTION RESOLVER
 ```
-
-Final principle:
 
 > **Module Router menentukan apa yang harus dibaca dan source authority mana yang harus diperiksa; bukan apa yang harus terjadi.**
