@@ -1,7 +1,7 @@
 # ELDORIA WORLD — CANON GEOGRAPHY REGISTRY
 
 > **Authority:** Admin
-> **Status:** Admin Canon v1.5
+> **Status:** Admin Canon v1.6
 > **Purpose:** Registry resmi struktur geografis-politik Eldoria sebagai dasar settlement, population model, faction, dan Canon NPC.
 
 ## 1. Authority
@@ -26,8 +26,10 @@ KINGDOM-001_REGION_COUNT: 4
 KINGDOM-001_CITY_COUNT: 4
 KINGDOM-001_VILLAGE_SETTLEMENT_COUNT: 8
 KINGDOM-001_POPULATION_MODEL: ACTIVE
-KINGDOM-002_GEOGRAPHY: PENDING
-KINGDOM-002_POPULATION_MODEL: PENDING
+KINGDOM-002_REGION_COUNT: 4
+KINGDOM-002_CITY_COUNT: 4
+KINGDOM-002_VILLAGE_SETTLEMENT_COUNT: 8
+KINGDOM-002_POPULATION_MODEL: ACTIVE
 KINGDOM-003+: PENDING
 ```
 
@@ -180,15 +182,15 @@ NAME: Kerajaan Brannor
 TYPE: Kerajaan Highland-Mineral
 CAPITAL: Durnhaven
 BOUNDARY: Wilayah dataran tinggi dan pegunungan di luar heartland Valedorn; batas fisik rinci = ???
-REGIONS: PENDING
-CURRENT_STATE: Stabil secara administratif; kondisi keamanan, politik, dan ekonomi aktif = ???
+REGIONS: REGION-005, REGION-006, REGION-007, REGION-008
+CURRENT_STATE: Stabil secara administratif; kondisi politik, keamanan, dan ekonomi aktif = ???
 ORIGIN: Berkembang sebagai pusat dataran tinggi, sumber daya mineral, dan jalur lintas pegunungan; detail pendirian = ???
 HISTORY: ???
 ```
 
 Brannor menjadi pelengkap geografis Valedorn melalui fungsi dataran tinggi, pegunungan, mineral, jalur lintas pegunungan, perdagangan, dan frontier transport.
 
-Detail Region → City → Village/Settlement → Population Model Brannor belum dibuat.
+Detail Region → City → Village/Settlement → Population Model berada di `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
 
 ### 4.3 Future Kingdoms
 
@@ -211,39 +213,66 @@ CITY-003 → Goldmere → REGION-003 → KINGDOM-001
 CITY-004 → Thornwick → REGION-004 → KINGDOM-001
 ```
 
-Detail City Canon Kingdom-001 berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md`.
+Kingdom-002:
 
-Kingdom-002 City Registry: `PENDING`.
+```text
+CITY-005 → Durnhaven → REGION-005 → KINGDOM-002
+CITY-006 → Kharhold → REGION-006 → KINGDOM-002
+CITY-007 → Ferren → REGION-007 → KINGDOM-002
+CITY-008 → Frostwatch → REGION-008 → KINGDOM-002
+```
+
+Detail City Canon berada pada `world/kingdoms/KINGDOM-001_GEOGRAPHY.md` dan `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
 
 ## 6. Village / Settlement Registry
 
 Current Canon Settlement Registry Kingdom-001:
 
 ```text
-SETTLEMENT-001 → Bellmere     → CITY-001 → REGION-001
-SETTLEMENT-002 → Oakrest      → CITY-001 → REGION-001
-SETTLEMENT-003 → Rivergate    → CITY-002 → REGION-002
-SETTLEMENT-004 → Millhaven    → CITY-002 → REGION-002
-SETTLEMENT-005 → Wheatcross   → CITY-003 → REGION-003
-SETTLEMENT-006 → Sunfield     → CITY-003 → REGION-003
-SETTLEMENT-007 → Briarford    → CITY-004 → REGION-004
-SETTLEMENT-008 → Greenhollow  → CITY-004 → REGION-004
+SETTLEMENT-001 → Bellmere → CITY-001 → REGION-001
+SETTLEMENT-002 → Oakrest → CITY-001 → REGION-001
+SETTLEMENT-003 → Rivergate → CITY-002 → REGION-002
+SETTLEMENT-004 → Millhaven → CITY-002 → REGION-002
+SETTLEMENT-005 → Wheatcross → CITY-003 → REGION-003
+SETTLEMENT-006 → Sunfield → CITY-003 → REGION-003
+SETTLEMENT-007 → Briarford → CITY-004 → REGION-004
+SETTLEMENT-008 → Greenhollow → CITY-004 → REGION-004
 ```
 
-Kingdom-002 Settlement Registry: `PENDING`.
+Kingdom-002:
+
+```text
+SETTLEMENT-009 → Stonepass → CITY-005 → REGION-005
+SETTLEMENT-010 → Highmere → CITY-005 → REGION-005
+SETTLEMENT-011 → Valecrest → CITY-006 → REGION-006
+SETTLEMENT-012 → Ironbrook → CITY-006 → REGION-006
+SETTLEMENT-013 → Blackridge → CITY-007 → REGION-007
+SETTLEMENT-014 → Redstone → CITY-007 → REGION-007
+SETTLEMENT-015 → Pinewatch → CITY-008 → REGION-008
+SETTLEMENT-016 → Coldmere → CITY-008 → REGION-008
+```
 
 ## 7. Region Registry
 
 Current Canon Region Registry Kingdom-001:
 
 ```text
-REGION-001 → Cekungan Varenhold       → KINGDOM-001
-REGION-002 → Koridor Sungai Averen    → KINGDOM-001
-REGION-003 → Dataran Ladang Emas      → KINGDOM-001
-REGION-004 → Perbatasan Hutan Thorn   → KINGDOM-001
+REGION-001 → Cekungan Varenhold → KINGDOM-001
+REGION-002 → Koridor Sungai Averen → KINGDOM-001
+REGION-003 → Dataran Ladang Emas → KINGDOM-001
+REGION-004 → Perbatasan Hutan Thorn → KINGDOM-001
 ```
 
-Kingdom-002 Region Registry: `PENDING`.
+Kingdom-002:
+
+```text
+REGION-005 → Pegunungan Durn → KINGDOM-002
+REGION-006 → Lembah Kharven → KINGDOM-002
+REGION-007 → Punggung Besi → KINGDOM-002
+REGION-008 → Perbatasan Frostpine → KINGDOM-002
+```
+
+Detail Region Kingdom-002 berada pada `world/kingdoms/KINGDOM-002_GEOGRAPHY.md`.
 
 ## 8. Parent-Child Integrity
 
@@ -259,13 +288,13 @@ CITY → existing Kingdom + Region
 SETTLEMENT → existing City + Region
 ```
 
-Tidak ada Region/City/Settlement Kingdom-002 yang boleh dianggap Canon sampai parent geography-nya dibuat secara resmi.
+Semua Region/City/Settlement Kingdom-002 yang tercantum di registry ini memiliki parent Canon yang valid.
 
 ## 9. Population Boundary
 
 Population Model menangani penduduk massal secara agregat. Tidak semua penduduk menjadi Canon NPC atau record individual.
 
-Kingdom-001 memiliki Population Model aktif:
+Kingdom-001 Population Model:
 
 ```text
 POPULATION_MODEL_ID: POP-VAL-001
@@ -286,9 +315,30 @@ REGION-003 → 35–40%
 REGION-004 → 15–20%
 ```
 
-Exact race percentages tetap `???`; hanya Race Canon aktif dari `races/CANON_REGISTRY.md` yang boleh dipakai sebagai racial category.
+Kingdom-002 Population Model:
 
-Kingdom-002 Population Model: `PENDING`.
+```text
+POPULATION_MODEL_ID: POP-BRA-001
+TOTAL_POPULATION: RANGE 450,000–700,000
+URBANIZATION: LOW-MODERATE
+PRIMARY_POPULATION_BASE: MINING + HIGHLAND AGRICULTURE + TRADE + FORESTRY
+SEASONAL_MOBILITY: MODERATE-HIGH
+MIGRATION_BALANCE: ???
+EXACT_RACE_PERCENTAGES: ???
+```
+
+Regional distribution model Kingdom-002:
+
+```text
+REGION-005 → 20–25%
+REGION-006 → 25–30%
+REGION-007 → 30–35%
+REGION-008 → 15–20%
+```
+
+Settlement population mengikuti kapasitas ekonomi, terrain, akses, keamanan, musim, migrasi, dan kebutuhan simulasi. Tidak harus mengisi batas atas setiap settlement.
+
+Exact race percentages dan occupational percentages tetap `???` bila belum ditetapkan. Population Model tidak membuat individu massal menjadi file repository.
 
 ## 10. Canon NPC Build Gate
 
@@ -303,22 +353,20 @@ CANON GEOGRAPHY
 Minimum Canon NPC:
 
 ```text
-DESA       → ≥ 3 Canon NPC
-KOTA       → ≥ 5 Canon NPC
-KERAJAAN   → ≥ 10 Canon NPC per kingdom
+DESA → ≥ 3 Canon NPC
+KOTA → ≥ 5 Canon NPC
+KERAJAAN → ≥ 10 Canon NPC per kingdom
 KEKAISARAN → ≥ 25 Canon NPC
 ```
 
-Kingdom-001 geography dan population model tersedia; Canon NPC belum dibangun.
-Kingdom-002 harus menyelesaikan geography dan population model sebelum Canon NPC wilayah dibangun.
+Kingdom-001 dan Kingdom-002 geography serta Population Model sekarang tersedia; Canon NPC belum dibangun.
 
 ## 11. Canon Safety
 
 - `Kekaisaran Valthera`, `Aurelis`, `Monarki Kekaisaran Terdesentralisasi`, `Kerajaan Valedorn`, `Varenhold`, `Kerajaan Brannor`, dan `Durnhaven` adalah Canon resmi.
-- Region/City/Settlement Kingdom-001 yang tercantum adalah Admin Canon.
-- Kingdom-002 belum memiliki Region/City/Village Canon.
+- Region/City/Settlement Kingdom-001 dan Kingdom-002 yang tercantum adalah Admin Canon.
+- Population Model adalah model agregat, bukan daftar individu.
 - `???` tetap Unknown/Unresolved dan tidak boleh ditebak AI GM.
-- Population Model tidak membuat individu massal menjadi file repository.
 - Race tidak boleh ditebak dari nama, penampilan, lokasi, class, faction, atau stereotype.
 - Dynamic NPC tidak otomatis menjadi Canon NPC.
 - Perubahan struktur geography Canon adalah kewenangan Admin.
@@ -335,10 +383,11 @@ PHASE 6 — KINGDOM-001 VILLAGES / SETTLEMENTS: COMPLETE
 PHASE 7 — KINGDOM-001 POPULATION MODEL: COMPLETE
 PHASE 8 — KINGDOM-001 CANON NPC: READY / NOT YET BUILT
 PHASE 9 — KINGDOM-002 IDENTITY: COMPLETE
-PHASE 10 — KINGDOM-002 REGIONS: NEXT
-PHASE 11 — KINGDOM-002 CITIES: PENDING
-PHASE 12 — KINGDOM-002 VILLAGES / SETTLEMENTS: PENDING
-PHASE 13 — KINGDOM-002 POPULATION MODEL: PENDING
+PHASE 10 — KINGDOM-002 REGIONS: COMPLETE
+PHASE 11 — KINGDOM-002 CITIES: COMPLETE
+PHASE 12 — KINGDOM-002 VILLAGES / SETTLEMENTS: COMPLETE
+PHASE 13 — KINGDOM-002 POPULATION MODEL: COMPLETE
+PHASE 14 — KINGDOM-001 + KINGDOM-002 CANON NPC: NEXT
 ```
 
 ## 13. Final Principle
