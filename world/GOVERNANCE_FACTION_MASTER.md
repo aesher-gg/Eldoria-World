@@ -70,7 +70,7 @@ KINGDOM-001: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-012 —
 KINGDOM-002: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-013 — Tharok Brann
 KINGDOM-003: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-014 — Celestine Aureon
 KINGDOM-004: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-015 — Edrien Sylvar
-KINGDOM-005: Kerajaan otonom di bawah hukum kekaisaran; RULER: ???
+KINGDOM-005: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-016 — Nadir Qasrane
 ```
 
 Detail berikut belum ditetapkan per Kingdom dan tetap `???` sampai Canonized:
@@ -94,7 +94,7 @@ KINGDOM-TO-KINGDOM RELATIONS
 | Scope | Authority baseline | Known | Unresolved |
 |---|---|---|---|
 | Empire | Imperial central authority + defined imperial scope | Political system, ruler identity, broad scope | Institutions, laws, military, economy, factions |
-| Kingdom | Internal autonomy under Imperial law | Autonomy baseline and four Canon rulers | Remaining ruler, institutions, laws, military, factions |
+| Kingdom | Internal autonomy under Imperial law | Autonomy baseline and five Canon rulers | Institutions, laws, military, factions |
 | Region | Parent kingdom administration | Parent hierarchy | Regional offices/authority = ??? |
 | City | Parent kingdom/local administration | Parent hierarchy | City government/offices = ??? |
 | Settlement | Local administration under parent hierarchy | Parent hierarchy | Local offices/authority = ??? |
@@ -341,8 +341,8 @@ NPC COVERAGE MATRIX: COMPLETE
 GOVERNANCE BASELINE: ESTABLISHED
 HEAD-OF-STATE CANON: ACTIVE — 5 REGISTERED
 FACTION FRAMEWORK: ESTABLISHED
-SPECIFIC FACTION CANON: ESTABLISHED — 43 ACTIVE CANON FACTIONS
-INDIVIDUAL CANON NPC: ACTIVE — 15 REGISTERED
+SPECIFIC FACTION CANON: ESTABLISHED — 53 ACTIVE CANON FACTIONS
+INDIVIDUAL CANON NPC: ACTIVE — 16 REGISTERED
 CURRENT NPC CREATION METHOD: CONTROLLED BATCHES OF UP TO 5
 QUOTA STATUS: COVERAGE TARGET ONLY; NO MASS NPC FILLING
 ```
