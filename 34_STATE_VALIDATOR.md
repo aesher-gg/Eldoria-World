@@ -8,7 +8,7 @@
 
 State Validator memeriksa apakah hasil Action Resolver sah untuk diterapkan pada authoritative state.
 
-Validator adalah **gate**, bukan resolver. Validator tidak boleh mengarang koreksi atau mengubah delta secara diam-diam.
+Validator adalah gate, bukan resolver. Validator tidak boleh mengarang koreksi atau mengubah delta secara diam-diam.
 
 ## 1. INPUT
 
@@ -62,6 +62,12 @@ Periksa:
 - tidak ada duplicate persistent identity,
 - references menunjuk entity yang benar.
 
+Untuk Player Character, `CHARACTER_ID` harus berasal dari Character Record/Player Registry resmi.
+
+Untuk Canon NPC, `NPC_ID` harus cocok dengan Canon Registry/record bila entity tersebut adalah Canon NPC.
+
+Untuk Monster Canon, `MONSTER_CANON_ID` harus cocok dengan Canon Registry bila species tersebut diklaim sebagai Canon.
+
 ## 4. TURN & IDEMPOTENCY
 
 Validator harus memastikan `TURN_ID` belum berhasil committed.
@@ -72,8 +78,6 @@ Jika transaction dengan `TURN_ID` yang sama telah committed:
 STATUS = ALREADY_COMMITTED
 NO SECOND COMMIT
 ```
-
-Jika belum committed, validation dapat dilanjutkan.
 
 ## 5. STATE VERSION
 
@@ -90,11 +94,54 @@ Transaction stale harus reload dan re-resolve melalui pipeline.
 
 Validator memastikan perubahan berasal dari module yang memiliki kewenangan atas domain tersebut.
 
-Module tidak boleh mengubah domain authoritative module lain tanpa mekanisme integrasi yang sah.
+Authority dipisahkan sebagai berikut:
+
+```text
+CANON / REGISTRY
+→ identity + official definition
+
+CURRENT STATE
+→ kondisi entity saat ini
+
+HISTORY / ORIGIN
+→ bukti perubahan dan provenance
+```
+
+AI GM runtime tidak boleh mengubah Canon Registry secara implisit.
+
+Player submission tidak sama dengan Admin registration.
 
 Narrative tidak pernah menjadi authority.
 
-## 7. CAPABILITY & PREREQUISITE
+## 7. PLAYER CHARACTER VALIDATION
+
+Player Character hanya valid sebagai PC resmi jika:
+
+```text
+PLAYER_ID
++
+CHARACTER_ID
++
+CHARACTER RECORD
++
+ADMIN REGISTRATION
+```
+
+terverifikasi.
+
+AI GM tidak boleh menciptakan atau mengganti identity dasar PC melalui state delta biasa.
+
+## 8. CANON ENTITY VALIDATION
+
+Untuk Canon NPC dan Monster Canon:
+
+- identity Canon harus berasal dari registry/record resmi;
+- generation tidak boleh menciptakan duplicate Canon identity;
+- runtime state boleh berubah melalui resolution yang sah;
+- perubahan terhadap Canon definition/lore/tier tidak boleh disamarkan sebagai state change biasa;
+- perubahan Canon membutuhkan Admin Canon update.
+
+## 9. CAPABILITY & PREREQUISITE
 
 Periksa action terhadap:
 
@@ -110,7 +157,7 @@ Periksa action terhadap:
 
 Tidak boleh ada free capability atau progression.
 
-## 8. RESOURCE / OWNERSHIP
+## 10. RESOURCE / OWNERSHIP
 
 Periksa konsistensi:
 
@@ -126,7 +173,7 @@ Periksa konsistensi:
 
 Tidak boleh mengurangi resource yang tidak tersedia.
 
-## 9. TARGET / LOCATION / TIME
+## 11. TARGET / LOCATION / TIME
 
 Validator memeriksa bahwa:
 
@@ -137,7 +184,7 @@ Validator memeriksa bahwa:
 - World Time dan Local Environment tidak kontradiktif,
 - time delta tidak diterapkan dua kali.
 
-## 10. LIFECYCLE
+## 12. LIFECYCLE
 
 Perubahan harus sesuai lifecycle entity.
 
@@ -145,7 +192,7 @@ Entity `DEAD`, `RETIRED`, `CANCELLED`, atau status terminal lain tidak boleh mel
 
 Revival hanya valid melalui mechanism yang sah.
 
-## 11. DELTA CONSISTENCY
+## 13. DELTA CONSISTENCY
 
 Setiap State Delta harus:
 
@@ -158,7 +205,7 @@ Setiap State Delta harus:
 
 `???` tetap Unknown/Unresolved dan bukan zero/empty/false.
 
-## 12. CROSS-ENTITY CONSISTENCY
+## 14. CROSS-ENTITY CONSISTENCY
 
 Untuk transaction multi-entity, semua perubahan yang secara logis saling bergantung harus hadir dalam atomic bundle.
 
@@ -172,7 +219,7 @@ Item ownership → Buyer
 
 Jika salah satu required delta hilang, transaction ditolak.
 
-## 13. CAUSE / ORIGIN / HISTORY
+## 15. CAUSE / ORIGIN / HISTORY
 
 Setiap material state change harus memiliki:
 
@@ -185,7 +232,7 @@ HISTORY RECORD PROPOSAL
 
 Origin harus menunjuk sumber yang benar. Tidak boleh dibuat untuk membenarkan perubahan yang tidak terjadi.
 
-## 14. DYNAMIC GENERATION
+## 16. DYNAMIC GENERATION
 
 Generated entity hanya PASS jika memiliki, sesuai kebutuhan:
 
@@ -199,7 +246,7 @@ HISTORY
 
 Generator tidak boleh menggantikan entity persisten yang sudah ada.
 
-## 15. NO SILENT CORRECTION
+## 17. NO SILENT CORRECTION
 
 Jika delta invalid, Validator:
 
@@ -211,7 +258,7 @@ REPORT ERROR
 
 Validator tidak boleh diam-diam mengubah HP, gold, item, outcome, waktu, atau field lain untuk membuat transaction valid.
 
-## 16. RESULT
+## 18. RESULT
 
 Output minimal:
 
@@ -229,7 +276,7 @@ VALIDATED_ORIGINS
 
 `WARNINGS` tidak boleh dipakai untuk melewati hard invariant.
 
-## 17. NO MUTATION
+## 19. NO MUTATION
 
 State Validator tidak melakukan persistent mutation.
 
@@ -239,7 +286,7 @@ VALIDATOR → CHECK
 SAVE PIPELINE → COMMIT
 ```
 
-## 18. FAILURE
+## 20. FAILURE
 
 Jika validation gagal:
 
@@ -257,4 +304,4 @@ RELOAD / RE-RESOLVE / ABORT
 
 Final principle:
 
-> **Tidak ada State Delta yang sah hanya karena resolver mengusulkannya; Validator harus membuktikannya terhadap Canon, rules, dan authoritative state.**
+> **Tidak ada State Delta yang sah hanya karena resolver mengusulkannya; Validator harus membuktikannya terhadap Canon, registry, rules, dan authoritative state.**
