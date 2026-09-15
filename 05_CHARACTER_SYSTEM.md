@@ -2,7 +2,7 @@
 
 > **Module:** 05 — Character System
 > **Canon:** ELDORIA CANON v1.0 — LOCKED
-> **Status:** Admin Canon v1.1
+> **Status:** Admin Canon v1.2
 
 ## 1. Purpose
 
@@ -44,6 +44,7 @@ Setiap Player Character persisten wajib memiliki identity stabil:
 PLAYER_ID
 CHARACTER_ID
 NAME
+RACE_CANON_ID
 STATUS
 ORIGIN
 HISTORY
@@ -51,6 +52,8 @@ CURRENT_STATE
 ```
 
 `CHARACTER_ID` harus unik dalam World. `PLAYER_ID` mengidentifikasi pemilik/player dan tidak menggantikan identity karakter.
+
+`RACE_CANON_ID` digunakan bila race karakter telah ditetapkan dalam Character Record. Nilainya harus berasal dari `races/CANON_REGISTRY.md` dan tidak boleh diciptakan AI GM.
 
 ## 4. Player Registry
 
@@ -88,10 +91,11 @@ Status aktual harus berasal dari state/resolution. Daftar ini tidak berarti semu
 
 Current Character State adalah sumber kebenaran kondisi karakter saat ini.
 
-Field dapat mencakup:
+Field dapat mencakup, bila relevan:
 
 ```text
 IDENTITY
+RACE_CANON_ID
 LOCATION
 VITALITY
 ATTRIBUTES
@@ -112,13 +116,26 @@ STATE_VERSION
 
 Field yang belum diketahui = `???`.
 
-## 7. Character History
+## 7. Race Integration
+
+Race adalah bagian dari identity karakter bila ditetapkan dalam Character Record.
+
+Aturan:
+
+- Player memilih/memberikan race sebagai bagian dari input karakter bila diinginkan.
+- Admin memvalidasi dan mendaftarkan `RACE_CANON_ID` yang sesuai.
+- AI GM tidak boleh mengganti race karakter melalui narrative/runtime generation.
+- Race Canon definition berasal dari `36_RACE_SYSTEM.md` dan `races/CANON_REGISTRY.md`.
+- Current race-related condition seperti lokasi, migration status, lineage state, atau social treatment berada pada state layer yang relevan.
+- Race tidak otomatis memberikan Class, Skill, Magic, faction, personality, morality, atau outcome.
+
+## 8. Character History
 
 Peristiwa material yang memengaruhi karakter dicatat melalui History sesuai `30_HISTORY_SYSTEM.md`.
 
 History bukan pengganti Current State.
 
-## 8. Origin
+## 9. Origin
 
 Data karakter dan perubahan karakter harus dapat ditelusuri melalui Origin sesuai `31_ORIGIN_LOG.md`.
 
@@ -134,13 +151,13 @@ Contoh source yang sah:
 - System Generation,
 - Admin Canon.
 
-## 9. Player Agency
+## 10. Player Agency
 
 Player mengendalikan intent dan tindakan karakter, bukan outcome.
 
 Karakter tidak boleh memperoleh kemampuan, item, status, relationship, atau progression hanya karena Player menyatakannya sebagai fakta.
 
-## 10. Character Knowledge
+## 11. Character Knowledge
 
 Pengetahuan karakter adalah bagian dari Information State.
 
@@ -150,7 +167,7 @@ PLAYER KNOWLEDGE ≠ CHARACTER KNOWLEDGE
 
 Karakter hanya dapat menggunakan informasi yang secara sah tersedia bagi karakter melalui pengalaman, komunikasi, discovery, skill, atau mekanisme lain yang relevan.
 
-## 11. Progression Boundary
+## 12. Progression Boundary
 
 Progression karakter ditentukan oleh module yang relevan:
 
@@ -158,28 +175,29 @@ Progression karakter ditentukan oleh module yang relevan:
 - Classes → `07_CLASSES.md`
 - Skills → `08_SKILLS.md`
 - Magic → `09_MAGIC_SYSTEM.md`
+- Race → `36_RACE_SYSTEM.md`
 
 Module ini tidak memberikan progression gratis atau angka perkembangan default.
 
-## 12. Location & Travel
+## 13. Location & Travel
 
 Location karakter adalah bagian dari Current State. Perubahan location harus berasal dari resolution yang sah.
 
 Travel tidak boleh mengubah location tanpa memperhitungkan durasi dan konsekuensi yang relevan.
 
-## 13. Relationships
+## 14. Relationships
 
 Character dapat memiliki hubungan dengan NPC, faction, party, pet, companion, quest, settlement, dan entity lain.
 
 Relationship yang menjadi material dan persisten harus memiliki identity/state/history/origin yang sesuai.
 
-## 14. Death & Revival
+## 15. Death & Revival
 
 `DEAD` adalah state, bukan sekadar narasi.
 
 Perubahan dari `DEAD` ke status aktif hanya sah melalui mekanisme revival yang diizinkan oleh module/world.
 
-## 15. Dynamic Character Creation Boundary
+## 16. Dynamic Character Creation Boundary
 
 AI GM dapat menjalankan **runtime simulation** untuk character-like entities bila module mengizinkan, tetapi itu tidak sama dengan membuat Player Character resmi.
 
@@ -187,12 +205,13 @@ Tidak ada dynamic generation yang boleh menghasilkan atau menggantikan Player Ch
 
 Duplicate identity terhadap `CHARACTER_ID` atau `PLAYER_ID` yang sudah terdaftar dilarang.
 
-## 16. Validation Requirements
+## 17. Validation Requirements
 
 Character State Delta minimal harus memeriksa:
 
 - `CHARACTER_ID` valid,
 - character terdaftar atau memiliki authority yang sah,
+- `RACE_CANON_ID` valid bila digunakan,
 - current state tersedia,
 - `STATE_VERSION` cocok,
 - perubahan memiliki Cause + Origin,
@@ -200,20 +219,22 @@ Character State Delta minimal harus memeriksa:
 - tidak ada contradiction,
 - `TURN_ID` belum committed.
 
-## 17. Canon Safety
+## 18. Canon Safety
 
 Module ini tidak menetapkan ras, statistik, class, skill, magic, item, atau latar belakang karakter tertentu sebagai fakta Canon.
 
 Detail Player Character berasal dari **Admin Character Registration** berdasarkan input Player, lalu dari state/resolution yang sah.
 
-## 18. Dependencies
+Daftar dan definition Race Canon berasal dari `races/CANON_REGISTRY.md`, bukan dari module ini.
+
+## 19. Dependencies
 
 Module ini menjadi basis bagi:
 
-`06_ATTRIBUTES` · `07_CLASSES` · `08_SKILLS` · `09_MAGIC_SYSTEM` · `10_EQUIPMENT_SYSTEM` · `12_VITALITY_SURVIVAL` · `13_COMBAT` · `20_REPUTATION` · `23_PARTY_SYSTEM` · `24_PETS_AND_COMPANIONS` · `26_CHARACTER_STATE`.
+`06_ATTRIBUTES` · `07_CLASSES` · `08_SKILLS` · `09_MAGIC_SYSTEM` · `10_EQUIPMENT_SYSTEM` · `12_VITALITY_SURVIVAL` · `13_COMBAT` · `20_REPUTATION` · `23_PARTY_SYSTEM` · `24_PETS_AND_COMPANIONS` · `26_CHARACTER_STATE` · `36_RACE_SYSTEM`.
 
 Registry Player terintegrasi dengan INDEX, Module Router, State Validator, dan Save Pipeline.
 
-## 19. Final Principle
+## 20. Final Principle
 
-> **Player memberikan identitas dan latar karakter; Admin mendaftarkan Player Character sebagai entitas resmi; AI GM menjalankan karakter tersebut dan sistem menentukan outcome.**
+> **Player memberikan identitas dan latar karakter; Admin mendaftarkan Player Character sebagai entitas resmi; Race Character harus menggunakan Race Canon yang sah; AI GM menjalankan karakter tersebut dan sistem menentukan outcome.**
