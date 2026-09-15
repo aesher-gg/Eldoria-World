@@ -2,22 +2,64 @@
 
 > **Module:** 14 — Monster Ecosystem
 > **Canon:** ELDORIA CANON v1.0 — LOCKED
-> **Status:** Admin Canon v1.0
+> **Status:** Admin Canon v1.1
 
 ## 1. Purpose
 
 Mendefinisikan monster sebagai bagian dari ekosistem hidup yang dapat muncul, bergerak, berkembang, berinteraksi, dan berubah berdasarkan habitat, kebutuhan, kondisi, serta world state.
 
-Module ini menetapkan framework generation dan ecology, bukan katalog monster tetap atau angka balance universal.
+Module ini menggunakan **Monster Canon terbatas** sebagai fondasi spesies/jenis resmi dan **Dynamic Monster Generation** untuk populasi, individu, dan variasi di runtime.
 
-## 2. Monster Identity
+## 2. Monster Canon Registry
 
-Monster yang menjadi material bagi gameplay wajib memiliki:
+Eldoria memiliki katalog **Monster Canon maksimum 150 jenis/spesies**.
+
+```text
+MONSTER CANON
+MAXIMUM = 150 TYPES / SPECIES
+```
+
+150 adalah batas katalog Canon, **bukan batas jumlah individu monster yang boleh hidup di dunia**.
+
+Monster Canon ditetapkan oleh Admin dan dapat dikelompokkan ke tingkat ancaman/kekuatan yang ditetapkan Canon. Distribusi tingkat tidak boleh ditebak oleh AI GM bila belum ditetapkan.
+
+AI GM tidak boleh menambahkan spesies baru ke Monster Canon hanya melalui generation atau narrative.
+
+## 3. Monster Classes
+
+Secara konseptual:
+
+```text
+MONSTER CANON
+├── TINGKAT RENDAH
+├── TINGKAT MENENGAH
+├── TINGKAT TINGGI
+└── TINGKAT PUNCAK
+```
+
+Nama dan jumlah sub-tier final dapat ditetapkan Admin tanpa mengubah batas maksimum 150 jenis.
+
+Tier Canon menentukan klasifikasi/species capability baseline; individual state tetap dapat berbeda karena umur, kondisi, habitat, mutation/evolution rules, equipment/effect, atau faktor sah lainnya.
+
+## 4. Monster Identity
+
+Monster Canon wajib memiliki stable species identity, misalnya:
+
+```text
+MONSTER_CANON_ID
+NAME
+SPECIES / TYPE
+CANON_TIER
+CANON_ORIGIN
+CANON_DEFINITION
+```
+
+Individual monster yang menjadi material wajib memiliki:
 
 ```text
 MONSTER_ID
+MONSTER_CANON_ID (bila berasal dari Canon species)
 NAME / DESIGNATION
-SPECIES / TYPE
 CURRENT_STATE
 ORIGIN
 GENERATION_DATA
@@ -26,7 +68,7 @@ HISTORY
 
 Field yang belum diketahui = `???`.
 
-## 3. Ecological State
+## 5. Ecological State
 
 State monster dapat mencakup, bila relevan:
 
@@ -48,7 +90,7 @@ REPRODUCTION / LIFECYCLE STATE
 
 Nilai aktual berasal dari state atau generation/resolution yang sah.
 
-## 4. Habitat & Ecology
+## 6. Habitat & Ecology
 
 Monster dipengaruhi oleh:
 
@@ -68,7 +110,7 @@ Monster dipengaruhi oleh:
 
 Kecocokan habitat memengaruhi kemungkinan generation dan perilaku, tetapi tidak menjamin hasil tertentu tanpa mekanisme resolution.
 
-## 5. Dynamic Generation
+## 7. Dynamic Generation
 
 Monster dapat dihasilkan secara dinamis berdasarkan context yang relevan, misalnya:
 
@@ -80,14 +122,15 @@ TIME
 SEASON
 ECOLOGICAL PRESSURE
 WORLD STATE
+MONSTER CANON DEFINITION (jika species Canon)
 GENERATION SEED / PARAMETERS
 ```
 
-Generator tidak boleh menggunakan fixed catalog sebagai satu-satunya sumber keberadaan monster.
+Generator boleh memilih monster Canon yang sesuai dengan ecology atau menghasilkan creature dynamic yang diizinkan Canon.
 
-Jika monster menjadi material, generation menghasilkan stable identity dan data yang cukup untuk continuity.
+Generator tidak boleh mengubah creature dynamic menjadi Monster Canon baru tanpa Admin Canon.
 
-## 6. Generation Determinism
+## 8. Generation Determinism
 
 Generation harus menggunakan seed, parameter, atau mekanisme deterministik ekuivalen bila diperlukan untuk menjaga hasil yang konsisten.
 
@@ -95,7 +138,7 @@ Runtime wajib mencari MONSTER_ID yang sudah persisted sebelum membuat entity bar
 
 Pemanggilan generator ulang tidak boleh menggandakan monster persisten tanpa resolution yang sah.
 
-## 7. Lifecycle
+## 9. Lifecycle
 
 Monster dapat memiliki lifecycle yang relevan terhadap dunia, termasuk:
 
@@ -109,7 +152,7 @@ SPAWNED / BORN
 
 Lifecycle aktual tidak boleh diasumsikan jika tidak didukung state atau module.
 
-## 8. Agency & Behavior
+## 10. Agency & Behavior
 
 Monster memiliki agency sesuai capability dan cognition-nya.
 
@@ -130,7 +173,7 @@ Behavior dapat dipengaruhi oleh:
 
 Monster tidak wajib menyerang Player dan tidak wajib menghindari Player.
 
-## 9. Population & Persistence Threshold
+## 11. Population & Persistence Threshold
 
 Tidak setiap organisme harus menjadi entity persisten individual.
 
@@ -138,7 +181,7 @@ Population-level simulation dapat digunakan untuk entity yang belum material.
 
 Ketika individual monster menjadi material bagi gameplay melalui combat, interaction, tracking, capture, quest, loot, atau konsekuensi lain, monster harus memperoleh stable identity/state sesuai kebutuhan persistence.
 
-## 10. Interaction With World
+## 12. Interaction With World
 
 Monster dapat menyebabkan atau mengalami perubahan pada:
 
@@ -154,7 +197,7 @@ Monster dapat menyebabkan atau mengalami perubahan pada:
 
 Setiap perubahan material mengikuti Cause + Origin + State Change + History.
 
-## 11. Combat Integration
+## 13. Combat Integration
 
 Combat terhadap monster menggunakan `13_COMBAT.md`.
 
@@ -162,19 +205,19 @@ Monster current state, capability, condition, positioning, knowledge, dan behavi
 
 Death, escape, capture, injury, atau perubahan lain harus dipersistenkan sebagai state outcome.
 
-## 12. Loot Integration
+## 14. Loot Integration
 
 Loot dari monster tidak otomatis.
 
 Jika resolution menghasilkan material loot, `15_LOOT_GENERATION.md` menentukan generation berdasarkan source dan context.
 
-## 13. Information Boundary
+## 15. Information Boundary
 
 Character, NPC, faction, dan Player tidak otomatis mengetahui species, location, capability, weakness, population, atau state monster.
 
 Informasi harus mengikuti Information State.
 
-## 14. State Change
+## 16. State Change
 
 Perubahan monster mengikuti:
 
@@ -194,25 +237,28 @@ ATOMIC PERSISTENCE
 HISTORY + ORIGIN
 ```
 
-## 15. Canon Safety
+## 17. Canon Safety
 
-Module ini tidak menetapkan:
+Monster Canon adalah katalog resmi Admin dengan batas maksimum 150 jenis/spesies.
 
-- katalog monster tetap,
-- stat monster universal,
-- damage universal,
-- drop table universal,
-- habitat absolut,
-- atau perilaku tunggal untuk semua monster.
+AI GM tidak boleh:
 
-Data spesifik harus berasal dari repository, state, generation, atau resolution yang sah.
+- menambahkan spesies Canon baru,
+- menghapus spesies Canon,
+- mengubah tier Canon,
+- mengubah identity Canon,
+- atau mengubah lore Canon
 
-## 16. Dependencies
+hanya melalui narrative/generation.
+
+Perubahan Canon membutuhkan Admin Canon update. Perubahan individual tetap menggunakan Monster State dan runtime resolution.
+
+## 18. Dependencies
 
 Konteks utama: `02_REALMS_AND_REGIONS`, `03_CITIES_AND_SETTLEMENTS`, `12_VITALITY_SURVIVAL`, `13_COMBAT`.
 
 Integrasi: `15_LOOT_GENERATION`, `16_NPC_SYSTEM`, `18_WORLD_EVENTS`, `25_WORLD_STATE`, `28_MONSTER_STATE`, `30_HISTORY_SYSTEM`, `31_ORIGIN_LOG`, `32_MODULE_ROUTER`, `33_ACTION_RESOLVER`, `34_STATE_VALIDATOR`, `35_SAVE_PIPELINE`.
 
-## 17. Final Principle
+## 19. Final Principle
 
-> **Monster bukan encounter sekali pakai; monster adalah bagian dari ekosistem hidup yang dapat dihasilkan secara dinamis, memiliki agency, dan menjadi persisten ketika material bagi dunia.**
+> **Monster Canon menyediakan maksimal 150 jenis resmi; population/ecology dan Dynamic Generation menyediakan kehidupan monster dalam jumlah besar; individual yang material dapat menjadi persistent tanpa menjadikan seluruh populasi sebagai database.**
