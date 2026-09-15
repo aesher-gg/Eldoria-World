@@ -137,7 +137,7 @@ Allowed relationship states mengikuti Module 04: `ALLY`, `FRIENDLY`, `NEUTRAL`, 
 
 ## 8. NPC Dependency
 
-Registry ini menyediakan konteks untuk jabatan pemerintahan, keamanan, ekonomi, dan administrasi. Membership, rank, authority, access, reputation, dan hubungan personal tidak diwariskan otomatis kepada NPC.
+Registry ini menyediakan konteks untuk jabatan pemerintahan, keamanan, ekonomi, dan administrasi. Membership, rank, authority, access, reputation, resources, dan hubungan personal tidak diwariskan otomatis kepada NPC.
 
 ```text
 FACTION CANON
@@ -158,7 +158,7 @@ CITY-LEVEL CANON FACTIONS: 20
 SETTLEMENT-LEVEL SPECIFIC CANON FACTIONS: 0
 ADDITIONAL CROSS-TERRITORIAL CANON FACTIONS: 0
 TOTAL CURRENT CANON FACTIONS: 43
-INDIVIDUAL CANON NPC CREATED: 5
+INDIVIDUAL CANON NPC CREATED: 15
 ```
 
 ## 10. Final Principle
