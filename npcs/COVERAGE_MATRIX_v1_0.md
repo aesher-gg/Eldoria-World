@@ -36,6 +36,8 @@ Faction context: `FACTION-001`, `FACTION-002`, `FACTION-003`.
 
 Planning bands: Government/Administration ≥8; Security/Defense ≥6; Inter-kingdom Trade ≥4; Strategic ≥3; Specialist ≥4.
 
+Current Canon coverage is 5 individual NPCs. They occupy real functions across government administration, defense coordination, and trade administration. Remaining planning bands are needs to evaluate, not automatic creation orders.
+
 ## Kingdoms
 
 | Kingdom | Target | Faction context | Coverage bands |
@@ -44,7 +46,7 @@ Planning bands: Government/Administration ≥8; Security/Defense ≥6; Inter-kin
 | KINGDOM-002 Brannor | ≥10 | 111/112/113/114 | governance, security, mining, mountain transport, specialist |
 | KINGDOM-003 Mariselle | ≥10 | 121/122/123/124 | governance, security, maritime trade, seafaring/shipbuilding, specialist |
 | KINGDOM-004 Sylvaran | ≥10 | 131/132/133/134 | governance, frontier, forestry, craft, specialist |
-| KINGDOM-005 Sahrad | ≥10 | 141/142/143/144 | governance, frontier, caravan trade, pastoral, specialist |
+| KINGDOM-005 Sahrad | ≥10 | 141/142/143/144 | governance, security, caravan trade, pastoral, specialist |
 
 Each listed band is a planning target, not automatic NPC creation.
 
@@ -138,8 +140,8 @@ CITY TARGET: ≥5 × 20 = ≥100
 SETTLEMENT TARGET: ≥3 × 40 = ≥120
 TOTAL SCOPE COVERAGE TARGET: ≥295
 
-INDIVIDUAL CANON NPC CREATED: 0
-INDIVIDUAL CANON NPC REGISTERED: 0
+INDIVIDUAL CANON NPC CREATED: 5
+INDIVIDUAL CANON NPC REGISTERED: 5
 ```
 
 > Coverage Matrix mengatur pemerataan kebutuhan Canon NPC; bukan alasan untuk membuat NPC filler.
