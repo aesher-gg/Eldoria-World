@@ -29,6 +29,8 @@ ORIGIN PROPOSALS
 ```text
 IDENTITY
 ↓
+RACE CANON IDENTITY
+↓
 TURN / IDEMPOTENCY
 ↓
 STATE VERSION
@@ -68,7 +70,44 @@ Untuk Canon NPC, `NPC_ID` harus cocok dengan Canon Registry/record bila entity t
 
 Untuk Monster Canon, `MONSTER_CANON_ID` harus cocok dengan Canon Registry bila species tersebut diklaim sebagai Canon.
 
-## 4. TURN & IDEMPOTENCY
+## 4. RACE CANON ID VALIDATION
+
+`RACE_CANON_ID` adalah identity reference Canon dan bukan free-form runtime label.
+
+Jika Character, NPC, Monster, Population Model, atau entity lain memiliki field `RACE_CANON_ID`, Validator wajib memastikan:
+
+```text
+RACE_CANON_ID
+↓
+races/CANON_REGISTRY.md
+↓
+MATCHING ACTIVE CANON RACE
+```
+
+Hard rules:
+
+- `RACE_CANON_ID` harus exact match dengan Race Canon Registry;
+- Race yang tidak ada di registry = `REJECT` untuk state/identity yang mengharuskan Race Canon;
+- `???` boleh dipertahankan sebagai Unknown hanya bila module/entity memang mengizinkan Race belum diketahui; `???` tidak dapat diperlakukan sebagai Race ID;
+- nama ras, subrace, lineage, clan, ethnicity, culture, faction, class, atau appearance tidak boleh menggantikan `RACE_CANON_ID`;
+- Dynamic NPC/entity yang menggunakan Race harus memilih Race dari registry, bukan membuat Race baru;
+- `RACE_CANON_ID` tidak boleh berubah melalui narrative atau State Delta biasa tanpa mechanism perubahan identity yang sah;
+- perubahan definisi, lore, biology, tier/classification, atau status Canon Race memerlukan Admin Canon update, bukan runtime state mutation;
+- Race Canon tidak secara otomatis menentukan class, skill, magic, faction, personality, morality, atau outcome.
+
+### Race Validation Matrix
+
+| Kondisi | Hasil |
+|---|---|
+| `RACE_CANON_ID` valid dan registry match | PASS untuk race identity |
+| `RACE_CANON_ID` tidak ditemukan | REJECT |
+| Race name ada tetapi ID tidak ada | REJECT / unresolved sesuai entity contract |
+| `RACE_CANON_ID = ???` dan Race wajib diketahui | REJECT |
+| `RACE_CANON_ID = ???` dan Race boleh Unknown | PASS sebagai Unknown, tanpa substitusi |
+| Runtime mencoba membuat Race Canon baru | REJECT |
+| Runtime mencoba mengubah Canon Race definition | REJECT; Admin update required |
+
+## 5. TURN & IDEMPOTENCY
 
 Validator harus memastikan `TURN_ID` belum berhasil committed.
 
@@ -79,7 +118,7 @@ STATUS = ALREADY_COMMITTED
 NO SECOND COMMIT
 ```
 
-## 5. STATE VERSION
+## 6. STATE VERSION
 
 Setiap affected persistent state harus dibandingkan dengan version yang ditangkap saat load.
 
@@ -90,7 +129,7 @@ LOADED VERSION != CURRENT VERSION → REJECT STALE TRANSACTION
 
 Transaction stale harus reload dan re-resolve melalui pipeline.
 
-## 6. AUTHORITY
+## 7. AUTHORITY
 
 Validator memastikan perubahan berasal dari module yang memiliki kewenangan atas domain tersebut.
 
@@ -113,7 +152,7 @@ Player submission tidak sama dengan Admin registration.
 
 Narrative tidak pernah menjadi authority.
 
-## 7. PLAYER CHARACTER VALIDATION
+## 8. PLAYER CHARACTER VALIDATION
 
 Player Character hanya valid sebagai PC resmi jika:
 
@@ -131,7 +170,9 @@ terverifikasi.
 
 AI GM tidak boleh menciptakan atau mengganti identity dasar PC melalui state delta biasa.
 
-## 8. CANON ENTITY VALIDATION
+Jika PC memiliki `RACE_CANON_ID`, Race tersebut harus lolos Section 4 sebelum identity/state dianggap valid.
+
+## 9. CANON ENTITY VALIDATION
 
 Untuk Canon NPC dan Monster Canon:
 
@@ -141,7 +182,7 @@ Untuk Canon NPC dan Monster Canon:
 - perubahan terhadap Canon definition/lore/tier tidak boleh disamarkan sebagai state change biasa;
 - perubahan Canon membutuhkan Admin Canon update.
 
-## 9. CAPABILITY & PREREQUISITE
+## 10. CAPABILITY & PREREQUISITE
 
 Periksa action terhadap:
 
@@ -157,7 +198,7 @@ Periksa action terhadap:
 
 Tidak boleh ada free capability atau progression.
 
-## 10. RESOURCE / OWNERSHIP
+## 11. RESOURCE / OWNERSHIP
 
 Periksa konsistensi:
 
@@ -173,7 +214,7 @@ Periksa konsistensi:
 
 Tidak boleh mengurangi resource yang tidak tersedia.
 
-## 11. TARGET / LOCATION / TIME
+## 12. TARGET / LOCATION / TIME
 
 Validator memeriksa bahwa:
 
@@ -184,7 +225,7 @@ Validator memeriksa bahwa:
 - World Time dan Local Environment tidak kontradiktif,
 - time delta tidak diterapkan dua kali.
 
-## 12. LIFECYCLE
+## 13. LIFECYCLE
 
 Perubahan harus sesuai lifecycle entity.
 
@@ -192,7 +233,7 @@ Entity `DEAD`, `RETIRED`, `CANCELLED`, atau status terminal lain tidak boleh mel
 
 Revival hanya valid melalui mechanism yang sah.
 
-## 13. DELTA CONSISTENCY
+## 14. DELTA CONSISTENCY
 
 Setiap State Delta harus:
 
@@ -205,7 +246,7 @@ Setiap State Delta harus:
 
 `???` tetap Unknown/Unresolved dan bukan zero/empty/false.
 
-## 14. CROSS-ENTITY CONSISTENCY
+## 15. CROSS-ENTITY CONSISTENCY
 
 Untuk transaction multi-entity, semua perubahan yang secara logis saling bergantung harus hadir dalam atomic bundle.
 
@@ -219,7 +260,7 @@ Item ownership → Buyer
 
 Jika salah satu required delta hilang, transaction ditolak.
 
-## 15. CAUSE / ORIGIN / HISTORY
+## 16. CAUSE / ORIGIN / HISTORY
 
 Setiap material state change harus memiliki:
 
@@ -232,7 +273,7 @@ HISTORY RECORD PROPOSAL
 
 Origin harus menunjuk sumber yang benar. Tidak boleh dibuat untuk membenarkan perubahan yang tidak terjadi.
 
-## 16. DYNAMIC GENERATION
+## 17. DYNAMIC GENERATION
 
 Generated entity hanya PASS jika memiliki, sesuai kebutuhan:
 
@@ -246,7 +287,9 @@ HISTORY
 
 Generator tidak boleh menggantikan entity persisten yang sudah ada.
 
-## 17. NO SILENT CORRECTION
+Untuk generated entity yang memiliki `RACE_CANON_ID`, registry match wajib dilakukan sebelum PASS.
+
+## 18. NO SILENT CORRECTION
 
 Jika delta invalid, Validator:
 
@@ -256,9 +299,9 @@ REJECT
 REPORT ERROR
 ```
 
-Validator tidak boleh diam-diam mengubah HP, gold, item, outcome, waktu, atau field lain untuk membuat transaction valid.
+Validator tidak boleh diam-diam mengubah HP, gold, item, outcome, waktu, Race ID, atau field lain untuk membuat transaction valid.
 
-## 18. RESULT
+## 19. RESULT
 
 Output minimal:
 
@@ -267,6 +310,7 @@ TURN_ID
 VALIDATION_STATUS = PASS | REJECT | ALREADY_COMMITTED
 VALIDATED_ENTITY_IDS
 VALIDATED_STATE_VERSIONS
+VALIDATED_RACE_CANON_IDS
 ERRORS
 WARNINGS
 VALIDATED_DELTAS
@@ -276,7 +320,7 @@ VALIDATED_ORIGINS
 
 `WARNINGS` tidak boleh dipakai untuk melewati hard invariant.
 
-## 19. NO MUTATION
+## 20. NO MUTATION
 
 State Validator tidak melakukan persistent mutation.
 
@@ -286,7 +330,7 @@ VALIDATOR → CHECK
 SAVE PIPELINE → COMMIT
 ```
 
-## 20. FAILURE
+## 21. FAILURE
 
 Jika validation gagal:
 
@@ -304,4 +348,4 @@ RELOAD / RE-RESOLVE / ABORT
 
 Final principle:
 
-> **Tidak ada State Delta yang sah hanya karena resolver mengusulkannya; Validator harus membuktikannya terhadap Canon, registry, rules, dan authoritative state.**
+> **Tidak ada State Delta yang sah hanya karena resolver mengusulkannya; Validator harus membuktikannya terhadap Canon, registry, rules, dan authoritative state — termasuk `RACE_CANON_ID` bila Race relevan.**
