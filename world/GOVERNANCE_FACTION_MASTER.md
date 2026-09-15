@@ -315,7 +315,7 @@ Jika suatu field belum memiliki dasar Canon, nilainya tetap `???` dan faction be
 
 ## 10. Relationship to NPC Coverage Matrix
 
-`npcs/COVERAGE_MATRIX.md` menentukan kebutuhan coverage NPC.
+`npcs/COVERAGE_MATRIX_v1_0.md` menentukan kebutuhan coverage NPC.
 
 File ini menentukan konteks governance/faction yang harus tersedia sebelum NPC individual dibuat.
 
@@ -342,8 +342,10 @@ NPC ARCHITECTURE: COMPLETE
 NPC COVERAGE MATRIX: COMPLETE
 GOVERNANCE BASELINE: ESTABLISHED
 FACTION FRAMEWORK: ESTABLISHED
-SPECIFIC FACTION CANON: PENDING
-INDIVIDUAL CANON NPC: NOT STARTED
+SPECIFIC FACTION CANON: ESTABLISHED — 43 ACTIVE CANON FACTIONS
+INDIVIDUAL CANON NPC: ACTIVE — 5 REGISTERED
+CURRENT NPC CREATION METHOD: CONTROLLED BATCHES OF UP TO 5
+QUOTA STATUS: COVERAGE TARGET ONLY; NO MASS NPC FILLING
 ```
 
 ---
