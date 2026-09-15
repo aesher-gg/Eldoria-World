@@ -52,10 +52,21 @@ Canon NPC tidak boleh digantikan Dynamic NPC dengan identity berbeda hanya karen
 
 ## 5. Registered Canon NPC
 
-Belum ada Canon NPC individual yang didaftarkan.
-
+### NPC-CANON-001 — Alaric Veyn
 ```text
-REGISTRY_STATUS: READY
+NPC_ID: NPC-CANON-001
+NPC_CLASS: CANON
+NAME: Alaric Veyn
+RACE_CANON_ID: RACE-001
+ROLE: Pejabat Administrasi Kekaisaran — Pengawas Koordinasi Antar-Kerajaan
+EMPIRE_ID: EMPIRE-001
+SETTLEMENT_ID: ???
+CITY_ID: ???
+REGION_ID: ???
+KINGDOM_ID: ???
+FACTION: FACTION-001 — Pemerintahan Kekaisaran Valthera
+CANON_STATUS: ACTIVE
+RECORD: npcs/canon/NPC-CANON-001.md
 ```
 
 ## 6. Registration Template
@@ -76,3 +87,13 @@ CANON_ORIGIN: Admin Canon
 ```
 
 `???` berarti belum ditentukan.
+
+## 7. Current Status
+
+```text
+EMPIRE CANON NPC CREATED: 1 / ≥25 target coverage
+KINGDOM CANON NPC CREATED: 0
+CITY CANON NPC CREATED: 0
+SETTLEMENT CANON NPC CREATED: 0
+TOTAL INDIVIDUAL CANON NPC CREATED: 1
+```
