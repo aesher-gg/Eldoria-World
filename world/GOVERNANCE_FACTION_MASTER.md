@@ -39,7 +39,7 @@ REGION → CITY → SETTLEMENT
 
 ```text
 POLITICAL_SYSTEM: Monarki Kekaisaran Terdesentralisasi
-HEAD_OF_STATE: Kaisar Valthera
+HEAD_OF_STATE: NPC-CANON-011 — Aurelian Valthera
 CENTRAL_AUTHORITY: Pemerintahan Kekaisaran
 KINGDOM_AUTONOMY: Internal governance permitted within Imperial law
 IMPERIAL_SCOPE: Pertahanan bersama, hukum kekaisaran, hubungan antar-kerajaan, kepentingan strategis, dan urusan yang ditetapkan oleh hukum kekaisaran
@@ -49,7 +49,6 @@ LOCAL_SCOPE: Pemerintahan kerajaan dan administrasi lokal berada pada kerajaan m
 Detail berikut tetap unresolved:
 
 ```text
-PERSONAL_NAME_OF_EMPEROR: ???
 IMPERIAL_MINISTRIES: ???
 IMPERIAL_COUNCIL: ???
 SPECIFIC_IMPERIAL_LAWS: ???
@@ -67,17 +66,16 @@ EXTERNAL_RELATIONS: ???
 Kelima Kingdom berada di bawah hukum kekaisaran dan memiliki otonomi pemerintahan internal.
 
 ```text
-KINGDOM-001: Kerajaan otonom di bawah hukum kekaisaran
-KINGDOM-002: Kerajaan otonom di bawah hukum kekaisaran
-KINGDOM-003: Kerajaan otonom di bawah hukum kekaisaran
-KINGDOM-004: Kerajaan otonom di bawah hukum kekaisaran
-KINGDOM-005: Kerajaan otonom di bawah hukum kekaisaran
+KINGDOM-001: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-012 — Cedric Varen
+KINGDOM-002: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-013 — Tharok Brann
+KINGDOM-003: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-014 — Celestine Aureon
+KINGDOM-004: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-015 — Edrien Sylvar
+KINGDOM-005: Kerajaan otonom di bawah hukum kekaisaran; RULER: ???
 ```
 
 Detail berikut belum ditetapkan per Kingdom dan tetap `???` sampai Canonized:
 
 ```text
-RULER / RULING HOUSE
 GOVERNMENT BODY
 SUCCESSION LAW
 LOCAL LAW
@@ -95,8 +93,8 @@ KINGDOM-TO-KINGDOM RELATIONS
 
 | Scope | Authority baseline | Known | Unresolved |
 |---|---|---|---|
-| Empire | Imperial central authority + defined imperial scope | Political system and broad scope | Ruler name, institutions, laws, military, economy, factions |
-| Kingdom | Internal autonomy under Imperial law | Autonomy baseline | Rulers, institutions, laws, military, factions |
+| Empire | Imperial central authority + defined imperial scope | Political system, ruler identity, broad scope | Institutions, laws, military, economy, factions |
+| Kingdom | Internal autonomy under Imperial law | Autonomy baseline and four Canon rulers | Remaining ruler, institutions, laws, military, factions |
 | Region | Parent kingdom administration | Parent hierarchy | Regional offices/authority = ??? |
 | City | Parent kingdom/local administration | Parent hierarchy | City government/offices = ??? |
 | Settlement | Local administration under parent hierarchy | Parent hierarchy | Local offices/authority = ??? |
@@ -244,7 +242,7 @@ For each future Canon NPC:
 ROLE              → must have a valid context
 FACTION           → must reference an existing/valid faction or be explicitly ???
 AUTHORITY         → must be supported by governance/faction structure
-CORE_RELATIONSHIPS → must not contradict established political structure
+CORE RELATIONSHIPS → must not contradict established political structure
 KNOWLEDGE_BOUNDARY → must follow actual position/access
 ```
 
@@ -341,9 +339,10 @@ POPULATION MODEL: ACTIVE
 NPC ARCHITECTURE: COMPLETE
 NPC COVERAGE MATRIX: COMPLETE
 GOVERNANCE BASELINE: ESTABLISHED
+HEAD-OF-STATE CANON: ACTIVE — 5 REGISTERED
 FACTION FRAMEWORK: ESTABLISHED
 SPECIFIC FACTION CANON: ESTABLISHED — 43 ACTIVE CANON FACTIONS
-INDIVIDUAL CANON NPC: ACTIVE — 5 REGISTERED
+INDIVIDUAL CANON NPC: ACTIVE — 15 REGISTERED
 CURRENT NPC CREATION METHOD: CONTROLLED BATCHES OF UP TO 5
 QUOTA STATUS: COVERAGE TARGET ONLY; NO MASS NPC FILLING
 ```
