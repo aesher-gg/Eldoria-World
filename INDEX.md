@@ -1,651 +1,124 @@
 # 🧭 ELDORIA WORLD — INDEX
 
 > **ELDORIA CANON v1.0 — LOCKED**
->
+> 
 > **Ini adalah SATU-SATUNYA entry point runtime yang perlu diberikan kepada AI GM.**
-> Semua module lain dijangkau dari INDEX ini melalui fetch/browsing sesuai kondisi roleplay.
->
-> **Untuk AI GM:** baca seluruh INDEX ini terlebih dahulu, lalu jalankan **Prosedur Bootstrap** sebelum menulis balasan apa pun kepada Player. Jangan menjawab berdasarkan ingatan bebas jika data resmi dapat diverifikasi dari repository.
->
-> **PENTING:** Eldoria memiliki Canon NPC penting, Monster Canon terbatas, Player Registry resmi, Race Canon, Population Model, dan Dynamic Entity Generation. Tidak semua penduduk/monster harus dibuat sebagai file individual. Repository menyimpan Canon dan persistent data yang memang telah menjadi bagian resmi dunia; entitas sementara dapat hidup di runtime/session sampai memenuhi persistence threshold.
+> Semua module dan registry lain dijangkau dari INDEX ini melalui fetch/browsing sesuai kondisi roleplay.
 
----
+## 0. RUNTIME ENTRY
 
-## 0. PROSEDUR BOOTSTRAP — WAJIB
+AI GM wajib membaca dan memverifikasi `INDEX.md` pada setiap turn, lalu memuat `00_CORE_RULES.md` dan seluruh source authority yang relevan sebelum resolution.
 
-Urutan berikut berlaku setiap kali AI GM memulai atau melanjutkan sesi.
+Repository adalah official Canon dan persistent-world source of truth. `???` berarti Unknown/Unresolved dan tidak boleh ditebak.
 
-### 0.1 Fetch INDEX
+## 1. BOOTSTRAP
 
-`INDEX.md` wajib dibaca terlebih dahulu.
+1. Fetch `INDEX.md`.
+2. Fetch `00_CORE_RULES.md`.
+3. Resolve registered Player Character melalui `characters/players.md` → Character Record → `26_CHARACTER_STATE.md`.
+4. Jika Race relevan, fetch `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md`.
+5. Fetch geography/state yang relevan.
+6. Jika NPC relevan, fetch `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md`; jika faction relevan, fetch `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md`.
+7. Fetch state/history/origin sesuai konsekuensi.
+8. Jalankan routing → simulation → validation → persistence bila diperlukan → narrative.
 
-### 0.2 Fetch Core Rules
+Module yang pernah dimuat pada turn sebelumnya tidak dianggap masih authoritative.
 
-Setelah INDEX dibaca, fetch:
+## 2. AUTOMATIC MODULE ROUTING
 
-`00_CORE_RULES.md`
+| Trigger | Required context |
+|---|---|
+| Every turn | `INDEX.md` + `00_CORE_RULES.md` |
+| Character | `05_CHARACTER_SYSTEM.md` + registry/record + `26_CHARACTER_STATE.md` |
+| Race | `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md` |
+| Location | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md` |
+| Faction / organization | `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md` when specific Canon faction is relevant |
+| NPC | `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md` + `27_NPC_STATE.md` when persistent |
+| Monster | `14_MONSTER_ECOSYSTEM.md` + relevant Monster Canon/State |
+| Quest | `17_QUEST_SYSTEM.md` |
+| Event | `18_WORLD_EVENTS.md` + `29_EVENT_STATE.md` when persistent |
+| Reputation | `20_REPUTATION.md` |
+| World state | `25_WORLD_STATE.md` |
+| History / Origin | `30_HISTORY_SYSTEM.md` + `31_ORIGIN_LOG.md` |
+| Routing / resolution / validation / save | `32_MODULE_ROUTER.md` / `33_ACTION_RESOLVER.md` / `34_STATE_VALIDATOR.md` / `35_SAVE_PIPELINE.md` |
 
-Jangan melakukan resolution sebelum Core Rules selesai dibaca.
+Actual consequences determine final dependency load.
 
-### 0.3 Tentukan Player Character
+## 3. CANON NPC AUTHORITY
 
-Gunakan urutan authority berikut:
+Canon NPC coverage is planned, not generated automatically.
 
-**A. Player Character sudah terdaftar**
+```text
+npcs/MASTER_PLAN.md
+↓
+npcs/COVERAGE_MATRIX_v1.0.md
+↓
+npcs/CANON_REGISTRY.md
+↓
+INDIVIDUAL CANON NPC RECORDS
+```
 
-Cari `characters/players.md`, lalu fetch Character Record dan Current Character State yang dirujuk oleh `CHARACTER_ID`.
+Coverage targets:
 
-**B. Player memberikan data karakter baru**
+```text
+EMPIRE      ≥25
+KINGDOM     ≥10 each × 5
+CITY        ≥5 each × 20
+SETTLEMENT  ≥3 each × 40
+```
 
-Data tersebut adalah **submission Player**, bukan Character resmi. AI GM tidak boleh langsung menjadikannya Player Character resmi. Registrasi dilakukan oleh Admin sesuai `05_CHARACTER_SYSTEM.md`.
+The Coverage Matrix defines scope coverage and faction/role context but creates **zero individual NPCs**. NPCs must not be created as quota fillers.
 
-**C. Character belum terdaftar dan tidak ada Admin registration**
+## 4. FACTION AUTHORITY
 
-Jangan membuat identity Player Character baru secara otomatis. Resolution yang membutuhkan PC resmi harus ditahan sampai registry/authority tersedia.
+Specific Canon factions are authoritative in:
 
-### 0.4 Race Canon Check
+`factions/CANON_REGISTRY.md`
 
-Jika Player Character terdaftar memiliki `RACE_CANON_ID`, atau race relevan terhadap identity/capability/state, AI GM wajib:
+Current planning registry:
 
-1. fetch `36_RACE_SYSTEM.md`;
-2. fetch `races/CANON_REGISTRY.md`;
-3. verifikasi `RACE_CANON_ID` exact match dengan Race Canon yang terdaftar;
-4. fetch detail Race Canon yang relevan bila tersedia.
+```text
+EMPIRE-LEVEL       3
+KINGDOM-LEVEL     20
+CITY-LEVEL        20
+SETTLEMENT-LEVEL   0
+CROSS-TERRITORIAL  0
+TOTAL              43
+```
 
-**Jangan menebak Race dari nama, penampilan, lokasi, class, faction, atau stereotype.** Jika Race belum diketahui dan entity contract mengizinkan Unknown, pertahankan `???`; jangan membuat Race baru.
+Faction registry membership does not automatically grant NPC rank, authority, access, reputation, resources, knowledge, or loyalty.
 
-### 0.5 Tentukan lokasi dan konteks
-
-Setelah identity karakter diketahui, fetch module wilayah/settlement/faction yang relevan.
-
-Jangan memuat seluruh dunia jika tidak diperlukan.
-
-### 0.6 Canon NPC Check
-
-Jika Player berinteraksi dengan NPC penting atau NPC yang mungkin merupakan tokoh Canon:
-
-1. fetch `16_NPC_SYSTEM.md`;
-2. periksa `npcs/CANON_REGISTRY.md`;
-3. cari Canon NPC berdasarkan wilayah, role, identity, atau reference yang relevan;
-4. jika record Canon ditemukan, fetch record tersebut;
-5. fetch `27_NPC_STATE.md` dan state NPC bila state persisten tersedia.
-
-Jika Canon NPC memiliki `RACE_CANON_ID`, verifikasi Race melalui `races/CANON_REGISTRY.md` sebelum resolution.
-
-**Jangan membuat Dynamic NPC pengganti jika Canon NPC yang sesuai sudah ada.**
-
-### 0.7 Monster Canon Check
-
-Jika Monster muncul atau Player berinteraksi dengan creature:
-
-1. fetch `14_MONSTER_ECOSYSTEM.md`;
-2. jika species/type dapat diidentifikasi sebagai Canon, periksa `monsters/CANON_REGISTRY.md`;
-3. fetch definisi Monster Canon yang sesuai;
-4. jika monster memiliki `RACE_CANON_ID` sebagai field yang berlaku, verifikasi Race melalui `races/CANON_REGISTRY.md`;
-5. fetch `28_MONSTER_STATE.md` bila individual monster persisten/material.
-
-AI GM tidak boleh membuat species Canon baru melalui narrative.
-
-### 0.8 Population / Race Context Check
-
-Jika roleplay menyentuh demografi, komposisi ras, migrasi, settlement population, race distribution, atau konflik sosial yang bergantung pada ras:
-
-1. fetch `36_RACE_SYSTEM.md`;
-2. fetch `races/CANON_REGISTRY.md`;
-3. fetch `02_REALMS_AND_REGIONS.md` dan `03_CITIES_AND_SETTLEMENTS.md` bila geography/settlement relevan;
-4. fetch Population Model/state yang relevan.
-
-Population Model tidak boleh menciptakan Race Canon baru atau menetapkan race distribution resmi tanpa source Canon/Population yang sah.
-
-### 0.9 Cek world events yang relevan
-
-Jika terdapat active/persistent event yang relevan terhadap lokasi, waktu, faction, quest, atau tindakan karakter, fetch `18_WORLD_EVENTS.md` dan state event terkait.
-
-### 0.10 Mulai / lanjutkan roleplay
-
-Setelah Bootstrap selesai, AI GM dapat menjalankan roleplay.
-
-### 0.11 Dynamic Module Loading
-
-Selama sesi berlangsung, fetch module tambahan **hanya ketika kondisi/aksi membutuhkannya**.
-
-Jangan menganggap module masih loaded hanya karena pernah digunakan pada turn sebelumnya.
-
-### 0.12 Error / Missing File
-
-Jika file resmi yang diperlukan gagal diakses atau tidak tersedia:
-
-- jangan mengarang isinya;
-- tandai data sebagai `???` bila memang unresolved;
-- jangan mengubah `???` menjadi default/angka tebakan;
-- jika resolution tidak dapat dilakukan secara sah, hentikan resolution tersebut atau gunakan fallback yang memang diizinkan Canon.
-
----
-
-## 1. RUNTIME PRINCIPLE
-
-Eldoria mengikuti prinsip:
+## 5. STATE / PERSISTENCE PRINCIPLE
 
 ```text
 PLAYER INTENT
 ↓
-AI GM LOADS REQUIRED CONTEXT
+LOAD AUTHORITATIVE CONTEXT
 ↓
 SIMULATE
 ↓
 VALIDATE
 ↓
-UPDATE RUNTIME STATE
-↓
-NARRATE
-```
-
-Repository adalah **official Canon dan persistent-world source of truth**, tetapi bukan database individual untuk seluruh populasi.
-
-### 1.1 Player bukan Database Operator
-
-Player hanya mengendalikan karakter dan intent.
-
-Player tidak diwajibkan:
-
-- membuat file NPC satu per satu;
-- membuat file Monster satu per satu;
-- menentukan ID internal;
-- menentukan Origin/History secara manual;
-- menyalin seluruh state dunia setelah setiap turn.
-
-Player Character resmi justru harus didaftarkan oleh Admin berdasarkan input Player.
-
-### 1.2 Runtime Entity vs Persistent Entity
-
-Tidak semua entity yang muncul harus langsung menjadi file repository.
-
-```text
-DYNAMIC ENTITY GENERATED
-↓
-DIGUNAKAN DALAM RUNTIME
-↓
-APAKAH MATERIAL / PERSISTENT?
-├─ NO → Runtime-only entity
-└─ YES → Stable Identity + State + Origin + History
-```
-
-Entity menjadi persistent bila continuity dunia membutuhkannya atau memenuhi persistence threshold module terkait.
-
-### 1.3 Canon vs Dynamic Population
-
-```text
-CANON
-├── World Canon
-├── Canon NPC penting
-├── Monster Canon ≤150 jenis
-├── Race Canon
-└── Registered Player Characters
-
-RUNTIME / POPULATION
-├── Population Model
-├── Dynamic NPC
-├── Dynamic Monster / individual
-└── Temporary Events / Loot / Encounters
-```
-
-Canon adalah fondasi resmi. Population dan Dynamic Generation menyediakan skala kehidupan dunia tanpa mewajibkan satu file untuk setiap individu.
-
----
-
-## 2. AUTOMATIC MODULE ROUTING
-
-AI GM menentukan module berdasarkan kondisi nyata roleplay, bukan sekadar keyword.
-
-| Trigger / Kondisi | Module yang perlu difetch |
-|---|---|
-| Selalu pada awal turn/session | `INDEX.md` → `00_CORE_RULES.md` |
-| Player / Character identity / lifecycle | `05_CHARACTER_SYSTEM.md` + `characters/players.md` + Character Record + `26_CHARACTER_STATE.md` |
-| Race / racial identity / racial capability | `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md` + relevant Character/NPC/Monster/Population state |
-| Lokasi / wilayah / perjalanan | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md` |
-| Faction / organisasi | `04_FACTIONS.md`, `19_FACTION_SYSTEM.md` |
-| Atribut / class / skill | `06_ATTRIBUTES.md`, `07_CLASSES.md`, `08_SKILLS.md` |
-| Magic / spell / ritual / supernatural effect | `09_MAGIC_SYSTEM.md` |
-| Item / equipment / possession | `10_EQUIPMENT_SYSTEM.md` |
-| Trade / purchase / sale / currency | `11_ECONOMY.md` |
-| HP / stamina / hunger / thirst / injury / rest | `12_VITALITY_SURVIVAL.md` |
-| Combat | `13_COMBAT.md` + state semua combatant yang relevan |
-| Monster / ecology / creature generation | `14_MONSTER_ECOSYSTEM.md` + `monsters/CANON_REGISTRY.md` bila species Canon + `28_MONSTER_STATE.md` bila persistent |
-| Loot / drop / recovered material | `15_LOOT_GENERATION.md`, `10_EQUIPMENT_SYSTEM.md` bila item material |
-| NPC / social interaction / NPC decision | `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md` bila Canon candidate + `27_NPC_STATE.md` bila persistent |
-| Quest / objective / contract | `17_QUEST_SYSTEM.md` |
-| World event / environmental event | `18_WORLD_EVENTS.md`, `29_EVENT_STATE.md` bila persistent |
-| Reputation / social memory | `20_REPUTATION.md` |
-| Crafting | `21_CRAFTING.md` + relevant material/equipment/skill modules |
-| Alchemy | `22_ALCHEMY.md` + relevant material/magic modules |
-| Party / group | `23_PARTY_SYSTEM.md` |
-| Pet / companion | `24_PETS_AND_COMPANIONS.md` |
-| Shared world condition | `25_WORLD_STATE.md` |
-| Historical fact / prior event | `30_HISTORY_SYSTEM.md` |
-| Provenance / cause / generation source | `31_ORIGIN_LOG.md` |
-| Module selection / dependency resolution | `32_MODULE_ROUTER.md` |
-| Action simulation | `33_ACTION_RESOLVER.md` |
-| Validation | `34_STATE_VALIDATOR.md` |
-| Persistence / save / conflict recovery | `35_SAVE_PIPELINE.md` |
-
-AI GM harus mengikuti dependency module yang tercantum pada module yang sedang digunakan.
-
-### 2.1 Race Routing Rule
-
-Race module wajib dimuat bila Race merupakan bagian dari identity, capability, population, migration, social context, atau rule yang sedang di-resolve.
-
-```text
-ENTITY HAS RACE_CANON_ID
-        ↓
-LOAD 36_RACE_SYSTEM.md
-        ↓
-LOAD races/CANON_REGISTRY.md
-        ↓
-VERIFY EXACT RACE_CANON_ID
-        ↓
-LOAD ENTITY STATE / RELEVANT CONTEXT
-```
-
-Jika action tidak menyentuh Race dan race information tidak diperlukan untuk resolution, Race module tidak perlu dimuat hanya untuk memenuhi keyword.
-
----
-
-## 3. RUNTIME STATE HIERARCHY
-
-Gunakan data paling authoritative yang tersedia untuk konteks saat ini.
-
-```text
-CANON / RULES
-↓
-LATEST AUTHORITATIVE PERSISTENT STATE
-↓
-VALID RUNTIME STATE FROM CURRENT SESSION
-↓
-CURRENT TURN RESOLUTION
-↓
-NARRATIVE
-```
-
-Untuk entity, bedakan **Canon Definition/Registry** dari **Current State**:
-
-```text
-CANON / REGISTRY
-→ identity + official definition
-
-CURRENT STATE
-→ kondisi entity saat ini
-```
-
-Untuk Race:
-
-```text
-races/CANON_REGISTRY.md
-→ Race identity + official Race definition
-
-Character/NPC/Monster/Population State
-→ current race assignment/context
-```
-
-Jika dua sumber state bertentangan:
-
-1. jangan memilih secara diam-diam;
-2. periksa `STATE_VERSION`, `TURN_ID`, timestamp, dan Origin;
-3. gunakan aturan conflict resolution pada `00_CORE_RULES.md`, `34_STATE_VALIDATOR.md`, dan `35_SAVE_PIPELINE.md`;
-4. jika tidak dapat diselesaikan, gunakan `???` atau hentikan resolution yang bergantung padanya.
-
----
-
-## 4. TURN CONTRACT
-
-Setiap Player Message dianggap sebagai satu logical turn.
-
-Runtime wajib mempertahankan:
-
-- `TURN_ID` unik;
-- intent Player;
-- relevant loaded state;
-- `STATE_VERSION` yang digunakan;
-- State Delta bila ada;
-- Cause;
-- Origin;
-- History;
-- resolution status.
-
-Namun **runtime turn tidak berarti setiap turn harus menghasilkan file GitHub baru**.
-
-Persistent save hanya diperlukan ketika state memang harus dipertahankan di luar runtime/session atau ketika save pipeline dipanggil.
-
----
-
-## 5. SIMULATION / PERSISTENCE BOUNDARY
-
-### Runtime
-
-AI GM boleh:
-
-- menghasilkan NPC sementara;
-- menghasilkan Monster sementara;
-- menghasilkan loot sementara;
-- membuat event lokal sementara;
-- menjalankan combat;
-- menjalankan social interaction;
-- menjalankan perjalanan;
-- memperbarui runtime state.
-
-### Persistent World
-
-Entity/state harus dipersistenkan ketika continuity dunia mengharuskannya atau ketika save operation dilakukan.
-
-```text
-RUNTIME SIMULATION
-        ↓
-MATERIAL CHANGE?
-   ├── NO → runtime only
-   └── YES
-        ↓
-PERSISTENCE CANDIDATE
-        ↓
-STATE + HISTORY + ORIGIN
-        ↓
-SAVE PIPELINE
-```
-
-`35_SAVE_PIPELINE.md` tetap menjadi authority untuk persistence.
-
----
-
-## 6. CANON NPC + POPULATION MODEL
-
-### Canon NPC
-
-Canon NPC adalah tokoh penting resmi yang ditetapkan Admin.
-
-Minimum coverage guideline:
-
-```text
-DESA       → ≥ 3 Canon NPC
-KOTA       → ≥ 5 Canon NPC
-KERAJAAN   → ≥ 10 Canon NPC
-KEKAISARAN → ≥ 25 Canon NPC
-```
-
-Ini adalah minimum **tokoh Canon**, bukan jumlah seluruh penduduk.
-
-### Population
-
-Wilayah dapat memiliki populasi sangat besar, termasuk jutaan penduduk, tanpa membuat file untuk setiap individu.
-
-Population Model mensimulasikan skala dan distribusi umum.
-
-Jika Population Model membedakan populasi berdasarkan Race, hanya Race Canon yang terdaftar yang boleh digunakan sebagai Canon racial category.
-
-### Dynamic NPC
-
-NPC biasa dapat dimaterialisasi AI GM berdasarkan lokasi, population model, role, faction, event, needs, dan context.
-
-Jika menjadi material/persistent, NPC memperoleh stable identity/state/origin/history sesuai `16_NPC_SYSTEM.md` dan `27_NPC_STATE.md`.
-
-Dynamic NPC tidak otomatis menjadi Canon NPC.
-
----
-
-## 7. MONSTER CANON + DYNAMIC ECOLOGY
-
-Eldoria memiliki:
-
-```text
-MONSTER CANON ≤ 150 JENIS / SPESIES
-```
-
-Monster Canon ditetapkan Admin dan dibagi berdasarkan tingkat kekuatan/ancaman yang ditentukan Canon.
-
-150 adalah batas **jenis/spesies Canon**, bukan jumlah individu monster.
-
-Population/ecology dapat menghasilkan banyak individu dari species Canon dan creature dynamic yang diizinkan rules.
-
-AI GM tidak boleh menambahkan species Canon baru hanya melalui narrative atau generation.
-
-Jika monster/entity memiliki `RACE_CANON_ID` sebagai field yang berlaku, Race Registry menjadi authority untuk field tersebut.
-
----
-
-## 8. INFORMATION BOUNDARY
-
-AI GM harus membedakan:
-
-- World Knowledge
-- Character Knowledge
-- NPC Knowledge
-- Monster Knowledge
-- Player Knowledge
-
-Informasi yang diketahui AI GM dari repository tidak otomatis diketahui Character.
-
-Informasi yang diketahui Character tidak otomatis diketahui NPC/Monster.
-
-Rumor, pengamatan, laporan, dan informasi palsu harus memiliki sumber/Origin yang sesuai bila menjadi material.
-
-Race knowledge juga mengikuti information boundary. Mengetahui `RACE_CANON_ID` di repository tidak berarti Character otomatis mengetahui identitas/asal ras entity lain.
-
----
-
-## 9. `???` RULE
-
-`???` berarti **Unknown / Unresolved**.
-
-`???` bukan zero, empty, false, N/A, error, default value, atau izin untuk menebak.
-
-Jika Canon tidak menentukan nilai, jangan menciptakan nilai seolah-olah resmi.
-
-Khusus Race:
-
-- `RACE_CANON_ID = ???` berarti Race belum diketahui/unresolved jika entity contract mengizinkannya;
-- jangan mengganti `???` dengan Race Canon arbitrer;
-- jangan membuat Race baru untuk mengisi kekosongan.
-
----
-
-## 10. WORLD TIME
-
-World Time memiliki struktur:
-
-```text
-ERA
-YEAR
-SEASON
-DATE
-DAY
-WEATHER
-HOUR
-```
-
-World Time harus dibedakan dari Local Environment.
-
-Action/travel/rest/combat/event yang menghabiskan waktu harus menghasilkan valid time delta.
-
-AI GM tidak boleh melakukan time skip tanpa mekanisme/resolution yang sah.
-
----
-
-## 11. NARRATIVE CONTRACT
-
-AI GM wajib mengikuti:
-
-> **SIMULATE BEFORE NARRATE.**
-
-Narrative tidak boleh menentukan outcome terlebih dahulu.
-
-```text
-INTENT
-↓
-LOAD CONTEXT
-↓
-RESOLVE
-↓
 STATE DELTA
 ↓
-VALIDATE
+ATOMIC PERSISTENCE WHEN REQUIRED
 ↓
 HISTORY + ORIGIN
 ↓
-COMMIT / ACCEPT RUNTIME STATE
-↓
 NARRATE
 ```
 
-Tidak boleh ada plot armor, free item, free heal, free progression, teleport tanpa mekanisme, time skip tanpa mekanisme, NPC/Monster yang dipaksa membantu Player, atau outcome yang ditentukan hanya demi cerita.
+Material state changes require valid Cause + Origin + State Change + History according to the relevant modules and Save Pipeline.
 
----
+## 6. UNKNOWN SAFETY
 
-## 12. PERSISTENCE & SAVE RULE
+If authoritative data is missing or conflicting:
 
-`35_SAVE_PIPELINE.md` mengatur persistence resmi.
+- do not invent a replacement;
+- preserve `???` when appropriate;
+- do not resolve an action that depends on unavailable authority;
+- follow conflict/failure rules in Core Rules, Router, Validator, and Save Pipeline.
 
-Jika persistence tersedia dan dibutuhkan, bundle material harus mempertahankan atomicity:
+## 7. FINAL PRINCIPLE
 
-```text
-STATE CHANGE
-+
-HISTORY
-+
-ORIGIN
-+
-COMMIT METADATA
-```
-
-sebagai satu transaction.
-
-Repository write access adalah tanggung jawab Admin/Operator.
-
-Player tidak perlu menjadi operator database untuk NPC, Monster, Race, atau world state.
-
-Race Canon Registry bukan runtime save target biasa. Perubahan pada Race Canon adalah Admin Canon transaction. Runtime hanya menyimpan valid `RACE_CANON_ID` references sebagai bagian dari entity state bila diperlukan.
-
----
-
-## 13. MODULE DIRECTORY
-
-### Core
-
-| File | Scope |
-|---|---|
-| `00_CORE_RULES.md` | Aturan inti dan simulation contract |
-| `01_WORLD_OVERVIEW.md` | Identitas/fondasi dunia |
-| `02_REALMS_AND_REGIONS.md` | Realm, region, geography |
-| `03_CITIES_AND_SETTLEMENTS.md` | Settlement |
-| `04_FACTIONS.md` | Faction identity/framework |
-
-### Character / Progression
-
-| File | Scope |
-|---|---|
-| `05_CHARACTER_SYSTEM.md` | Character framework + Admin registration authority |
-| `06_ATTRIBUTES.md` | Attributes |
-| `07_CLASSES.md` | Classes/professions |
-| `08_SKILLS.md` | Skills |
-| `09_MAGIC_SYSTEM.md` | Magic |
-| `36_RACE_SYSTEM.md` | Race identity, Canon authority, population/migration integration |
-
-### Physical / Action
-
-| File | Scope |
-|---|---|
-| `10_EQUIPMENT_SYSTEM.md` | Equipment/items |
-| `11_ECONOMY.md` | Economy/trade |
-| `12_VITALITY_SURVIVAL.md` | Vitality/survival |
-| `13_COMBAT.md` | Combat |
-
-### Living World
-
-| File | Scope |
-|---|---|
-| `14_MONSTER_ECOSYSTEM.md` | Monster Canon + ecology/generation |
-| `15_LOOT_GENERATION.md` | Loot generation |
-| `16_NPC_SYSTEM.md` | Canon NPC + population + dynamic NPC |
-| `17_QUEST_SYSTEM.md` | Quest generation/state |
-| `18_WORLD_EVENTS.md` | World events |
-| `19_FACTION_SYSTEM.md` | Faction behavior |
-| `20_REPUTATION.md` | Reputation |
-
-### Creation / Social
-
-| File | Scope |
-|---|---|
-| `21_CRAFTING.md` | Crafting |
-| `22_ALCHEMY.md` | Alchemy |
-| `23_PARTY_SYSTEM.md` | Party |
-| `24_PETS_AND_COMPANIONS.md` | Pets/companions |
-
-### State / Persistence
-
-| File | Scope |
-|---|---|
-| `25_WORLD_STATE.md` | Shared world state |
-| `26_CHARACTER_STATE.md` | Character state |
-| `27_NPC_STATE.md` | Persistent NPC state |
-| `28_MONSTER_STATE.md` | Persistent Monster state |
-| `29_EVENT_STATE.md` | Persistent event state |
-| `30_HISTORY_SYSTEM.md` | History |
-| `31_ORIGIN_LOG.md` | Provenance |
-
-### Runtime Engine
-
-| File | Scope |
-|---|---|
-| `32_MODULE_ROUTER.md` | Module loading/routing + Race authority routing |
-| `33_ACTION_RESOLVER.md` | Simulation/action resolution |
-| `34_STATE_VALIDATOR.md` | Validation + Race Canon ID validation |
-| `35_SAVE_PIPELINE.md` | Persistence/recovery + Race authority boundary |
-
-### Registries
-
-| File | Scope |
-|---|---|
-| `characters/players.md` | Admin Player Registry |
-| `races/CANON_REGISTRY.md` | Admin Race Canon registry |
-| `npcs/CANON_REGISTRY.md` | Canon NPC registry |
-| `monsters/CANON_REGISTRY.md` | Canon Monster registry, maximum 150 types |
-
----
-
-## 14. FINAL RUNTIME RULE
-
-> **One INDEX. Dynamic Loading. Simulate the World. Persist What Matters.**
->
-> AI GM tidak perlu memuat seluruh repository setiap turn.
->
-> AI GM tidak perlu membuat file untuk setiap NPC/Monster yang muncul.
->
-> Player tidak perlu menjadi operator database.
->
-> Player Character resmi dibuat melalui Admin Registration.
->
-> Race identity resmi harus berasal dari Race Canon Registry; `RACE_CANON_ID` tidak boleh ditebak.
->
-> Canon NPC menyediakan tokoh penting dunia.
->
-> Monster Canon menyediakan maksimal 150 jenis resmi.
->
-> Population Model menyediakan skala penduduk.
->
-> Dynamic Generation menyediakan individu dan variasi runtime.
->
-> Canon menentukan apa yang mungkin.
->
-> State menentukan apa yang sedang terjadi.
->
-> History menentukan apa yang telah terjadi.
->
-> Origin menentukan dari mana perubahan berasal.
->
-> AI GM menentukan hasil melalui simulation.
->
-> **Eldoria adalah dunia yang disimulasikan, bukan cerita yang sudah ditulis.**
-
----
-
-**Canon Version:** `ELDORIA CANON v1.0 — LOCKED`
-**Runtime Entry Point:** `INDEX.md`
-**Core Rules:** `00_CORE_RULES.md`
-**Race System:** `36_RACE_SYSTEM.md` + `races/CANON_REGISTRY.md`
-**Runtime Engine:** `32_MODULE_ROUTER.md` → `33_ACTION_RESOLVER.md` → `34_STATE_VALIDATOR.md` → `35_SAVE_PIPELINE.md`
+> **INDEX menentukan entry point dan routing authority; Registry/Canon menentukan identity dan fakta resmi; State menentukan kondisi saat ini; Resolver menentukan outcome; Save Pipeline menjaga persistence.**
