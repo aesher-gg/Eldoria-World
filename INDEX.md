@@ -19,8 +19,10 @@ Repository adalah official Canon/persistent-world source of truth. `???` = Unkno
 5. Fetch geography/state yang relevan.
 6. Jika NPC relevan, fetch `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md`.
 7. Jika faction relevan, fetch `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md`.
-8. Fetch state/history/origin sesuai konsekuensi.
-9. Routing → simulation → validation → persistence bila diperlukan → narrative.
+8. Jika nobility/title/royal house/domain/succession relevan, fetch `37_NOBILITY_SYSTEM.md` + governance/faction context + relevant Canon records.
+9. Jika magic relevan, fetch `09_MAGIC_SYSTEM.md` + relevant magic identity/state.
+10. Fetch state/history/origin sesuai konsekuensi.
+11. Routing → simulation → validation → persistence bila diperlukan → narrative.
 
 Module yang pernah dimuat pada turn sebelumnya tidak dianggap masih authoritative.
 
@@ -63,6 +65,8 @@ Membership, rank, authority, access, reputation, resources, knowledge, dan loyal
 | Race | `36_RACE_SYSTEM.md` + Race Registry |
 | Location | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md` |
 | Faction | `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md` bila specific faction relevan |
+| Nobility / Title / Noble House / Domain / Succession | `37_NOBILITY_SYSTEM.md` + `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/law/state context |
+| Magic | `09_MAGIC_SYSTEM.md` + relevant magic identity/state |
 | NPC | `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md` + `27_NPC_STATE.md` bila persistent |
 | Combat | `13_COMBAT.md` + relevant state |
 | Trade | `11_ECONOMY.md` + relevant item/NPC/faction/state context |
