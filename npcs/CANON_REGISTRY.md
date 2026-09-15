@@ -4,166 +4,148 @@
 > **Status:** Admin Canon v1.0
 > **Purpose:** Registry dan index NPC penting yang ditetapkan sebagai Canon resmi Eldoria.
 
-## 1. Scope
-
-Registry ini hanya mencatat **NPC Canon penting**, bukan seluruh populasi dunia.
-
-Populasi biasa tetap ditangani oleh Population Model + Dynamic NPC Generation.
+## 1. Cakupan
+Registry ini hanya mencatat **NPC Canon penting**, bukan seluruh populasi dunia. Populasi biasa tetap ditangani oleh Population Model + Dynamic NPC Generation.
 
 ## 2. Minimum Canon NPC Coverage
-
 ```text
 DESA       → ≥ 3 Canon NPC
 KOTA       → ≥ 5 Canon NPC
 KERAJAAN   → ≥ 10 Canon NPC
 KEKAISARAN → ≥ 25 Canon NPC
 ```
+Angka tersebut adalah target minimum coverage, bukan perintah untuk membuat NPC filler.
 
-Angka tersebut adalah minimum. Wilayah dapat memiliki lebih banyak NPC Canon sesuai kepentingan dunia.
+## 3. Aturan Canon NPC
+Setiap Canon NPC wajib memiliki stable `NPC_ID` dan record resmi. Identity, fungsi, konteks faction, agency, batas pengetahuan, dan Origin harus dapat dipertanggungjawabkan terhadap Canon.
 
-## 3. Canon NPC Authority
+## 4. Aturan Runtime
+Jika Player berinteraksi dengan tokoh Canon, AI GM wajib mencari dan menggunakan record Canon yang sesuai sebelum generation. Canon NPC tidak boleh digantikan Dynamic NPC dengan identity berbeda hanya karena record belum dimuat.
 
-Setiap Canon NPC wajib memiliki stable `NPC_ID` dan record resmi.
-
-Minimal record:
-
-```text
-NPC_ID
-NPC_CLASS: CANON
-NAME
-ROLE
-SETTLEMENT / REGION
-FACTION
-BACKGROUND
-GOALS
-CORE_RELATIONSHIPS
-CAPABILITIES
-KNOWLEDGE_BOUNDARY
-CANON_ORIGIN
-```
-
-Current condition/state berada pada NPC State layer yang relevan.
-
-## 4. Runtime Rule
-
-Jika Player berinteraksi dengan tokoh Canon, AI GM wajib mencari dan menggunakan record Canon yang sesuai sebelum melakukan generation.
-
-Canon NPC tidak boleh digantikan Dynamic NPC dengan identity berbeda hanya karena record Canon belum dimuat.
-
-## 5. Registered Canon NPC
+## 5. NPC Terdaftar
 
 ### NPC-CANON-001 — Alaric Veyn
 ```text
-NPC_ID: NPC-CANON-001
-NPC_CLASS: CANON
-NAME: Alaric Veyn
-RACE_CANON_ID: RACE-001
 ROLE: Pejabat Administrasi Kekaisaran — Pengawas Koordinasi Antar-Kerajaan
+RACE_CANON_ID: RACE-001
 EMPIRE_ID: EMPIRE-001
-SETTLEMENT_ID: ???
-CITY_ID: ???
-REGION_ID: ???
-KINGDOM_ID: ???
-FACTION: FACTION-001 — Pemerintahan Kekaisaran Valthera
-CANON_STATUS: ACTIVE
+FACTION: FACTION-001
 RECORD: npcs/canon/NPC-CANON-001.md
 ```
 
 ### NPC-CANON-002 — Seraphine Darr
 ```text
-NPC_ID: NPC-CANON-002
-NPC_CLASS: CANON
-NAME: Seraphine Darr
-RACE_CANON_ID: RACE-001
 ROLE: Pejabat Koordinasi Pertahanan Kekaisaran — Penghubung Antar-Kerajaan
+RACE_CANON_ID: RACE-001
 EMPIRE_ID: EMPIRE-001
-SETTLEMENT_ID: ???
-CITY_ID: ???
-REGION_ID: ???
-KINGDOM_ID: ???
-FACTION: FACTION-002 — Pertahanan Kekaisaran Valthera
-CANON_STATUS: ACTIVE
+FACTION: FACTION-002
 RECORD: npcs/canon/NPC-CANON-002.md
 ```
 
 ### NPC-CANON-003 — Corvin Hale
 ```text
-NPC_ID: NPC-CANON-003
-NPC_CLASS: CANON
-NAME: Corvin Hale
-RACE_CANON_ID: RACE-003
 ROLE: Koordinator Administrasi Perdagangan Kekaisaran — Penghubung Jalur Antar-Kerajaan
+RACE_CANON_ID: RACE-003
 EMPIRE_ID: EMPIRE-001
-SETTLEMENT_ID: ???
-CITY_ID: ???
-REGION_ID: ???
-KINGDOM_ID: ???
-FACTION: FACTION-003 — Administrasi Perdagangan Kekaisaran
-CANON_STATUS: ACTIVE
+FACTION: FACTION-003
 RECORD: npcs/canon/NPC-CANON-003.md
 ```
 
 ### NPC-CANON-004 — Mirelle Ordan
 ```text
-NPC_ID: NPC-CANON-004
-NPC_CLASS: CANON
-NAME: Mirelle Ordan
-RACE_CANON_ID: RACE-002
 ROLE: Pemeriksa Catatan Administrasi Kekaisaran — Verifikasi Antar-Wilayah
+RACE_CANON_ID: RACE-002
 EMPIRE_ID: EMPIRE-001
-SETTLEMENT_ID: ???
-CITY_ID: ???
-REGION_ID: ???
-KINGDOM_ID: ???
-FACTION: FACTION-001 — Pemerintahan Kekaisaran Valthera
-CANON_STATUS: ACTIVE
+FACTION: FACTION-001
 RECORD: npcs/canon/NPC-CANON-004.md
 ```
 
 ### NPC-CANON-005 — Garran Voss
 ```text
-NPC_ID: NPC-CANON-005
-NPC_CLASS: CANON
-NAME: Garran Voss
-RACE_CANON_ID: RACE-006
 ROLE: Koordinator Catatan dan Logistik Pertahanan Kekaisaran
+RACE_CANON_ID: RACE-006
 EMPIRE_ID: EMPIRE-001
-SETTLEMENT_ID: ???
-CITY_ID: ???
-REGION_ID: ???
-KINGDOM_ID: ???
-FACTION: FACTION-002 — Pertahanan Kekaisaran Valthera
-CANON_STATUS: ACTIVE
+FACTION: FACTION-002
 RECORD: npcs/canon/NPC-CANON-005.md
 ```
 
-## 6. Registration Template
-
+### NPC-CANON-006 — Edric Vale
 ```text
-NPC_ID: NPC-CANON-???
-NPC_CLASS: CANON
-NAME: ???
-ROLE: ???
-SETTLEMENT / REGION: ???
-FACTION: ???
-BACKGROUND: ???
-GOALS: ???
-CORE_RELATIONSHIPS: ???
-CAPABILITIES: ???
-KNOWLEDGE_BOUNDARY: ???
-CANON_ORIGIN: Admin Canon
+ROLE: Pengelola Distribusi Pangan Kerajaan Valedorn
+RACE_CANON_ID: RACE-004
+SETTLEMENT_ID: ???
+CITY_ID: CITY-003
+REGION_ID: REGION-003
+KINGDOM_ID: KINGDOM-001
+EMPIRE_ID: EMPIRE-001
+FACTION: FACTION-104
+RECORD: npcs/canon/NPC-CANON-006.md
 ```
 
-`???` berarti belum ditentukan.
+### NPC-CANON-007 — Dorin Khar
+```text
+ROLE: Koordinator Operasional Pertambangan Brannor
+RACE_CANON_ID: RACE-003
+SETTLEMENT_ID: ???
+CITY_ID: CITY-007
+REGION_ID: REGION-007
+KINGDOM_ID: KINGDOM-002
+EMPIRE_ID: EMPIRE-001
+FACTION: FACTION-113
+RECORD: npcs/canon/NPC-CANON-007.md
+```
 
-## 7. Current Status
+### NPC-CANON-008 — Marina Solenne
+```text
+ROLE: Koordinator Pelayaran dan Galangan Mariselle
+RACE_CANON_ID: RACE-002
+SETTLEMENT_ID: ???
+CITY_ID: CITY-009
+REGION_ID: REGION-009
+KINGDOM_ID: KINGDOM-003
+EMPIRE_ID: EMPIRE-001
+FACTION: FACTION-124
+RECORD: npcs/canon/NPC-CANON-008.md
+```
 
+### NPC-CANON-009 — Elowen Thorne
+```text
+ROLE: Pengelola Hasil Hutan Sylvaran
+RACE_CANON_ID: RACE-001
+SETTLEMENT_ID: ???
+CITY_ID: CITY-013
+REGION_ID: REGION-013
+KINGDOM_ID: KINGDOM-004
+EMPIRE_ID: EMPIRE-001
+FACTION: FACTION-133
+RECORD: npcs/canon/NPC-CANON-009.md
+```
+
+### NPC-CANON-010 — Rashid Qamar
+```text
+ROLE: Koordinator Jalur Kafilah Sahrad
+RACE_CANON_ID: RACE-005
+SETTLEMENT_ID: ???
+CITY_ID: CITY-019
+REGION_ID: REGION-019
+KINGDOM_ID: KINGDOM-005
+EMPIRE_ID: EMPIRE-001
+FACTION: FACTION-143
+RECORD: npcs/canon/NPC-CANON-010.md
+```
+
+## 6. Status Coverage Saat Ini
 ```text
 EMPIRE CANON NPC CREATED: 5 / ≥25 target coverage
-KINGDOM CANON NPC CREATED: 0
+KINGDOM-001 CANON NPC: 1 / ≥10
+KINGDOM-002 CANON NPC: 1 / ≥10
+KINGDOM-003 CANON NPC: 1 / ≥10
+KINGDOM-004 CANON NPC: 1 / ≥10
+KINGDOM-005 CANON NPC: 1 / ≥10
 CITY CANON NPC CREATED: 0
 SETTLEMENT CANON NPC CREATED: 0
-TOTAL INDIVIDUAL CANON NPC CREATED: 5
+TOTAL INDIVIDUAL CANON NPC CREATED: 10
 ```
 
-> Coverage target bukan alasan pembuatan NPC. Setiap NPC harus memiliki fungsi nyata, agency, konteks Canon, dan Origin yang dapat diverifikasi.
+## 7. Prinsip
+Coverage target bukan alasan pembuatan NPC. Setiap NPC harus memiliki fungsi nyata, agency, konteks Canon, Race Canon yang valid, batas pengetahuan, dan Origin yang dapat diverifikasi. Pembuatan dilakukan dalam batch terkontrol maksimal 5 NPC.
