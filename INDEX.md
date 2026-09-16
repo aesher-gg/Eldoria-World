@@ -1,9 +1,9 @@
 # Eldoria World — INDEX
 
-> **Official Entry Point for AI Game Master**
-> **Repository:** `aesher-gg/Eldoria-World`
-> **Branch:** `main`
-> **World:** Eldoria
+> **Official Entry Point for AI Game Master**  
+> **Repository:** `aesher-gg/Eldoria-World`  
+> **Branch:** `main`  
+> **World:** Eldoria  
 > **Genre:** Medieval Fantasy
 
 ---
@@ -259,7 +259,7 @@ OTHER SYSTEMS
 = domain-specific action resolution
 ```
 
-NPC Behavior does not replace Character Data, Factions, Politics, Economy, Creatures/Ecology, Travel, Combat, Health, Time, or State/History authority.
+NPC Behavior does not replace Character Data, Factions, Politics, Economy, Creatures/Ecology, Travel, Combat, Health, Time, Relationships, Reputation, or State/History authority.
 
 No universal NPC numerical formula, decision probability, personality score, simulation tick, behavior frequency, or quantitative fallback is defined by v0.1.
 
@@ -287,11 +287,52 @@ POLITICS
 ECONOMY
 = economic processes / transactions / ownership
 
+REPUTATION
+= how a subject is regarded by a specific audience/context
+
 STATE & HISTORY
 = state / provenance / persistence
 ```
 
 No universal relationship score, social probability, affection/trust/loyalty formula, relationship decay formula, or quantitative fallback is defined by v0.1.
+
+### System #07 — Reputation
+
+`systems/REPUTATION.md`
+
+Canonical owner for reputation state, reputation lifecycle, reputation formation/change, audience and context, reputation evidence/provenance, information flow, reputation consequences, and integration with NPCs, factions, politics, economy, relationships, and other relevant domains.
+
+Boundary:
+
+```text
+REPUTATION
+= bagaimana actor / entity dipandang oleh audience tertentu
+  dalam konteks tertentu
+
+RELATIONSHIPS
+= relationship state / lifecycle / relationship change
+
+NPC BEHAVIOR
+= NPC decision-making menggunakan reputation sebagai context
+
+FACTIONS
+= faction structure / membership / faction relations
+
+POLITICS
+= authority / governance / jurisdiction / legitimacy
+
+ECONOMY
+= economic processes / transactions / ownership
+
+STATE & HISTORY
+= state / provenance / persistence
+```
+
+Reputation dapat bersifat local, group-specific, actor-specific, contextual, asymmetric, dan time-dependent.
+
+No universal reputation score, rating, multiplier, threshold, probability, decay formula, automatic reaction, global reputation ranking, atau quantitative fallback is defined by v0.1.
+
+Reputation is not objective moral truth and does not automatically create relationship, membership, authority, legitimacy, ownership, wealth, transaction, alliance, hostility, or other state.
 
 ---
 
@@ -372,6 +413,9 @@ NPC BEHAVIOR & AGENCY
 RELATIONSHIPS
 → relationship state / lifecycle / relationship change
 
+REPUTATION
+→ reputation state / audience context / reputation formation and change
+
 STATE & HISTORY
 → state / provenance / persistence
 ```
@@ -415,6 +459,8 @@ NPC KNOWLEDGE
 ↓
 GOALS / MOTIVATIONS
 ↓
+RELEVANT RELATIONSHIP / REPUTATION CONTEXT
+↓
 CONTEXT / CONSTRAINTS
 ↓
 NPC BEHAVIOR & AGENCY
@@ -436,6 +482,20 @@ RELATIONSHIP RESOLUTION
 VALIDATED RELATIONSHIP STATE CHANGE
 ```
 
+Reputation-related processing should additionally use:
+
+```text
+CURRENT REPUTATION STATE
+↓
+RELEVANT SUBJECT / AUDIENCE / CONTEXT
+↓
+RELEVANT ACTION / EVENT / INFORMATION
+↓
+REPUTATION RESOLUTION
+↓
+VALIDATED REPUTATION STATE CHANGE
+```
+
 ---
 
 ## 12. Development Status
@@ -449,6 +509,7 @@ Current Canon systems:
 🟢 #04 TRAVEL & MOVEMENT
 🟢 #05 NPC BEHAVIOR & AGENCY
 🟢 #06 RELATIONSHIPS
+🟢 #07 REPUTATION
 ```
 
 Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
@@ -473,6 +534,8 @@ Potential future domains listed by architecture framework are not automatically 
 - Persistent State Change requires validation and provenance.
 - Persistence must be verified before being claimed.
 - Relationship State must use the canonical Relationships system when relationship data is relevant.
+- Reputation State must use the canonical Reputation system when reputation data is relevant.
+- Reputation must not be treated as universal truth or universal value.
 
 ---
 
