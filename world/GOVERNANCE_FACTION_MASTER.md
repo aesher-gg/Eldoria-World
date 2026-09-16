@@ -17,7 +17,7 @@ KNOWN / CANON → boleh digunakan
 PENDING       → belum boleh digunakan sebagai fakta spesifik
 ```
 
-Nama penguasa, kementerian, dewan, hukum spesifik, faction spesifik, hubungan politik spesifik, dan detail kekuasaan yang belum ditetapkan tetap `???`.
+Nama penguasa, hukum, faction spesifik, hubungan politik spesifik, dan detail kekuasaan yang belum ditetapkan tetap `???`.
 
 ---
 
@@ -46,47 +46,56 @@ IMPERIAL_SCOPE: Pertahanan bersama, hukum kekaisaran, hubungan antar-kerajaan, k
 LOCAL_SCOPE: Pemerintahan kerajaan dan administrasi lokal berada pada kerajaan masing-masing sesuai hukum yang berlaku
 ```
 
-Detail berikut tetap unresolved:
+### 2.2 Kingdom Governance — Canon
+
+Kelima Kingdom memiliki internal autonomy dalam batas `38_LAW_SYSTEM.md` dan hukum Kekaisaran Valthera.
+
+| Kingdom | Head of State | Central Government Body | Succession Baseline |
+|---|---|---|---|
+| KINGDOM-001 Valedorn | NPC-CANON-012 — Cedric Varen | Royal Court of Valedorn | Designated-heir primogeniture, gender-neutral |
+| KINGDOM-002 Brannor | NPC-CANON-013 — Tharok Brann | High Crown Council of Brannor | Designated-heir primogeniture, gender-neutral |
+| KINGDOM-003 Mariselle | NPC-CANON-014 — Celestine Aureon | Maritime Crown Council of Mariselle | Designated-heir primogeniture, gender-neutral |
+| KINGDOM-004 Sylvaran | NPC-CANON-015 — Edrien Sylvar | Royal Stewardship Council of Sylvaran | Designated-heir primogeniture, gender-neutral |
+| KINGDOM-005 Sahrad | NPC-CANON-016 — Nadir Qasrane | Royal Oasis Council of Sahrad | Designated-heir primogeniture, gender-neutral |
+
+Detailed legal rules are authoritative in `38_LAW_SYSTEM.md`.
+
+### 2.3 Kingdom Authority Boundaries
+
+**Crown / Kingdom central authority** memiliki authority atas:
+
+- kingdom executive administration;
+- lawful title grants dan recognition dalam Kingdom scope;
+- high-level domain grants dan delegated administration;
+- kingdom-wide taxation/revenue policy sesuai hukum;
+- kingdom military/security organization dalam batas Imperial law;
+- inter-kingdom representation sesuai Imperial scope;
+- appointment/removal of lawful royal offices;
+- succession administration sesuai local succession law.
+
+**Regional / City / Settlement authority** hanya memiliki kewenangan yang didelegasikan atau diberikan oleh hukum lokal. Nama wilayah, kota, atau settlement tidak dengan sendirinya menciptakan office, title, sovereignty, tax power, military command, atau judicial supremacy.
+
+**Noble House / Noble Title** tidak otomatis memiliki authority di luar lawful grant, office, domain right, contract, atau delegation yang relevan.
+
+### 2.4 Succession Authority
+
+Succession resolution wajib mengikuti:
 
 ```text
-IMPERIAL_MINISTRIES: ???
-IMPERIAL_COUNCIL: ???
-SPECIFIC_IMPERIAL_LAWS: ???
-DETAILED_AUTHORITY_BOUNDARIES: ???
-MILITARY_STRUCTURE: ???
-ECONOMIC_STRUCTURE: ???
-CULTURAL_PROFILE: ???
-RELIGIOUS_STRUCTURE: ???
-MAJOR_IMPERIAL_FACTIONS: ???
-EXTERNAL_RELATIONS: ???
+CLAIM
+↓
+ELIGIBILITY
+↓
+LOCAL SUCCESSION LAW
+↓
+LEGAL / INSTITUTIONAL CONFIRMATION
+↓
+STATE UPDATE
+↓
+HISTORY + ORIGIN
 ```
 
-### 2.2 Kingdom Governance — Canon Baseline
-
-Kelima Kingdom berada di bawah hukum kekaisaran dan memiliki otonomi pemerintahan internal.
-
-```text
-KINGDOM-001: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-012 — Cedric Varen
-KINGDOM-002: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-013 — Tharok Brann
-KINGDOM-003: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-014 — Celestine Aureon
-KINGDOM-004: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-015 — Edrien Sylvar
-KINGDOM-005: Kerajaan otonom di bawah hukum kekaisaran; RULER: NPC-CANON-016 — Nadir Qasrane
-```
-
-Detail berikut belum ditetapkan per Kingdom dan tetap `???` sampai Canonized:
-
-```text
-GOVERNMENT BODY
-SUCCESSION LAW
-LOCAL LAW
-MILITARY COMMAND
-TAX / REVENUE STRUCTURE
-MAJOR POLITICAL BLOCS
-MAJOR FACTIONS
-KINGDOM-TO-KINGDOM RELATIONS
-```
-
-`MAJOR NOBLE HOUSES` sekarang memiliki Canon registry tersendiri di `factions/NOBLE_HOUSES_CANON.md` dan berisi 10 initial strategic Canon Noble Houses. Detail title, domain grant, succession, political relations, dan authority individual yang belum ditetapkan tetap `???`.
+Military force, wealth, magic, popularity, race, House membership, atau personal influence tidak menggantikan legal succession basis.
 
 ---
 
@@ -94,11 +103,11 @@ KINGDOM-TO-KINGDOM RELATIONS
 
 | Scope | Authority baseline | Known | Unresolved |
 |---|---|---|---|
-| Empire | Imperial central authority + defined imperial scope | Political system, ruler identity, broad scope | Institutions, laws, military, economy, factions |
-| Kingdom | Internal autonomy under Imperial law | Autonomy baseline, five Canon rulers, 10 Canon Noble Houses | Institutions, laws, military, detailed political relations |
-| Region | Parent kingdom administration | Parent hierarchy | Regional offices/authority = ??? |
-| City | Parent kingdom/local administration | Parent hierarchy | City government/offices = ??? |
-| Settlement | Local administration under parent hierarchy | Parent hierarchy | Local offices/authority = ??? |
+| Empire | Imperial central authority + defined imperial scope | Political system, ruler identity, broad scope, Law hierarchy | Detailed ministries, full judicial/economic institutions |
+| Kingdom | Internal autonomy under Imperial law | Five rulers, five central governance bodies, succession baseline, 10 Canon Noble Houses | Detailed lower offices, additional specific laws |
+| Region | Parent kingdom administration | Parent hierarchy | Regional offices/authority = ??? unless delegated/Canonized |
+| City | Parent kingdom/local administration | Parent hierarchy | City government/offices = ??? unless delegated/Canonized |
+| Settlement | Local administration under parent hierarchy | Parent hierarchy | Local offices/authority = ??? unless delegated/Canonized |
 
 No lower-level office may be inferred solely from settlement or city name.
 
@@ -278,18 +287,38 @@ No relationship may be invented to give an NPC a political connection.
 
 ## 8. Authority Rules
 
-1. Empire memiliki authority pada scope yang telah ditetapkan Canon.
+1. Empire memiliki authority pada scope yang telah ditetapkan Canon dan `38_LAW_SYSTEM.md`.
 2. Kingdom memiliki internal governance autonomy dalam batas hukum kekaisaran.
-3. Lower-level authority tidak boleh mengklaim kewenangan yang belum ditetapkan.
+3. Lower-level authority tidak boleh mengklaim kewenangan yang belum ditetapkan atau didelegasikan.
 4. Faction influence tidak sama dengan sovereignty.
 5. Claim, control, influence, dan occupation tetap konsep berbeda.
 6. Membership tidak otomatis memberikan authority.
 7. NPC position does not automatically imply access to information, resources, or decision-making power.
-8. Material political changes wajib melalui resolution dan persistence.
+8. Noble title tidak otomatis memberikan domain, military command, taxation rights, judicial supremacy, atau magical authority.
+9. Material political changes wajib melalui resolution dan persistence.
 
 ---
 
-## 9. Canonization Gate for Specific Factions
+## 9. Law Authority Reference
+
+`38_LAW_SYSTEM.md` adalah authority reference untuk:
+
+```text
+LAW HIERARCHY
+IMPERIAL LEGAL BASELINE
+KINGDOM SUCCESSION
+TITLE RECOGNITION
+DOMAIN AUTHORITY
+MILITARY AUTHORITY
+TAX AUTHORITY
+DISPUTED SUCCESSION
+```
+
+Jika dokumen governance dan law tampak berbeda pada authority/succession, resolution harus menggunakan hierarchy hukum yang ditetapkan Module 38 dan tidak boleh memilih hasil berdasarkan narasi.
+
+---
+
+## 10. Canonization Gate for Specific Factions
 
 Sebelum faction spesifik ditetapkan sebagai Canon, Admin wajib dapat menentukan minimal:
 
@@ -312,7 +341,7 @@ Jika suatu field belum memiliki dasar Canon, nilainya tetap `???` dan faction be
 
 ---
 
-## 10. Relationship to NPC Coverage Matrix
+## 11. Relationship to NPC Coverage Matrix
 
 `npcs/COVERAGE_MATRIX_v1_0.md` menentukan kebutuhan coverage NPC.
 
@@ -332,7 +361,7 @@ Coverage quota tidak boleh menjadi sumber lore.
 
 ---
 
-## 11. Current Phase
+## 12. Current Phase
 
 ```text
 GEOGRAPHY CANON: COMPLETE
@@ -340,6 +369,8 @@ POPULATION MODEL: ACTIVE
 NPC ARCHITECTURE: COMPLETE
 NPC COVERAGE MATRIX: COMPLETE
 GOVERNANCE BASELINE: ESTABLISHED
+KINGDOM GOVERNANCE BODIES: CANON — 5 REGISTERED
+KINGDOM SUCCESSION BASELINE: CANON — 5 KINGDOMS
 HEAD-OF-STATE CANON: ACTIVE — 5 REGISTERED
 NOBLE HOUSE CANON: ESTABLISHED — 10 ACTIVE CANON HOUSES
 FACTION FRAMEWORK: ESTABLISHED
@@ -351,6 +382,6 @@ QUOTA STATUS: COVERAGE TARGET ONLY; NO MASS NPC FILLING
 
 ---
 
-## 12. Final Principle
+## 13. Final Principle
 
-> **Governance dan faction menyediakan konteks authority dan kepentingan; NPC dibangun dari konteks tersebut, bukan sebaliknya. `???` tidak boleh diisi hanya untuk membuat NPC terlihat lengkap.**
+> **Governance dan faction menyediakan konteks authority dan kepentingan; law menentukan batas kewenangan dan succession; NPC dibangun dari konteks tersebut, bukan sebaliknya. `???` tidak boleh diisi hanya untuk membuat NPC terlihat lengkap.**
