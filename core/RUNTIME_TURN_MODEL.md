@@ -27,9 +27,13 @@ CONSEQUENCES
 ↓
 STATE CHANGE
 ↓
+STATE VALIDATION
+↓
 HISTORY
 ↓
 PERSISTENCE
+↓
+VERIFICATION
 ↓
 RESPONSE
 ```
@@ -77,7 +81,7 @@ Pipeline minimum:
 3. RECEIVE PLAYER MESSAGE
 4. PARSE MESSAGE
 5. IDENTIFY ACTION / INTENT
-6. VALIDATE
+6. VALIDATE ACTION
 7. RESOLVE
 8. CALCULATE CONSEQUENCES
 9. GENERATE STATE CHANGES
@@ -127,7 +131,7 @@ Current State adalah baseline operasional Turn.
 
 Sebelum action diproses, runtime harus menggunakan State yang telah divalidasi sebagai kondisi awal.
 
-Jika ditemukan konflik atau ketidakkonsistenan pada State yang diperlukan, runtime tidak boleh diam-diam memilih nilai. Konflik harus diperlakukan sebagai integrity issue sesuai State & History Model.
+Jika ditemukan konflik atau ketidakkonsistenan pada State yang diperlukan, runtime tidak boleh diam-diam memilih nilai. Konflik harus diperlakukan sebagai integrity issue sesuai State & History Model dan State Validation.
 
 ## 7. Receive & Parse Player Message
 
@@ -147,7 +151,7 @@ PLAYER MESSAGE
 
 Tidak semua unsur harus menghasilkan simulasi.
 
-Narasi yang ditulis Player tidak otomatis menjadi fakta State. Fakta yang mengubah State harus melewati resolution dan validation.
+Narasi yang ditulis Player tidak otomatis menjadi fakta State. Fakta yang mengubah State harus melewati resolution dan State Validation.
 
 ## 8. Intent vs Result
 
@@ -270,6 +274,8 @@ WORKING STATE
 VALIDATE FINAL STATE CHANGES
 ↓
 PERSIST
+↓
+VERIFY
 ```
 
 Working State memungkinkan action yang berurutan melihat hasil action sebelumnya tanpa menganggap perubahan yang belum tervalidasi sebagai persistence final.
@@ -311,7 +317,7 @@ State Change harus mengikuti struktur dan integrity rules pada `state/STATE_AND_
 
 ## 16. State Change Validation
 
-Sebelum diterapkan, State Change harus divalidasi.
+Sebelum diterapkan, State Change harus diproses melalui canonical `core/STATE_VALIDATION.md`.
 
 Minimal:
 
@@ -323,7 +329,9 @@ Minimal:
 - tidak menghasilkan konflik internal yang diketahui;
 - perubahan dapat direkonsiliasi dengan History.
 
-State Change yang gagal validasi tidak boleh dianggap sebagai perubahan final.
+Jika beberapa perubahan saling bergantung, perubahan tersebut divalidasi sebagai Change Set sesuai State Validation.
+
+State Change atau Change Set yang gagal validasi tidak boleh dianggap sebagai perubahan final.
 
 ## 17. Atomicity of Interdependent Changes
 
@@ -336,18 +344,18 @@ GENERATE ALL RELATED CHANGES
 ↓
 VALIDATE AS A SET
 ↓
-APPLY TOGETHER
+PERSIST AS INTEGRATED RESULT
 ↓
-PERSIST
+VERIFY
 ```
 
 Tujuannya mencegah State setengah diterapkan ketika salah satu perubahan wajib ternyata invalid.
 
-Detail transaction mechanism akan ditetapkan oleh modul Persistence/Integrity di masa depan.
+Detail transaction mechanism, rollback, dan storage implementation mengikuti boundary `core/PERSISTENCE.md` dan belum ditentukan secara teknis oleh v0.1.
 
 ## 18. History Creation
 
-Setelah State Changes tervalidasi dan diterapkan, runtime membuat History Record untuk perubahan yang memang membutuhkan persistence history.
+Setelah State Changes tervalidasi dan diterapkan sesuai Persistence architecture, runtime membuat atau mempertahankan History Record untuk perubahan yang memang membutuhkan persistence history.
 
 History harus menghubungkan perubahan dengan:
 
@@ -417,25 +425,23 @@ Perubahan masa lalu hanya boleh dilakukan melalui mekanisme Canon/State/History 
 
 ## 23. Persistence
 
-Persistence mengikuti prinsip:
+Persistence mengikuti canonical `core/PERSISTENCE.md`:
 
 ```text
 VALIDATED STATE CHANGES
 ↓
 APPLY CURRENT STATE
 ↓
-CREATE HISTORY
-↓
-PERSIST
+PERSIST STATE / HISTORY
 ↓
 VERIFY
 ```
 
+Persistence hanya menerima perubahan yang memenuhi validation requirement. Invalid, conflict, atau unresolved changes tidak boleh dipersist sebagai final valid State.
+
 Narrative tidak boleh dianggap sebagai bukti persistence.
 
-Jika persistence gagal atau belum diverifikasi, AI GM tidak boleh menyatakan bahwa perubahan telah tersimpan secara resmi.
-
-Status kegagalan persistence harus dipertahankan untuk ditangani oleh mekanisme Persistence/Integrity yang akan didefinisikan kemudian.
+Jika persistence gagal atau verification belum berhasil, AI GM tidak boleh menyatakan bahwa perubahan telah tersimpan secara resmi. Status persistence harus tetap dibedakan dari gameplay result.
 
 ## 24. Response Generation
 
@@ -447,7 +453,8 @@ Response sebaiknya membedakan secara jelas:
 - apa yang benar-benar terjadi;
 - konsekuensi yang diketahui;
 - perubahan yang relevan terhadap karakter/dunia;
-- informasi yang masih tidak pasti.
+- informasi yang masih tidak pasti;
+- status persistence/verification jika relevan.
 
 Narrative harus merepresentasikan hasil simulasi, bukan menentukan hasil simulasi.
 
@@ -471,6 +478,8 @@ STATE CHANGES VALIDATED
 STATE / HISTORY UPDATED
 ↓
 PERSISTENCE STATUS KNOWN
+↓
+VERIFICATION STATUS KNOWN
 ↓
 RESPONSE GENERATED
 ```
@@ -514,6 +523,9 @@ Semua keputusan tersebut harus berasal dari aturan dan konteks yang relevan.
 - Runtime tidak menetapkan durasi Turn universal pada v0.1.
 - AI GM tidak boleh mengklaim persistence berhasil tanpa verifikasi.
 - Konflik State/History tidak boleh diselesaikan diam-diam.
+- State Validation tidak menentukan gameplay resolution.
+- Persistence tidak memperbaiki invalid State Change secara diam-diam.
+- Validation failure, persistence failure, dan verification failure harus tetap dibedakan.
 
 ## 28. Dependencies
 
@@ -525,23 +537,32 @@ core/CORE_RULES.md
 characters/CHARACTER_DATA_MODEL.md
 characters/players.md
 state/STATE_AND_HISTORY_MODEL.md
+core/STATE_VALIDATION.md
+core/PERSISTENCE.md
 ```
 
-Sistem berikutnya dapat memperluas Runtime melalui modul khusus tanpa menghapus prinsip inti modul ini.
+Domain systems tetap menjadi canonical owner untuk resolution masing-masing. Runtime, State Validation, dan Persistence tidak menggantikan ownership tersebut.
 
 ## 29. Future Extensions
 
-Modul berikut dapat didefinisikan kemudian:
+Modul berikut masih dapat didefinisikan kemudian:
 
 ```text
 ACTION MODEL
 RESOLUTION SYSTEMS
-TIME SYSTEM
-PERSISTENCE / SAVE PIPELINE
-INTEGRITY / VALIDATOR
 WORLD EVENT PROCESSOR
 NPC / FACTION SIMULATION
 SYSTEM-SPECIFIC MECHANICS
+STORAGE IMPLEMENTATION
+CONCURRENCY CONTROL
+ADVANCED RECOVERY / TRANSACTION MECHANISMS
 ```
 
-Ekstensi tidak boleh mengubah aturan Runtime secara diam-diam. Konflik atau kebutuhan pengecualian harus menjadi perubahan Canon eksplisit.
+`PERSISTENCE / SAVE PIPELINE` dan `INTEGRITY / VALIDATOR` tidak lagi merupakan future extensions kosong; keduanya sekarang memiliki canonical architecture di:
+
+```text
+core/STATE_VALIDATION.md
+core/PERSISTENCE.md
+```
+
+Ekstensi berikutnya tidak boleh mengubah aturan Runtime secara diam-diam. Konflik atau kebutuhan pengecualian harus menjadi perubahan Canon eksplisit.
