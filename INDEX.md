@@ -54,11 +54,16 @@ Eldoria-World/
 │   ├── GEOGRAPHY.md
 │   ├── CIVILIZATION.md
 │   └── PEOPLES_RACES.md
+│   ├── POLITICS.md
+│   ├── POLITICS.md
+│   └── ...
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
 ```
+
+> **Note:** `POLITICS.md` berada di `world/` dan merupakan modul Canon Politics v0.1.
 
 Directory atau modul baru hanya ditambahkan ketika memang telah didefinisikan sebagai bagian dari Canon Eldoria.
 
@@ -165,7 +170,15 @@ Modul ini **tidak** menetapkan daftar final race/people, statistik biologis univ
 
 Ketetapan World Foundation bahwa **Orc, Goblin, dan kelompok sejenis diklasifikasikan sebagai monster** tetap berlaku dan tidak diubah oleh modul ini.
 
-## 15. Canon Development Order
+## 15. Politics
+
+`world/POLITICS.md` adalah **Official Canon** untuk kerangka politik Eldoria.
+
+Politics v0.1 menetapkan framework untuk political organization, authority, power, governance, legitimacy, territory, jurisdiction, sovereignty, law/institution interfaces, internal power structures, leadership/succession, diplomacy, external relations, conflict, political change, political autonomy, political knowledge boundaries, data model, dan integrasi State/History.
+
+Politics v0.1 **tidak** menetapkan daftar kingdom, negara, penguasa, hukum, batas politik, perang, aliansi, hubungan diplomatik, sistem pemerintahan universal, sistem suksesi universal, mata uang, pajak, faction politik, atau lore politik spesifik. Detail yang belum ditetapkan tetap Unknown / Undefined.
+
+## 16. Canon Development Order
 
 World lore tidak dibuat sebagai daftar besar sekaligus. Fondasi menjadi dasar untuk pengembangan bertahap:
 
@@ -191,9 +204,9 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-Pada tahap saat ini, **Peoples / Races v0.1 telah ditetapkan** sebagai framework Canon. Urutan berikutnya adalah pengembangan Politics v0.1.
+Pada tahap saat ini, **Politics v0.1 telah ditetapkan** sebagai framework Canon. Urutan berikutnya adalah pengembangan Supernatural / Magic v0.1.
 
-## 16. Authority Boundary
+## 17. Authority Boundary
 
 ```text
 ADMIN
@@ -210,7 +223,7 @@ Player memiliki kebebasan menentukan keputusan karakter, tetapi tidak menentukan
 
 AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Player menjadi pemenang secara otomatis.
 
-## 17. Integrity Principles
+## 18. Integrity Principles
 
 - Intent ≠ Result.
 - Failure adalah hasil yang valid.
@@ -222,4 +235,5 @@ AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Pl
 - Autonomous NPC, faction, event, dan world changes harus memiliki dasar aturan/data dan dapat ditelusuri.
 - Civilization harus tetap diperlakukan sebagai framework Canon sampai detail spesifik ditetapkan secara eksplisit.
 - Peoples / Races harus tetap diperlakukan sebagai framework Canon sampai detail spesifik ditetapkan secara eksplisit.
+- Politics harus tetap diperlakukan sebagai framework Canon sampai detail politik spesifik ditetapkan secara eksplisit.
 - Identitas People / Race tidak boleh digunakan untuk menentukan perilaku individual tanpa dasar Canon atau data karakter yang relevan.
