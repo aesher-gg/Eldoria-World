@@ -59,7 +59,11 @@ RUNTIME
    ↓
 INTERACTION
    ↓
+STATE VALIDATION
+   ↓
 PERSISTENCE
+   ↓
+VERIFICATION
 ```
 
 Authority:
@@ -74,6 +78,24 @@ AI GM
 PLAYER
   └── Character decisions / intent
 ```
+
+Core infrastructure boundary:
+
+```text
+STATE & HISTORY
+= State / History / State Change / Origin / Source semantics
+
+STATE VALIDATION
+= integrity gate for State Changes
+
+PERSISTENCE
+= apply / save validated State and History
+
+VERIFICATION
+= confirm persistence result
+```
+
+Verification adalah stage/function dalam Persistence Architecture, bukan canonical owner atau modul ketiga.
 
 ---
 
@@ -120,14 +142,75 @@ CONSEQUENCES
 ↓
 STATE CHANGE
 ↓
-HISTORY
+STATE VALIDATION
 ↓
-PERSIST
+APPLY / HISTORY
+↓
+PERSISTENCE
 ↓
 VERIFY
 ↓
 RESPONSE
 ```
+
+### State Validation
+
+`core/STATE_VALIDATION.md`
+
+Canonical integrity layer for:
+
+- State Change validation;
+- Current State consistency;
+- provenance validation;
+- temporal consistency;
+- Canon compatibility;
+- Change Set / multi-entity consistency;
+- conflict detection;
+- Unknown / Undefined protection;
+- validation status.
+
+Boundary:
+
+```text
+RESOLUTION
+= what happened
+
+STATE VALIDATION
+= whether the resulting State Change can be applied validly
+```
+
+State Validation does not own State/History semantics or domain-specific resolution.
+
+### Persistence
+
+`core/PERSISTENCE.md`
+
+Canonical save/persistence architecture for:
+
+- validated Change Set application;
+- Current State persistence;
+- History persistence;
+- provenance preservation;
+- persistence lifecycle;
+- failure handling;
+- recovery/correction workflow;
+- duplicate-application protection;
+- verification of persisted results.
+
+Boundary:
+
+```text
+STATE VALIDATION
+= is this change valid?
+
+PERSISTENCE
+= can this valid change be applied/saved?
+
+VERIFICATION
+= did persistence actually produce the expected result?
+```
+
+Verification is part of the Persistence architecture.
 
 ---
 
@@ -460,7 +543,13 @@ REPUTATION
 → reputation state / audience context / reputation formation and change
 
 STATE & HISTORY
-→ state / provenance / persistence
+→ state / provenance / persistence structure
+
+STATE VALIDATION
+→ State Change integrity / consistency validation
+
+PERSISTENCE
+→ validated State/History application, storage, failure handling, and verification
 ```
 
 Principle:
@@ -491,6 +580,12 @@ SOURCE FETCH
 CONTEXT VALIDATION
 ↓
 ACTION / EVENT RESOLUTION
+↓
+STATE VALIDATION
+↓
+PERSISTENCE
+↓
+VERIFY
 ```
 
 NPC-related processing should additionally use:
@@ -575,6 +670,15 @@ Legal resolution must not silently take ownership of non-legal domains. Domain-s
 
 ## 12. Development Status
 
+Current Canon infrastructure:
+
+```text
+🟢 CORE RULES
+🟢 RUNTIME / TURN MODEL
+🟢 STATE VALIDATION
+🟢 PERSISTENCE
+```
+
 Current Canon systems:
 
 ```text
@@ -609,6 +713,10 @@ Potential future domains listed by architecture framework are not automatically 
 - System-specific resolution must use the canonical owner.
 - Persistent State Change requires validation and provenance.
 - Persistence must be verified before being claimed.
+- State Validation must not determine gameplay resolution.
+- Persistence must not repair invalid State Changes silently.
+- Interdependent State Changes must preserve required atomicity/integrity.
+- Persistence failure and verification failure must remain distinguishable from validation failure.
 - Relationship State must use the canonical Relationships system when relationship data is relevant.
 - Reputation State must use the canonical Reputation system when reputation data is relevant.
 - Reputation must not be treated as universal truth or universal value.
