@@ -247,19 +247,7 @@ Canonical owner for movement/travel process and resolution, while Geography rema
 
 `systems/NPC_BEHAVIOR_AND_AGENCY.md`
 
-Canonical owner for:
-
-- NPC decision-making;
-- NPC agency;
-- motivation and goals;
-- priorities and decision context;
-- perception and available information;
-- beliefs and uncertainty;
-- action candidate selection;
-- autonomous behavior;
-- plans and reactions;
-- NPC knowledge updates;
-- NPC decision integration with other world systems.
+Canonical owner for NPC decision-making, agency, motivation, goals, priorities, perception, available information, beliefs and uncertainty, action candidate selection, autonomous behavior, plans, reactions, knowledge updates, and NPC integration with other world systems.
 
 Boundary:
 
