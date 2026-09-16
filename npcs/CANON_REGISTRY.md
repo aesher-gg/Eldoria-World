@@ -204,17 +204,72 @@ HOUSE: NOBLE-HOUSE-009 — House Qasrane
 RECORD: npcs/canon/NPC-CANON-016.md
 ```
 
+### NPC-CANON-017 — Elian Goldriver
+```text
+ROLE: Kepala House Goldriver — Pengelola Kepentingan Agraria dan Riverine
+RACE_CANON_ID: RACE-001
+KINGDOM_ID: KINGDOM-001
+EMPIRE_ID: EMPIRE-001
+FACTION: NOBLE-HOUSE-002
+HOUSE: NOBLE-HOUSE-002 — House Goldriver
+RECORD: npcs/canon/NPC-CANON-017.md
+```
+
+### NPC-CANON-018 — Durgan Ironvein
+```text
+ROLE: Kepala House Ironvein — Pengelola Kepentingan Mineral dan Jalur Pegunungan
+RACE_CANON_ID: RACE-003
+KINGDOM_ID: KINGDOM-002
+EMPIRE_ID: EMPIRE-001
+FACTION: NOBLE-HOUSE-004
+HOUSE: NOBLE-HOUSE-004 — House Ironvein
+RECORD: npcs/canon/NPC-CANON-018.md
+```
+
+### NPC-CANON-019 — Lysara Tideward
+```text
+ROLE: Kepala House Tideward — Pengelola Kepentingan Maritim dan Pesisir
+RACE_CANON_ID: RACE-002
+KINGDOM_ID: KINGDOM-003
+EMPIRE_ID: EMPIRE-001
+FACTION: NOBLE-HOUSE-006
+HOUSE: NOBLE-HOUSE-006 — House Tideward
+RECORD: npcs/canon/NPC-CANON-019.md
+```
+
+### NPC-CANON-020 — Caelen Thornward
+```text
+ROLE: Kepala House Thornward — Pengelola Frontier Hutan dan Jalur Sungai
+RACE_CANON_ID: RACE-001
+KINGDOM_ID: KINGDOM-004
+EMPIRE_ID: EMPIRE-001
+FACTION: NOBLE-HOUSE-008
+HOUSE: NOBLE-HOUSE-008 — House Thornward
+RECORD: npcs/canon/NPC-CANON-020.md
+```
+
+### NPC-CANON-021 — Samir Dustveil
+```text
+ROLE: Kepala House Dustveil — Pengelola Kepentingan Kafilah dan Frontier Arid
+RACE_CANON_ID: RACE-005
+KINGDOM_ID: KINGDOM-005
+EMPIRE_ID: EMPIRE-001
+FACTION: NOBLE-HOUSE-010
+HOUSE: NOBLE-HOUSE-010 — House Dustveil
+RECORD: npcs/canon/NPC-CANON-021.md
+```
+
 ## 6. Status Coverage Saat Ini
 ```text
-EMPIRE CANON NPC CREATED: 7 / ≥25 target coverage
-KINGDOM-001 CANON NPC: 2 / ≥10
-KINGDOM-002 CANON NPC: 2 / ≥10
-KINGDOM-003 CANON NPC: 2 / ≥10
-KINGDOM-004 CANON NPC: 2 / ≥10
-KINGDOM-005 CANON NPC: 2 / ≥10
+EMPIRE CANON NPC CREATED: 12 / ≥25 target coverage
+KINGDOM-001 CANON NPC: 3 / ≥10
+KINGDOM-002 CANON NPC: 3 / ≥10
+KINGDOM-003 CANON NPC: 3 / ≥10
+KINGDOM-004 CANON NPC: 3 / ≥10
+KINGDOM-005 CANON NPC: 3 / ≥10
 CITY CANON NPC CREATED: 0
 SETTLEMENT CANON NPC CREATED: 0
-TOTAL INDIVIDUAL CANON NPC CREATED: 16
+TOTAL INDIVIDUAL CANON NPC CREATED: 21
 ```
 
 ## 7. Prinsip
