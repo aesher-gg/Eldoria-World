@@ -331,7 +331,7 @@ RECORD: npcs/canon/NPC-CANON-026.md
 
 ## 6. Status Coverage Saat Ini
 
-Coverage di bawah mengikuti assignment aktual yang tervalidasi pada `npcs/COVERAGE_MATRIX_v1_0.md` dan `npcs/COVERAGE_GAP_MATRIX.md`. `???` tidak dihitung sebagai coverage.
+Coverage mengikuti assignment aktual. `???` tidak dihitung sebagai coverage.
 
 ```text
 EMPIRE-001 CANON NPC ASSIGNMENTS: 26 / ≥25 target
@@ -342,7 +342,7 @@ KINGDOM-004 CANON NPC ASSIGNMENTS: 4 / ≥10
 KINGDOM-005 CANON NPC ASSIGNMENTS: 4 / ≥10
 CITY CANON NPC ASSIGNMENTS: 14 / 100 target aggregate
 SETTLEMENT CANON NPC ASSIGNMENTS: 5 / 120 target aggregate
-TOTAL OFFICIAL SCOPE COVERAGE: 70 / 295
+TOTAL OFFICIAL SCOPE COVERAGE: 65 / 295
 TOTAL INDIVIDUAL CANON NPC: 26
 ```
 
