@@ -19,7 +19,7 @@ Repository adalah official Canon/persistent-world source of truth. `???` = Unkno
 5. Fetch geography/state yang relevan.
 6. Jika NPC relevan, fetch `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md`.
 7. Jika faction relevan, fetch `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md`.
-8. Jika nobility/title/royal house/domain/succession relevan, fetch `37_NOBILITY_SYSTEM.md` + governance/faction context + relevant Canon records.
+8. Jika law, authority, succession, title, Noble House, domain, inheritance, atau royal governance relevan, fetch `38_LAW_SYSTEM.md` + `37_NOBILITY_SYSTEM.md` bila noble context + governance/faction context + relevant Canon records.
 9. Jika magic relevan, fetch `09_MAGIC_SYSTEM.md` + relevant magic identity/state.
 10. Fetch state/history/origin sesuai konsekuensi.
 11. Routing → simulation → validation → persistence bila diperlukan → narrative.
@@ -65,7 +65,8 @@ Membership, rank, authority, access, reputation, resources, knowledge, dan loyal
 | Race | `36_RACE_SYSTEM.md` + Race Registry |
 | Location | `02_REALMS_AND_REGIONS.md`, `03_CITIES_AND_SETTLEMENTS.md` |
 | Faction | `04_FACTIONS.md` + `19_FACTION_SYSTEM.md` + `factions/CANON_REGISTRY.md` bila specific faction relevan |
-| Nobility / Title / Noble House / Domain / Succession | `37_NOBILITY_SYSTEM.md` + `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/law/state context |
+| Law / Authority / Succession | `38_LAW_SYSTEM.md` + `GOVERNANCE_FACTION_MASTER.md` + relevant state; `37_NOBILITY_SYSTEM.md` bila noble context |
+| Nobility / Title / Noble House / Domain / Inheritance | `37_NOBILITY_SYSTEM.md` + `38_LAW_SYSTEM.md` + `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/state |
 | Magic | `09_MAGIC_SYSTEM.md` + relevant magic identity/state |
 | NPC | `16_NPC_SYSTEM.md` + `npcs/CANON_REGISTRY.md` + `27_NPC_STATE.md` bila persistent |
 | Combat | `13_COMBAT.md` + relevant state |
@@ -110,4 +111,4 @@ Jika authority hilang atau konflik tidak dapat diselesaikan:
 - jangan resolve action yang bergantung pada authority yang tidak tersedia;
 - ikuti failure/conflict rules Core Rules, Router, Validator, dan Save Pipeline.
 
-> **INDEX menentukan entry point/routing; Registry/Canon menentukan identity/fakta resmi; State menentukan kondisi saat ini; Resolver menentukan outcome; Save Pipeline menjaga persistence.**
+> **INDEX menentukan entry point/routing; Registry/Canon menentukan identity/fakta resmi; Law menentukan legal authority; State menentukan kondisi saat ini; Resolver menentukan outcome; Save Pipeline menjaga persistence.**
