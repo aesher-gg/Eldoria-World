@@ -43,7 +43,8 @@ Eldoria-World/
 │   ├── POLITICS.md
 │   ├── SUPERNATURAL_MAGIC.md
 │   ├── ECONOMY.md
-│   └── CREATURES_ECOLOGY.md
+│   ├── CREATURES_ECOLOGY.md
+│   └── FACTIONS.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -185,6 +186,16 @@ Modul mencakup klasifikasi creature, Wildlife, Monsters, habitat, food/nutrition
 
 V0.1 **tidak** menetapkan daftar creature/monster/wildlife, biology universal, habitat spesifik, population count, stat block, loot table, taming formula, atau formula ecological simulation universal.
 
+### 9. Factions v0.1
+
+`world/FACTIONS.md`
+
+Kerangka resmi Factions Eldoria: definisi dan identitas faction, formation, tipe konseptual, membership/recruitment, leadership/internal structure, goals/interests/agendas, resources/capabilities, influence/power, geographic presence, internal politics, alliances/rivalries/external relations, reputation/recognition/legitimacy, economy/funding, hubungan dengan Peoples/Races, Civilization, Politics, Supernatural/Magic, Character integration, NPC/faction autonomy, faction events/change, State/History, runtime/resolution, knowledge boundary, data models, progressive development, canon boundary, dependencies, dan integrity rules.
+
+Factions v0.1 **tidak** menetapkan daftar faction, nama, pemimpin, anggota, agenda, markas, wilayah, rank universal, membership requirement universal, loyalty/reputation/influence/strength formula, recruitment formula, faction economy formula, relationship formula, atau sejarah/event faction tertentu.
+
+Factions dibedakan dari Political Entity, Civilization, People/Race, Institution, Business, dan Individual. Membership, tujuan, pengaruh, sumber daya, serta hubungan faction harus memiliki dasar yang valid dan tidak boleh diasumsikan hanya untuk kebutuhan narasi.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -244,7 +255,7 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-**Status:** Creatures / Ecology v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **FACTIONS v0.1**.
+**Status:** Factions v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **OTHER WORLD SYSTEMS**.
 
 ## Canon Boundary
 
