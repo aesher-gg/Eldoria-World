@@ -17,11 +17,17 @@ CURRENT STATE
 ↓
 PLAYER MESSAGE
 ↓
-ACTION / INTENT
+INTENT
 ↓
-VALIDATION
+ACTION MODEL
 ↓
-RESOLUTION
+ACTION VALIDATION
+↓
+RESOLUTION ARCHITECTURE
+↓
+DOMAIN RESOLUTION
+↓
+RESULT
 ↓
 CONSEQUENCES
 ↓
@@ -80,18 +86,20 @@ Pipeline minimum:
 2. READ CURRENT STATE
 3. RECEIVE PLAYER MESSAGE
 4. PARSE MESSAGE
-5. IDENTIFY ACTION / INTENT
+5. IDENTIFY INTENT / ACTION
 6. VALIDATE ACTION
-7. RESOLVE
-8. CALCULATE CONSEQUENCES
-9. GENERATE STATE CHANGES
-10. VALIDATE STATE CHANGES
-11. APPLY STATE
-12. CREATE HISTORY
-13. PERSIST
-14. VERIFY PERSISTENCE
-15. GENERATE RESPONSE
-16. END TURN
+7. BUILD RESOLUTION REQUEST
+8. RESOLVE THROUGH RELEVANT DOMAIN
+9. GENERATE RESULT
+10. CALCULATE CONSEQUENCES
+11. GENERATE STATE CHANGES
+12. VALIDATE STATE CHANGES
+13. APPLY STATE
+14. CREATE HISTORY
+15. PERSIST
+16. VERIFY PERSISTENCE
+17. GENERATE RESPONSE
+18. END TURN
 ```
 
 Setiap tahap harus selesai atau menghasilkan status yang jelas sebelum tahap berikutnya bergantung padanya.
@@ -153,47 +161,41 @@ Tidak semua unsur harus menghasilkan simulasi.
 
 Narasi yang ditulis Player tidak otomatis menjadi fakta State. Fakta yang mengubah State harus melewati resolution dan State Validation.
 
-## 8. Intent vs Result
+## 8. Intent vs Action vs Result
 
-Intent hanya menyatakan apa yang ingin dilakukan Player.
+Intent menyatakan apa yang ingin dilakukan. Action adalah representasi terstruktur yang diproses Runtime. Result adalah outcome yang dihasilkan Resolution.
 
 ```text
 INTENT
+≠
+ACTION
 ≠
 RESULT
 ≠
 STATE CHANGE
 ```
 
-Contoh konseptual:
+Action Model menjadi canonical contract untuk representasi Action. Runtime tidak boleh langsung menulis New State berdasarkan keberadaan intent.
 
-```text
-Player: "Aku mencoba membuka pintu."
+## 9. Action Model
 
-Intent: membuka pintu
-Result: ditentukan oleh resolution
-State Change: hanya diterapkan jika hasilnya memang menyebabkan perubahan State
-```
-
-AI GM tidak boleh langsung menulis New State berdasarkan keberadaan intent.
-
-## 9. Action Identification
-
-Setiap action yang teridentifikasi harus memiliki konteks yang cukup untuk divalidasi.
+Action yang teridentifikasi diproses melalui `core/ACTION_MODEL.md`.
 
 Secara konseptual:
 
 ```text
-Action
+ACTION
 ├── Action ID
-├── Actor
-├── Intent
-├── Target (jika ada)
+├── Actor / Source
+├── Intent Reference
+├── Target(s) / Subject(s)
 ├── Context
-└── Input / Parameters
+├── Input / Parameters
+├── Relevant State References
+├── Temporal / Knowledge Context
+├── Dependencies / Sequence Reference
+└── Origin / Source
 ```
-
-Struktur ini bersifat konseptual dan dapat diperluas oleh sistem tertentu.
 
 Action ID harus memungkinkan resolution dan perubahan terkait ditelusuri bila diperlukan.
 
@@ -208,31 +210,61 @@ Sebelum resolution, runtime harus memeriksa apakah action dapat diproses berdasa
 - kemampuan/data yang memang tersedia;
 - target;
 - aturan sistem yang relevan;
-- constraint lain yang sah.
+- constraint lain yang sah;
+- dependency atau sequence yang berlaku.
 
-Validation tidak menjamin keberhasilan action.
+Validation menjawab apakah Action dapat diproses secara sah, bukan apakah Action pasti berhasil.
 
-Validation menjawab apakah action dapat diproses secara sah, bukan apakah action pasti berhasil.
+Invalid Action tidak boleh diperlakukan sebagai normal resolved success.
 
-## 11. Resolution
+## 11. Resolution Architecture
 
-Resolution menentukan hasil action berdasarkan Canon, State, konteks, dan mekanik sistem yang relevan.
+Action yang valid diserahkan kepada `core/RESOLUTION_ARCHITECTURE.md`.
 
-Hasil dapat berupa:
+```text
+VALID ACTION
+↓
+RESOLUTION REQUEST
+↓
+RELEVANT DOMAIN RESOLUTION
+↓
+RESULT
+```
 
-- success;
-- partial success;
-- failure;
-- blocked;
-- delayed;
-- interrupted;
-- atau hasil lain yang sah menurut sistem terkait.
+Resolution Architecture menyediakan kontrak generic. Domain system tetap menjadi canonical owner untuk resolution masing-masing.
 
-Runtime tidak boleh memaksakan hasil tertentu hanya demi kebutuhan naratif.
+Contoh:
 
-Jika sistem yang diperlukan untuk melakukan resolution belum didefinisikan, runtime tidak boleh menciptakan formula atau mekanik Canon secara spontan.
+```text
+COMBAT ACTION → COMBAT
+TRAVEL ACTION → TRAVEL & MOVEMENT
+LEGAL ACTION → LAW
+RELATIONSHIP ACTION → RELATIONSHIPS
+REPUTATION ACTION → REPUTATION
+NPC ACTION SELECTION → NPC BEHAVIOR & AGENCY
+```
 
-## 12. Sequential Actions
+Runtime tidak boleh menciptakan formula atau mekanik Canon secara spontan ketika domain yang diperlukan belum didefinisikan.
+
+## 12. Resolution Result
+
+Result harus dibedakan dari Action dan State Change.
+
+Status konseptual yang dapat digunakan:
+
+```text
+SUCCESS
+PARTIAL
+FAILURE
+BLOCKED
+DELAYED
+INTERRUPTED
+UNRESOLVED
+```
+
+`FAILURE` adalah gameplay outcome yang sah. `UNRESOLVED` berarti outcome yang sah belum dapat ditentukan karena rule/data yang diperlukan belum tersedia. Keduanya tidak boleh dicampur.
+
+## 13. Sequential Actions
 
 Jika satu Player Message mengandung beberapa action, action yang saling bergantung diproses secara berurutan.
 
@@ -252,13 +284,11 @@ Action berikutnya harus menggunakan kondisi yang benar-benar berlaku setelah act
 
 Jika action sebelumnya gagal, diblokir, atau terinterupsi, action berikutnya tidak otomatis dianggap berhasil atau tetap terjadi. Runtime harus menentukan kelanjutannya berdasarkan hasil dan aturan yang relevan.
 
-## 13. Working State
+## 14. Working State
 
 Selama satu Turn dengan beberapa action, runtime dapat menggunakan **Working State** sebagai representasi sementara setelah setiap resolution.
 
 Working State bukan persistence final.
-
-Prinsip:
 
 ```text
 CURRENT STATE
@@ -280,7 +310,7 @@ VERIFY
 
 Working State memungkinkan action yang berurutan melihat hasil action sebelumnya tanpa menganggap perubahan yang belum tervalidasi sebagai persistence final.
 
-## 14. Consequence Calculation
+## 15. Consequence Calculation
 
 Setelah resolution, runtime menghitung konsekuensi yang sah.
 
@@ -291,6 +321,8 @@ Konsekuensi dapat memengaruhi:
 - lokasi;
 - resources;
 - relationships;
+- reputation;
+- legal state;
 - event;
 - world conditions;
 - entity lain yang relevan.
@@ -299,12 +331,12 @@ Konsekuensi dapat langsung atau tertunda.
 
 Konsekuensi harus memiliki dasar dari resolution, Canon, State, atau sistem terkait dan tidak boleh dibuat semata-mata untuk menghukum atau menyenangkan Player.
 
-## 15. State Change Generation
+## 16. State Change Generation
 
 State Change dihasilkan dari hasil resolution dan consequence calculation.
 
 ```text
-RESOLUTION
+RESULT
 ↓
 CONSEQUENCES
 ↓
@@ -315,7 +347,7 @@ Setiap perubahan harus dapat dikaitkan dengan target dan nilai sebelum/sesudahny
 
 State Change harus mengikuti struktur dan integrity rules pada `state/STATE_AND_HISTORY_MODEL.md`.
 
-## 16. State Change Validation
+## 17. State Change Validation
 
 Sebelum diterapkan, State Change harus diproses melalui canonical `core/STATE_VALIDATION.md`.
 
@@ -333,11 +365,9 @@ Jika beberapa perubahan saling bergantung, perubahan tersebut divalidasi sebagai
 
 State Change atau Change Set yang gagal validasi tidak boleh dianggap sebagai perubahan final.
 
-## 17. Atomicity of Interdependent Changes
+## 18. Atomicity of Interdependent Changes
 
 Jika satu resolution menghasilkan beberapa State Changes yang saling bergantung, runtime harus memperlakukan rangkaian tersebut sebagai satu hasil terintegrasi untuk tujuan validasi dan persistence.
-
-Prinsip:
 
 ```text
 GENERATE ALL RELATED CHANGES
@@ -349,11 +379,9 @@ PERSIST AS INTEGRATED RESULT
 VERIFY
 ```
 
-Tujuannya mencegah State setengah diterapkan ketika salah satu perubahan wajib ternyata invalid.
-
 Detail transaction mechanism, rollback, dan storage implementation mengikuti boundary `core/PERSISTENCE.md` dan belum ditentukan secara teknis oleh v0.1.
 
-## 18. History Creation
+## 19. History Creation
 
 Setelah State Changes tervalidasi dan diterapkan sesuai Persistence architecture, runtime membuat atau mempertahankan History Record untuk perubahan yang memang membutuhkan persistence history.
 
@@ -370,7 +398,7 @@ History harus menghubungkan perubahan dengan:
 
 History bukan narrative response. Narrative dibuat setelah proses State/History selesai atau setelah status persistence diketahui.
 
-## 19. Time Advancement
+## 20. Time Advancement
 
 Action atau event dapat menyebabkan waktu dunia berubah jika sistem yang relevan mengaturnya.
 
@@ -380,7 +408,7 @@ Jika sistem waktu belum memberikan mekanisme atau sumber waktu yang sah, runtime
 
 Perubahan waktu yang memang terjadi harus diperlakukan sebagai State Change yang tervalidasi bila sistem mendefinisikannya demikian.
 
-## 20. Autonomous World Processing
+## 21. Autonomous World Processing
 
 Runtime dapat memproses perubahan dunia yang bukan berasal dari Player, misalnya:
 
@@ -396,7 +424,7 @@ Perubahan autonomous harus tetap mengikuti Canon, State, validation, resolution,
 
 Runtime tidak boleh membuat dunia bergerak secara arbitrer hanya untuk menghasilkan cerita.
 
-## 21. Knowledge Boundary
+## 22. Knowledge Boundary
 
 Resolution dan narrative harus membedakan:
 
@@ -409,7 +437,7 @@ Player Knowledge tidak otomatis menjadi Character Knowledge.
 
 Rumor atau informasi tidak terverifikasi tidak boleh diperlakukan sebagai fakta hanya karena diketahui Player.
 
-## 22. No Retroactive State
+## 23. No Retroactive State
 
 Runtime tidak boleh menambahkan fakta ke masa lalu hanya karena fakta tersebut membantu resolution saat ini.
 
@@ -423,7 +451,7 @@ WHAT IS NOW KNOWN
 
 Perubahan masa lalu hanya boleh dilakukan melalui mekanisme Canon/State/History yang sah dan dapat diaudit.
 
-## 23. Persistence
+## 24. Persistence
 
 Persistence mengikuti canonical `core/PERSISTENCE.md`:
 
@@ -443,7 +471,7 @@ Narrative tidak boleh dianggap sebagai bukti persistence.
 
 Jika persistence gagal atau verification belum berhasil, AI GM tidak boleh menyatakan bahwa perubahan telah tersimpan secara resmi. Status persistence harus tetap dibedakan dari gameplay result.
 
-## 24. Response Generation
+## 25. Response Generation
 
 Response Player dibuat setelah runtime memiliki hasil resolution dan status State/Persistence yang relevan.
 
@@ -458,18 +486,20 @@ Response sebaiknya membedakan secara jelas:
 
 Narrative harus merepresentasikan hasil simulasi, bukan menentukan hasil simulasi.
 
-## 25. Turn Completion
+## 26. Turn Completion
 
 Satu Turn selesai setelah:
 
 ```text
 INPUT
 ↓
-ACTION / INTENT PARSED
+INTENT / ACTION PARSED
 ↓
-VALIDATION
+ACTION VALIDATION
 ↓
 RESOLUTION
+↓
+RESULT
 ↓
 CONSEQUENCES
 ↓
@@ -486,7 +516,7 @@ RESPONSE GENERATED
 
 Jika tidak ada action yang perlu di-resolve, Turn tetap dapat selesai sebagai interaction tanpa State Change.
 
-## 26. Failed / Blocked / Interrupted Turn
+## 27. Failed / Blocked / Interrupted Turn
 
 Turn tidak dianggap gagal hanya karena action gagal.
 
@@ -502,14 +532,14 @@ Jika action gagal, runtime tetap harus menentukan apakah terdapat:
 
 Semua keputusan tersebut harus berasal dari aturan dan konteks yang relevan.
 
-## 27. Integrity Rules
+## 28. Integrity Rules
 
 - Satu Player Message = satu Turn.
 - Satu Turn dapat memiliki nol atau beberapa action.
+- Intent ≠ Action ≠ Result ≠ State Change.
 - Action yang saling bergantung diproses berurutan.
-- Intent tidak sama dengan Result.
 - Validation tidak menjamin keberhasilan.
-- Failure, blocked, delayed, dan interrupted adalah hasil yang sah.
+- Failure, blocked, delayed, interrupted, dan unresolved adalah status yang dapat sah sesuai konteks.
 - Current State harus menjadi baseline Turn.
 - Working State bukan persistence final.
 - State Change harus tervalidasi sebelum menjadi perubahan final.
@@ -526,14 +556,17 @@ Semua keputusan tersebut harus berasal dari aturan dan konteks yang relevan.
 - State Validation tidak menentukan gameplay resolution.
 - Persistence tidak memperbaiki invalid State Change secara diam-diam.
 - Validation failure, persistence failure, dan verification failure harus tetap dibedakan.
+- Domain systems tetap menjadi canonical owner untuk resolution masing-masing.
 
-## 28. Dependencies
+## 29. Dependencies
 
 Runtime / Turn Model bergantung pada:
 
 ```text
 INDEX.md
 core/CORE_RULES.md
+core/ACTION_MODEL.md
+core/RESOLUTION_ARCHITECTURE.md
 characters/CHARACTER_DATA_MODEL.md
 characters/players.md
 state/STATE_AND_HISTORY_MODEL.md
@@ -541,28 +574,22 @@ core/STATE_VALIDATION.md
 core/PERSISTENCE.md
 ```
 
-Domain systems tetap menjadi canonical owner untuk resolution masing-masing. Runtime, State Validation, dan Persistence tidak menggantikan ownership tersebut.
+Domain systems tetap menjadi canonical owner untuk resolution masing-masing. Runtime, Action Model, Resolution Architecture, State Validation, dan Persistence tidak menggantikan ownership tersebut.
 
-## 29. Future Extensions
+## 30. Future Extensions
 
-Modul berikut masih dapat didefinisikan kemudian:
+Fondasi berikut dapat dikembangkan kemudian tanpa mengubah boundary v0.1:
 
 ```text
-ACTION MODEL
-RESOLUTION SYSTEMS
 WORLD EVENT PROCESSOR
 NPC / FACTION SIMULATION
 SYSTEM-SPECIFIC MECHANICS
 STORAGE IMPLEMENTATION
 CONCURRENCY CONTROL
 ADVANCED RECOVERY / TRANSACTION MECHANISMS
+ACTION QUEUE IMPLEMENTATION
+RESOLUTION PLUGIN CONTRACTS
+RESOLUTION REPLAY / TRACE IMPLEMENTATION
 ```
 
-`PERSISTENCE / SAVE PIPELINE` dan `INTEGRITY / VALIDATOR` tidak lagi merupakan future extensions kosong; keduanya sekarang memiliki canonical architecture di:
-
-```text
-core/STATE_VALIDATION.md
-core/PERSISTENCE.md
-```
-
-Ekstensi berikutnya tidak boleh mengubah aturan Runtime secara diam-diam. Konflik atau kebutuhan pengecualian harus menjadi perubahan Canon eksplisit.
+`STATE VALIDATION` dan `PERSISTENCE` bukan lagi future extensions kosong; keduanya telah memiliki canonical architecture masing-masing.
