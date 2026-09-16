@@ -50,7 +50,8 @@ Eldoria-World/
 │   ├── CHARACTER_DATA_MODEL.md
 │   └── players/
 ├── world/
-│   └── WORLD_FOUNDATION.md
+│   ├── WORLD_FOUNDATION.md
+│   └── GEOGRAPHY.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -136,7 +137,15 @@ Fondasi yang ditetapkan:
 
 World Foundation tidak menetapkan lore rinci yang belum dibuat. Detail dunia berikutnya harus ditambahkan melalui modul Canon yang relevan.
 
-## 12. Canon Development Order
+## 12. Geography
+
+`world/GEOGRAPHY.md` adalah **Official Canon** untuk kerangka geografis dan prinsip spasial Eldoria.
+
+Modul ini menetapkan struktur geografis bertingkat, prinsip regional diversity, terrain, water systems, climate/environment, natural resources, travel/connectivity, settlements, natural barriers, spatial relationships, mapping/knowledge boundaries, dan progressive revelation.
+
+Geography v0.1 belum menetapkan nama atau jumlah benua, wilayah, kota, desa, lokasi, peta final, batas politik, distribusi sumber daya spesifik, atau durasi perjalanan universal.
+
+## 13. Canon Development Order
 
 World lore tidak dibuat sebagai daftar besar sekaligus. Fondasi menjadi dasar untuk pengembangan bertahap:
 
@@ -164,7 +173,7 @@ OTHER WORLD SYSTEMS
 
 Urutan ini adalah arah pengembangan, bukan izin untuk menganggap seluruh bagian yang belum ditulis sebagai Canon.
 
-## 13. Authority Boundary
+## 14. Authority Boundary
 
 ```text
 ADMIN
@@ -181,7 +190,7 @@ Player memiliki kebebasan menentukan keputusan karakter, tetapi tidak menentukan
 
 AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Player menjadi pemenang secara otomatis.
 
-## 14. Integrity Principles
+## 15. Integrity Principles
 
 - Intent ≠ Result.
 - Failure adalah hasil yang valid.
