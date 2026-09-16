@@ -41,7 +41,8 @@ Eldoria-World/
 │   ├── CIVILIZATION.md
 │   ├── PEOPLES_RACES.md
 │   ├── POLITICS.md
-│   └── SUPERNATURAL_MAGIC.md
+│   ├── SUPERNATURAL_MAGIC.md
+│   └── ECONOMY.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -165,6 +166,14 @@ V0.1 masih merupakan **framework**, bukan spell list atau sistem mekanik final.
 
 Belum ditetapkan secara universal: mana pool, magic level/tier, final magic schools, spell list, cosmology/source final, named magical entities, artifacts, magical races, universal cost, atau progression system.
 
+### 7. Economy v0.1
+
+`world/ECONOMY.md`
+
+Kerangka resmi Economy Eldoria: economic actors, needs/consumption, production, labor/occupation, resources, goods/services, property/ownership, exchange/trade, markets, currency/money, prices/valuation, supply/demand, wealth/distribution, credit/debt/finance, taxation/public revenue, logistics, infrastructure, regional economies, political/legal economy, Peoples/Races, supernatural effects, economic events/shocks, economic autonomy, character integration, State/History, runtime, data model, progressive development, dan integrity rules.
+
+Economy v0.1 **tidak** menetapkan nama atau jumlah mata uang, kurs, harga, upah, pajak universal, sistem perbankan universal, daftar komoditas lengkap, pasar atau merchant tertentu, wealth tier universal, statistik ekonomi universal, atau formula harga/supply-demand universal.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -224,7 +233,7 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-**Status:** Supernatural / Magic v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **ECONOMY v0.1**.
+**Status:** Economy v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **CREATURES / ECOLOGY v0.1**.
 
 ## Canon Boundary
 
