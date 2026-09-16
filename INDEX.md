@@ -43,12 +43,14 @@ Eldoria-World/
 ├── INDEX.md
 ├── README.md
 ├── core/
-│   └── CORE_RULES.md
+│   ├── CORE_RULES.md
+│   └── RUNTIME_TURN_MODEL.md
 ├── characters/
 │   ├── players.md
 │   ├── CHARACTER_DATA_MODEL.md
 │   └── players/
 ├── world/
+│   └── WORLD_FOUNDATION.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -81,7 +83,11 @@ Jika suatu fakta belum tersedia dalam Canon atau State yang relevan, AI GM tidak
 
 `core/CORE_RULES.md` adalah aturan dasar yang berlaku lintas sistem.
 
-## 7. Character Registry
+## 7. Runtime / Turn Model
+
+`core/RUNTIME_TURN_MODEL.md` mendefinisikan pipeline runtime dan prinsip satu Player Message = satu Turn, termasuk parsing, validation, resolution, consequences, State Change, History, persistence, dan response.
+
+## 8. Character Registry
 
 `characters/players.md` adalah **Official Player/Character Registry**.
 
@@ -93,13 +99,13 @@ Detail karakter disimpan pada file karakter masing-masing di:
 characters/players/
 ```
 
-## 8. Character Data Model
+## 9. Character Data Model
 
 `characters/CHARACTER_DATA_MODEL.md` mendefinisikan struktur data karakter, termasuk Identity, Background, Origin, Physical Profile, Attributes, Abilities, Equipment, Possessions, Relationships, Starting State, Current State, Conditions, History Reference, dan Metadata.
 
 Modul ini mendefinisikan struktur, bukan mekanik gameplay rinci.
 
-## 9. State & History
+## 10. State & History
 
 `state/STATE_AND_HISTORY_MODEL.md` adalah fondasi resmi untuk persistent State dan History.
 
@@ -112,43 +118,23 @@ Modul ini mendefinisikan struktur, bukan mekanik gameplay rinci.
 
 State dan History dipisahkan tetapi harus dapat direkonsiliasi. History tidak boleh dihapus/ditimpa secara diam-diam; koreksi harus tetap dapat diaudit.
 
-## 10. Runtime Direction
-
-Runtime Eldoria mengikuti alur konseptual:
-
-```text
-BOOT / LOAD CONTEXT
-→ READ CURRENT STATE
-→ RECEIVE PLAYER MESSAGE
-→ PARSE
-→ IDENTIFY ACTION / INTENT
-→ VALIDATE
-→ RESOLVE
-→ CALCULATE CONSEQUENCES
-→ GENERATE STATE CHANGES
-→ VALIDATE STATE CHANGES
-→ APPLY STATE
-→ CREATE HISTORY
-→ PERSIST
-→ GENERATE RESPONSE
-→ END TURN
-```
-
-Satu Player Message diperlakukan sebagai satu Turn. Satu Turn dapat berisi nol atau beberapa action yang diproses secara berurutan.
-
 ## 11. World Foundation
 
-Fondasi dunia Eldoria yang telah disepakati:
+`world/WORLD_FOUNDATION.md` adalah **Official Canon** untuk fondasi identitas dan arah dunia Eldoria.
+
+Fondasi yang ditetapkan:
 
 - **Identity:** Medieval Fantasy yang luas, terbuka, persisten, imersif, dan realistis.
 - **Tone:** Realistic Adventure + Dark Realistic + Realistic Heroic.
 - **Scale:** Dunia sangat luas, multi-wilayah/multi-benua, terungkap secara bertahap.
-- **Peoples & Creatures:** Manusia tidak otomatis menjadi mayoritas; masyarakat makhluk berakal dapat memiliki peradaban sendiri; hubungan antarkelompok beragam; Orc, Goblin, dan kelompok sejenis diklasifikasikan sebagai monster; makhluk memiliki perilaku dan ekosistem yang masuk akal.
+- **Peoples & Creatures:** Manusia tidak otomatis menjadi mayoritas; masyarakat makhluk berakal dapat memiliki peradaban sendiri; hubungan antarkelompok beragam; Orc, Goblin, dan kelompok sejenis diklasifikasikan sebagai monster; makhluk harus dipahami sebagai bagian dari ekosistem.
 - **Technology:** Medieval Fantasy fleksibel dan dapat berbeda menurut wilayah.
 - **Supernatural:** Umum dan diakui sebagai bagian dari kehidupan dunia, tetapi tidak berarti semua individu dapat menggunakan kekuatan supernatural.
 - **Player Freedom:** Open-world tanpa class/profession/main path wajib. Player dapat mengejar tujuan besar, termasuk membangun usaha, organisasi, wilayah, atau kerajaan, selama dunia memungkinkan dan konsekuensinya dijalani.
 - **Plot Armor:** Tidak ada perlindungan naratif khusus untuk Player maupun NPC.
 - **Theme:** **Dunia yang hidup, Player yang bebas, dan cerita yang lahir dari konsekuensi.**
+
+World Foundation tidak menetapkan lore rinci yang belum dibuat. Detail dunia berikutnya harus ditambahkan melalui modul Canon yang relevan.
 
 ## 12. Canon Development Order
 
