@@ -485,9 +485,7 @@ Intent harus melewati resolution system yang relevan.
 
 ## 18. Cross-System Resolution
 
-NPC Behavior hanya memilih atau memulai action.
-
-System lain menyelesaikan domainnya.
+NPC Behavior hanya memilih atau memulai action. System lain menyelesaikan domainnya.
 
 ### Travel
 
@@ -503,10 +501,10 @@ TRAVEL & MOVEMENT
 
 ```text
 NPC DECISION
-→ fight / flee / surrender / negotiate
+→ fight / flee / surrender / disengage
         ↓
 COMBAT
-→ conflict resolution
+→ combat resolution
 ```
 
 ### Economy
@@ -528,7 +526,19 @@ HEALTH & INJURY
 → health consequence resolution
 ```
 
-NPC Behavior tidak menduplikasi formula atau resolution rule milik system tersebut.
+### Negotiation / Social Interaction
+
+```text
+NPC DECISION
+→ negotiate / persuade / refuse / cooperate
+        ↓
+RELEVANT SOCIAL / RELATIONSHIP / OTHER CANON
+→ domain-specific resolution when available
+```
+
+Jika domain khusus belum memiliki canonical resolution system, NPC Behavior tidak boleh mengarang formula atau outcome universal untuk menggantikannya. Resolution tetap mengikuti Canon dan context yang tersedia.
+
+NPC Behavior tidak menduplikasi formula atau resolution rule milik system lain.
 
 ---
 
@@ -803,23 +813,27 @@ Durasi action ditentukan oleh system yang memiliki domain action tersebut atau c
 
 ## 32. State Integration
 
-NPC Behavior dapat membaca dan menghasilkan state yang relevan dengan decision process.
+NPC Behavior dapat membaca **NPC behavior state, knowledge, goals, plans, dan decision context** yang relevan dengan decision process.
 
 Conceptual flow:
 
 ```text
-CURRENT NPC STATE
+CURRENT NPC BEHAVIOR CONTEXT
         ↓
 NPC DECISION
         ↓
-ACTION
+ACTION / INTENT
         ↓
-RESULT
+RELEVANT SYSTEM RESOLUTION
+        ↓
+VALIDATED RESULT
         ↓
 VALIDATED STATE CHANGE
 ```
 
-State change harus mengikuti `state/STATE_AND_HISTORY_MODEL.md`.
+State change harus mengikuti `state/STATE_AND_HISTORY_MODEL.md` dan canonical owner domain masing-masing.
+
+NPC Behavior tidak menjadi owner atas Character State, Faction State, Political State, Economic State, Creature State, Travel State, Combat State, Health State, atau World State hanya karena NPC action dapat memengaruhinya.
 
 Starting State tidak ditimpa secara retroaktif oleh runtime behavior.
 
@@ -876,9 +890,9 @@ RESULT
         ↓
 CONSEQUENCES
         ↓
-NPC STATE UPDATE
+VALIDATED STATE / KNOWLEDGE UPDATE
         ↓
-WORLD STATE CHANGE
+WORLD STATE CHANGE THROUGH CANONICAL OWNER
         ↓
 HISTORY
         ↓
@@ -1011,6 +1025,8 @@ OTHER VALID STATE
 
 Daftar ini bukan universal state machine final.
 
+Behavioral State adalah context/status perilaku; ia tidak mengambil alih state process milik system domain lain. Misalnya, `TRAVELING` tidak menggantikan Travel State dan `FLEEING` tidak otomatis menentukan hasil Combat atau Travel.
+
 ---
 
 ## 40. System Interaction Model
@@ -1033,6 +1049,8 @@ Daftar ini bukan universal state machine final.
             └──────────┼──────────┘
                        ↓
                  CONSEQUENCES
+                       ↓
+              CANONICAL STATE OWNER
                        ↓
                  STATE / HISTORY
                        ↓
@@ -1092,6 +1110,7 @@ Tidak ada domain pada tabel ini yang dipindahkan authority-nya kepada NPC Behavi
 12. NPC autonomy tidak berarti unlimited capability.
 13. NPC action harus tunduk pada constraints.
 14. NPC decision tidak boleh mengontrol Player Character.
+15. NPC social intent tidak otomatis menghasilkan relationship, reputation, political, economic, atau other persistent State Change tanpa resolution dan authority yang sesuai.
 
 ---
 
