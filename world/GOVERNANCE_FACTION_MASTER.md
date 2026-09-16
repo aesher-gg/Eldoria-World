@@ -81,11 +81,12 @@ SUCCESSION LAW
 LOCAL LAW
 MILITARY COMMAND
 TAX / REVENUE STRUCTURE
-MAJOR NOBLE HOUSES
 MAJOR POLITICAL BLOCS
 MAJOR FACTIONS
 KINGDOM-TO-KINGDOM RELATIONS
 ```
+
+`MAJOR NOBLE HOUSES` sekarang memiliki Canon registry tersendiri di `factions/NOBLE_HOUSES_CANON.md` dan berisi 10 initial strategic Canon Noble Houses. Detail title, domain grant, succession, political relations, dan authority individual yang belum ditetapkan tetap `???`.
 
 ---
 
@@ -94,7 +95,7 @@ KINGDOM-TO-KINGDOM RELATIONS
 | Scope | Authority baseline | Known | Unresolved |
 |---|---|---|---|
 | Empire | Imperial central authority + defined imperial scope | Political system, ruler identity, broad scope | Institutions, laws, military, economy, factions |
-| Kingdom | Internal autonomy under Imperial law | Autonomy baseline and five Canon rulers | Institutions, laws, military, factions |
+| Kingdom | Internal autonomy under Imperial law | Autonomy baseline, five Canon rulers, 10 Canon Noble Houses | Institutions, laws, military, detailed political relations |
 | Region | Parent kingdom administration | Parent hierarchy | Regional offices/authority = ??? |
 | City | Parent kingdom/local administration | Parent hierarchy | City government/offices = ??? |
 | Settlement | Local administration under parent hierarchy | Parent hierarchy | Local offices/authority = ??? |
@@ -340,9 +341,10 @@ NPC ARCHITECTURE: COMPLETE
 NPC COVERAGE MATRIX: COMPLETE
 GOVERNANCE BASELINE: ESTABLISHED
 HEAD-OF-STATE CANON: ACTIVE — 5 REGISTERED
+NOBLE HOUSE CANON: ESTABLISHED — 10 ACTIVE CANON HOUSES
 FACTION FRAMEWORK: ESTABLISHED
 SPECIFIC FACTION CANON: ESTABLISHED — 53 ACTIVE CANON FACTIONS
-INDIVIDUAL CANON NPC: ACTIVE — 16 REGISTERED
+INDIVIDUAL CANON NPC: ACTIVE — 21 REGISTERED
 CURRENT NPC CREATION METHOD: CONTROLLED BATCHES OF UP TO 5
 QUOTA STATUS: COVERAGE TARGET ONLY; NO MASS NPC FILLING
 ```
