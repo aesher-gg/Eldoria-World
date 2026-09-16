@@ -334,6 +334,46 @@ No universal reputation score, rating, multiplier, threshold, probability, decay
 
 Reputation is not objective moral truth and does not automatically create relationship, membership, authority, legitimacy, ownership, wealth, transaction, alliance, hostility, or other state.
 
+### System #08 — Law / Legal Procedures
+
+`systems/LAW.md`
+
+Canonical owner for legal rules, legal applicability, jurisdiction-specific legal procedures, legal status, adjudication, enforcement, and legal consequences.
+
+Boundary:
+
+```text
+POLITICS
+= authority / governance / political jurisdiction
+
+LAW
+= legal rules / legal applicability / legal procedures / legal status
+  / adjudication / enforcement / legal consequences
+
+STATE & HISTORY
+= persistent legal state / provenance / history / persistence
+```
+
+Law does not replace Economy, NPC Behavior & Agency, Relationships, Reputation, Combat, Health & Injury, Time & Calendar, Politics, or State & History.
+
+Legal rules require a valid jurisdictional and canonical basis. A political jurisdiction does not automatically imply a universal legal rule.
+
+Important legal distinctions:
+
+```text
+FACT
+≠ CLAIM
+≠ ALLEGATION
+≠ RUMOR
+≠ EVIDENCE
+```
+
+An allegation or claim does not automatically establish a legal violation. Legal resolution depends on applicable rules, jurisdiction, relevant facts/evidence, procedure, authority, and context.
+
+No universal crime list, punishment list, fine amount, prison duration, evidence score, guilt probability, sentence formula, legal severity score, court success probability, corruption probability, limitation period, arrest rule, legal age, legal code, court structure, or quantitative legal fallback is defined by v0.1.
+
+Legal processing follows the relevant legal system's procedures and preserves NPC/faction agency in enforcement. Narrative alone does not create legal state.
+
 ---
 
 ## 8. State & History
@@ -382,6 +422,9 @@ PEOPLES / RACES
 
 POLITICS
 → authority / governance / jurisdiction / political relations
+
+LAW
+→ legal rules / applicability / procedures / legal status / adjudication / enforcement
 
 SUPERNATURAL / MAGIC
 → supernatural / magical domain
@@ -496,6 +539,38 @@ REPUTATION RESOLUTION
 VALIDATED REPUTATION STATE CHANGE
 ```
 
+Legal-related processing should additionally use:
+
+```text
+CURRENT STATE
+↓
+RELEVANT ACTION / EVENT / CLAIM
+↓
+LEGAL RELEVANCE?
+├── NO → CONTINUE RELEVANT SYSTEM
+└── YES
+     ↓
+  JURISDICTION
+     ↓
+  APPLICABLE LEGAL RULES
+     ↓
+  LEGAL PROCEDURE / RESOLUTION
+     ↓
+  LEGAL RESULT
+     ↓
+  CONSEQUENCES / ENFORCEMENT
+     ↓
+  VALIDATED STATE CHANGE
+     ↓
+  HISTORY
+     ↓
+  PERSISTENCE
+     ↓
+  VERIFY
+```
+
+Legal resolution must not silently take ownership of non-legal domains. Domain-specific consequences continue through their canonical systems.
+
 ---
 
 ## 12. Development Status
@@ -510,6 +585,7 @@ Current Canon systems:
 🟢 #05 NPC BEHAVIOR & AGENCY
 🟢 #06 RELATIONSHIPS
 🟢 #07 REPUTATION
+🟢 #08 LAW / LEGAL PROCEDURES
 ```
 
 Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
@@ -536,6 +612,9 @@ Potential future domains listed by architecture framework are not automatically 
 - Relationship State must use the canonical Relationships system when relationship data is relevant.
 - Reputation State must use the canonical Reputation system when reputation data is relevant.
 - Reputation must not be treated as universal truth or universal value.
+- Legal State and legal consequences must use the canonical Law system when legal data is relevant.
+- Legal applicability must be validated against jurisdiction and applicable Canon.
+- Legal claims, allegations, rumors, and evidence must not be treated as equivalent.
 
 ---
 
