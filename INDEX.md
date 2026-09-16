@@ -42,7 +42,8 @@ Eldoria-World/
 │   ├── PEOPLES_RACES.md
 │   ├── POLITICS.md
 │   ├── SUPERNATURAL_MAGIC.md
-│   └── ECONOMY.md
+│   ├── ECONOMY.md
+│   └── CREATURES_ECOLOGY.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -174,6 +175,16 @@ Kerangka resmi Economy Eldoria: economic actors, needs/consumption, production, 
 
 Economy v0.1 **tidak** menetapkan nama atau jumlah mata uang, kurs, harga, upah, pajak universal, sistem perbankan universal, daftar komoditas lengkap, pasar atau merchant tertentu, wealth tier universal, statistik ekonomi universal, atau formula harga/supply-demand universal.
 
+### 8. Creatures / Ecology v0.1
+
+`world/CREATURES_ECOLOGY.md`
+
+Kerangka resmi Creatures / Ecology Eldoria sebagai fondasi untuk **Wildlife → Monsters → Habitat → Food Chain → Population → Behavior → Ecosystem → Creature–Environment Interaction → Monster Ecology → State/History → Dynamic World**.
+
+Modul mencakup klasifikasi creature, Wildlife, Monsters, habitat, food/nutrition, food web, population, lifecycle/reproduction, behavior, territoriality/range, ecosystem, creature-environment interaction, monster ecology, creature-people interaction, domestication/taming/captivity, population dynamics, ecological events/shocks, ecological autonomy, data models, State/History, runtime, knowledge boundary, progressive development, canon boundary, dependencies, dan integrity rules.
+
+V0.1 **tidak** menetapkan daftar creature/monster/wildlife, biology universal, habitat spesifik, population count, stat block, loot table, taming formula, atau formula ecological simulation universal.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -233,7 +244,7 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-**Status:** Economy v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **CREATURES / ECOLOGY v0.1**.
+**Status:** Creatures / Ecology v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **FACTIONS v0.1**.
 
 ## Canon Boundary
 
