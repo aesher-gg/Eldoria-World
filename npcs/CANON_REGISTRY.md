@@ -260,17 +260,23 @@ RECORD: npcs/canon/NPC-CANON-021.md
 ```
 
 ## 6. Status Coverage Saat Ini
+
+Coverage di bawah mengikuti assignment aktual yang tervalidasi pada `npcs/COVERAGE_MATRIX_v1_0.md` dan `npcs/COVERAGE_GAP_MATRIX.md`. `???` tidak dihitung sebagai coverage.
+
 ```text
-EMPIRE CANON NPC CREATED: 12 / ≥25 target coverage
-KINGDOM-001 CANON NPC: 3 / ≥10
-KINGDOM-002 CANON NPC: 3 / ≥10
-KINGDOM-003 CANON NPC: 3 / ≥10
-KINGDOM-004 CANON NPC: 3 / ≥10
-KINGDOM-005 CANON NPC: 3 / ≥10
-CITY CANON NPC CREATED: 0
-SETTLEMENT CANON NPC CREATED: 0
-TOTAL INDIVIDUAL CANON NPC CREATED: 21
+EMPIRE-001 CANON NPC ASSIGNMENTS: 21 / ≥25 target
+KINGDOM-001 CANON NPC ASSIGNMENTS: 3 / ≥10
+KINGDOM-002 CANON NPC ASSIGNMENTS: 3 / ≥10
+KINGDOM-003 CANON NPC ASSIGNMENTS: 3 / ≥10
+KINGDOM-004 CANON NPC ASSIGNMENTS: 3 / ≥10
+KINGDOM-005 CANON NPC ASSIGNMENTS: 3 / ≥10
+CITY CANON NPC ASSIGNMENTS: 9 / 100 target aggregate
+SETTLEMENT CANON NPC ASSIGNMENTS: 0 / 120 target aggregate
+TOTAL OFFICIAL SCOPE COVERAGE: 45 / 295
+TOTAL INDIVIDUAL CANON NPC: 21
 ```
 
+Catatan: satu NPC dapat menghasilkan beberapa scope assignments. Karena itu `TOTAL INDIVIDUAL CANON NPC` tidak sama dengan `TOTAL OFFICIAL SCOPE COVERAGE`.
+
 ## 7. Prinsip
-Coverage target bukan alasan pembuatan NPC. Setiap NPC harus memiliki fungsi nyata, agency, konteks Canon, Race Canon yang valid, batas pengetahuan, dan Origin yang dapat diverifikasi. Pembuatan dilakukan dalam batch terkontrol maksimal 5 NPC.
+Coverage target bukan alasan pembuatan NPC. Setiap Canon NPC harus memiliki fungsi nyata, agency, konteks faction, Race Canon yang valid, batas pengetahuan, dan Origin yang dapat dipertanggungjawabkan. Pembuatan dilakukan dalam batch terkontrol maksimal 5 NPC.
