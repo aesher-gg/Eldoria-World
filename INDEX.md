@@ -53,17 +53,13 @@ Eldoria-World/
 │   ├── WORLD_FOUNDATION.md
 │   ├── GEOGRAPHY.md
 │   ├── CIVILIZATION.md
-│   └── PEOPLES_RACES.md
-│   ├── POLITICS.md
-│   ├── POLITICS.md
-│   └── ...
+│   ├── PEOPLES_RACES.md
+│   └── POLITICS.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
 ```
-
-> **Note:** `POLITICS.md` berada di `world/` dan merupakan modul Canon Politics v0.1.
 
 Directory atau modul baru hanya ditambahkan ketika memang telah didefinisikan sebagai bagian dari Canon Eldoria.
 
@@ -139,7 +135,7 @@ Fondasi yang ditetapkan:
 - **Technology:** Medieval Fantasy fleksibel dan dapat berbeda menurut wilayah.
 - **Supernatural:** Umum dan diakui sebagai bagian dari kehidupan dunia, tetapi tidak berarti semua individu dapat menggunakan kekuatan supernatural.
 - **Player Freedom:** Open-world tanpa class/profession/main path wajib. Player dapat mengejar tujuan besar, termasuk membangun usaha, organisasi, wilayah, atau kerajaan, selama dunia memungkinkan dan konsekuensinya dijalani.
-- **Plot Armor:** Tidak ada perlindungan naratif khusus untuk Player maupun NPC.
+- **Plot Armor:** Tidak ada perlindungan naratif khusus bagi Player maupun NPC.
 - **Theme:** **Dunia yang hidup, Player yang bebas, dan cerita yang lahir dari konsekuensi.**
 
 World Foundation tidak menetapkan lore rinci yang belum dibuat. Detail dunia berikutnya harus ditambahkan melalui modul Canon yang relevan.
