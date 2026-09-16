@@ -47,6 +47,7 @@ Eldoria-World/
 │   ├── FACTIONS.md
 │   └── OTHER_WORLD_SYSTEMS.md
 ├── systems/
+│   └── TIME_AND_CALENDAR.md
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
@@ -205,6 +206,18 @@ Kerangka arsitektur untuk world systems yang belum memiliki canonical module khu
 
 Other World Systems **tidak** menetapkan mekanik final seperti combat, health/injury, kalender, travel formula, crafting, progression, quests, events, NPC behavior, relationships/reputation, religion, legal code, settlement management, diplomacy/war, atau formula numerik universal. Kategori tersebut hanya merupakan area potensial yang dapat dikembangkan sebagai modul tersendiri setelah audit dan penetapan Canon.
 
+## Systems
+
+### 1. Time & Calendar v0.1
+
+`systems/TIME_AND_CALENDAR.md`
+
+Canonical temporal authority Eldoria. Menetapkan representasi World Time, Calendar, Duration, Timestamp, Temporal State, time advancement, hubungan Turn dengan waktu, sequential/concurrent processes, temporal ordering, temporal uncertainty, calendar conversion, serta integrasi Runtime, State, History, Character, dan world systems lain.
+
+Time & Calendar v0.1 **tidak** menetapkan nama/jumlah kalender, era, jumlah hari/bulan/tahun, nama hari/bulan, musim universal, durasi Turn, travel/combat/crafting/sleep duration, atau formula temporal universal. Detail tersebut harus ditetapkan secara eksplisit oleh Canon yang berwenang.
+
+**Status:** System spesifik pertama telah ditetapkan. Time & Calendar menjadi canonical owner untuk temporal representation dan calendar rules yang telah didefinisikan.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -262,9 +275,11 @@ CREATURES / ECOLOGY
 FACTIONS
 ↓
 OTHER WORLD SYSTEMS
+↓
+TIME & CALENDAR
 ```
 
-**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Tahap berikutnya tidak lagi berupa satu catch-all module; sistem spesifik dipilih berdasarkan kebutuhan dunia, dependency, dan audit overlap.
+**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. System spesifik pertama, Time & Calendar v0.1, telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
 
 ## Canon Boundary
 
