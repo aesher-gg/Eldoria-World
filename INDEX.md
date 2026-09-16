@@ -48,7 +48,8 @@ Eldoria-World/
 │   └── OTHER_WORLD_SYSTEMS.md
 ├── systems/
 │   ├── TIME_AND_CALENDAR.md
-│   └── HEALTH_AND_INJURY.md
+│   ├── HEALTH_AND_INJURY.md
+│   └── COMBAT.md
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
@@ -227,6 +228,32 @@ Health & Injury v0.1 **tidak** menetapkan HP universal, damage formula, armor mi
 
 **Status:** System spesifik kedua telah ditetapkan setelah gameplay-need, dependency, dan overlap audit. Health & Injury menjadi canonical owner untuk health/injury representation dan health-state lifecycle yang telah didefinisikan.
 
+### 3. Combat v0.1
+
+`systems/COMBAT.md`
+
+Canonical owner untuk **combat/conflict resolution** Eldoria. Menetapkan framework Combat State, participants, intent/objectives, action model, validation, position/context, initiative/order sebagai konsep yang bergantung pada mekanisme valid, attack/defense resolution, maneuver, retreat/escape, surrender/capture, disengagement, combat end conditions, serta integrasi dengan Health & Injury, Time & Calendar, Character, Creatures/Ecology, Supernatural/Magic, State/History, Geography, Politics, Economy, Factions, dan Runtime.
+
+Combat v0.1 **tidak** menetapkan HP universal, attack/defense formula, damage formula, armor mitigation, initiative formula, critical-hit/dodge percentage, weapon damage table, movement speed, range bands, action points, fixed combat rounds, combat-round duration, level/tier/rank, universal morale formula, universal escape/surrender threshold, atau mekanik numerik universal lain.
+
+Boundary utama:
+
+```text
+COMBAT
+= combat/conflict resolution
+
+HEALTH & INJURY
+= health/injury state and consequences
+
+TIME & CALENDAR
+= temporal authority
+
+STATE & HISTORY
+= state/provenance/persistence structure
+```
+
+**Status:** System spesifik ketiga telah ditetapkan setelah full Canon dependency dan overlap audit. Combat menjadi canonical owner untuk combat/conflict resolution.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -288,9 +315,11 @@ OTHER WORLD SYSTEMS
 TIME & CALENDAR
 ↓
 HEALTH & INJURY
+↓
+COMBAT
 ```
 
-**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1 dan Health & Injury v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
+**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1, Health & Injury v0.1, dan Combat v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
 
 ## Canon Boundary
 
