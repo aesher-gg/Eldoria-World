@@ -263,6 +263,36 @@ NPC Behavior does not replace Character Data, Factions, Politics, Economy, Creat
 
 No universal NPC numerical formula, decision probability, personality score, simulation tick, behavior frequency, or quantitative fallback is defined by v0.1.
 
+### System #06 — Relationships
+
+`systems/RELATIONSHIPS.md`
+
+Canonical owner for relationship state, relationship lifecycle, relationship formation/change, relationship consequences, relationship context, and relationship integration with NPCs, characters, factions, politics, economy, and other relevant domains.
+
+Boundary:
+
+```text
+RELATIONSHIPS
+= relationship state / lifecycle / relationship change
+
+NPC BEHAVIOR
+= NPC decision-making using relationship as context
+
+FACTIONS
+= faction structure / membership / faction relations
+
+POLITICS
+= political authority / governance / political relations
+
+ECONOMY
+= economic processes / transactions / ownership
+
+STATE & HISTORY
+= state / provenance / persistence
+```
+
+No universal relationship score, social probability, affection/trust/loyalty formula, relationship decay formula, or quantitative fallback is defined by v0.1.
+
 ---
 
 ## 8. State & History
@@ -339,6 +369,9 @@ TRAVEL & MOVEMENT
 NPC BEHAVIOR & AGENCY
 → sentient NPC decision-making / agency / action selection
 
+RELATIONSHIPS
+→ relationship state / lifecycle / relationship change
+
 STATE & HISTORY
 → state / provenance / persistence
 ```
@@ -389,6 +422,20 @@ NPC BEHAVIOR & AGENCY
 RELEVANT RESOLUTION SYSTEM
 ```
 
+Relationship-related processing should additionally use:
+
+```text
+CURRENT RELATIONSHIP STATE
+↓
+RELEVANT ACTOR / ENTITY CONTEXT
+↓
+RELEVANT ACTION / EVENT
+↓
+RELATIONSHIP RESOLUTION
+↓
+VALIDATED RELATIONSHIP STATE CHANGE
+```
+
 ---
 
 ## 12. Development Status
@@ -401,6 +448,7 @@ Current Canon systems:
 🟢 #03 COMBAT
 🟢 #04 TRAVEL & MOVEMENT
 🟢 #05 NPC BEHAVIOR & AGENCY
+🟢 #06 RELATIONSHIPS
 ```
 
 Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
@@ -424,6 +472,7 @@ Potential future domains listed by architecture framework are not automatically 
 - System-specific resolution must use the canonical owner.
 - Persistent State Change requires validation and provenance.
 - Persistence must be verified before being claimed.
+- Relationship State must use the canonical Relationships system when relationship data is relevant.
 
 ---
 
