@@ -110,7 +110,7 @@ KINGDOM_ID: KINGDOM-001
 TYPE: MAJOR_NOBLE_HOUSE
 PRIMARY_SCOPE: Agrarian and riverine domains
 LEADERSHIP_MODEL: Hereditary noble house
-CURRENT_HEAD: Hereditary head of House Goldriver
+CURRENT_HEAD: NPC-CANON-017 — Elian Goldriver
 PRIMARY_TITLE_CONTEXT: Count / Countess or higher title if separately granted by Crown
 DOMAIN_CONTEXT: Productive farmland, river transport, irrigation, and associated estates where legally granted
 GOALS: Maintain productive land, water infrastructure, food supply, and lawful regional influence
@@ -164,7 +164,7 @@ KINGDOM_ID: KINGDOM-002
 TYPE: MAJOR_NOBLE_HOUSE
 PRIMARY_SCOPE: Highland mineral and fortified-route domains
 LEADERSHIP_MODEL: Hereditary noble house
-CURRENT_HEAD: Hereditary head of House Ironvein
+CURRENT_HEAD: NPC-CANON-018 — Durgan Ironvein
 PRIMARY_TITLE_CONTEXT: Count / Countess or equivalent higher noble title when lawfully granted
 DOMAIN_CONTEXT: Mining districts, mountain routes, fortified holdings, or resource estates where legally granted
 GOALS: Protect lawful resource operations, mountain infrastructure, and strategic routes
@@ -218,7 +218,7 @@ KINGDOM_ID: KINGDOM-003
 TYPE: MAJOR_NOBLE_HOUSE
 PRIMARY_SCOPE: Maritime and coastal domains
 LEADERSHIP_MODEL: Hereditary noble house
-CURRENT_HEAD: Hereditary head of House Tideward
+CURRENT_HEAD: NPC-CANON-019 — Lysara Tideward
 PRIMARY_TITLE_CONTEXT: Count / Countess, Marquis / Marchioness, or other lawful title depending on domain
 DOMAIN_CONTEXT: Port districts, island holdings, coastal estates, or maritime approaches where legally granted
 GOALS: Maintain maritime infrastructure, lawful trade, coastal security, and port continuity
@@ -272,7 +272,7 @@ KINGDOM_ID: KINGDOM-004
 TYPE: MAJOR_NOBLE_HOUSE
 PRIMARY_SCOPE: Forest frontier and river-route domains
 LEADERSHIP_MODEL: Hereditary noble house
-CURRENT_HEAD: Hereditary head of House Thornward
+CURRENT_HEAD: NPC-CANON-020 — Caelen Thornward
 PRIMARY_TITLE_CONTEXT: Marquis / Marchioness or Count / Countess depending on lawful grant
 DOMAIN_CONTEXT: Frontier estates, forest routes, river crossings, or fortified holdings where legally granted
 GOALS: Maintain frontier security, route continuity, and sustainable resource stewardship
@@ -326,7 +326,7 @@ KINGDOM_ID: KINGDOM-005
 TYPE: MAJOR_NOBLE_HOUSE
 PRIMARY_SCOPE: Caravan and arid frontier domains
 LEADERSHIP_MODEL: Hereditary noble house
-CURRENT_HEAD: Hereditary head of House Dustveil
+CURRENT_HEAD: NPC-CANON-021 — Samir Dustveil
 PRIMARY_TITLE_CONTEXT: Marquis / Marchioness or Count / Countess depending on lawful grant
 DOMAIN_CONTEXT: Caravan corridors, route stations, water points, or frontier holdings where legally granted
 GOALS: Maintain route security, water access, caravan continuity, and frontier logistics
@@ -394,5 +394,24 @@ Untuk `House Qasrane`, office of the reigning Sovereign dan individual sovereign
 - House tidak otomatis memiliki magic.
 - House tidak otomatis memiliki standing army.
 - House membership tidak menentukan race, class, skill, morality, personality, atau capability.
-- Magic-specific claims harus kembali ke `09_MAGIC_SYSTEM.md`.
-- Individual Noble NPC harus memiliki record sendiri dan tidak boleh mengambil detail personal dari House record secara otomatis.
+- Magic-specific claims harus kembali ke `09_MAGIC_SYSTEM.md` dan memiliki basis Canon/resolution yang jelas.
+- Succession, inheritance, family relationships, title, domain, authority, dan personal capabilities harus ditetapkan secara eksplisit; tidak boleh diinferensikan dari House membership.
+- Setiap perubahan material pada House mengikuti state validation, Origin Log, dan History sesuai pipeline Canon.
+- House tambahan hanya dibuat jika terdapat kebutuhan struktural nyata.
+
+## 12. Current Canon Head Integrity
+
+```text
+NOBLE-HOUSE-001 → NPC-CANON-012 — Cedric Varen
+NOBLE-HOUSE-002 → NPC-CANON-017 — Elian Goldriver
+NOBLE-HOUSE-003 → NPC-CANON-013 — Tharok Brann
+NOBLE-HOUSE-004 → NPC-CANON-018 — Durgan Ironvein
+NOBLE-HOUSE-005 → NPC-CANON-014 — Celestine Aureon
+NOBLE-HOUSE-006 → NPC-CANON-019 — Lysara Tideward
+NOBLE-HOUSE-007 → NPC-CANON-015 — Edrien Sylvar
+NOBLE-HOUSE-008 → NPC-CANON-020 — Caelen Thornward
+NOBLE-HOUSE-009 → NPC-CANON-016 — Nadir Qasrane
+NOBLE-HOUSE-010 → NPC-CANON-021 — Samir Dustveil
+```
+
+This mapping is an integrity cross-check against `npcs/CANON_REGISTRY.md` and the individual Canon NPC records.
