@@ -91,12 +91,14 @@ RELEVANT FACTION STATE bila tersedia
 
 Membership, rank, authority, access, resources, knowledge, reputation, dan loyalty tidak boleh diasumsikan dari registry saja.
 
-### Nobility / Title / Noble House
+### Nobility / Title / Noble House / Law
 
-Jika action menyentuh noble title, Noble House, domain, vassalage, succession, inheritance, royal family, noble privilege, noble obligation, atau political authority yang bersumber dari status bangsawan:
+Jika action menyentuh noble title, Noble House, domain, vassalage, succession, inheritance, royal family, noble privilege, noble obligation, political authority, legal authority, atau succession dispute:
 
 ```text
-37_NOBILITY_SYSTEM.md
+38_LAW_SYSTEM.md
+↓
+37_NOBILITY_SYSTEM.md bila noble context relevan
 ↓
 GOVERNANCE_FACTION_MASTER.md
 ↓
@@ -104,6 +106,8 @@ GOVERNANCE_FACTION_MASTER.md
 ↓
 RELEVANT TITLE / HOUSE / NPC / LAW / STATE RECORDS
 ```
+
+`38_LAW_SYSTEM.md` adalah authority untuk law hierarchy, succession, title recognition, domain authority, military authority, taxation authority, dan disputed succession.
 
 Title, House membership, succession, domain, authority, dan family relationship tidak boleh ditebak dari genre, gelar, atau hubungan darah semata.
 
@@ -117,7 +121,7 @@ Jika action menyentuh magic atau magical capability:
 RELEVANT MAGIC IDENTITY / STATE
 ```
 
-Jika magic berhubungan dengan Noble House/title/domain, `37_NOBILITY_SYSTEM.md` juga wajib dimuat.
+Jika magic berhubungan dengan Noble House/title/domain, `37_NOBILITY_SYSTEM.md` dan `38_LAW_SYSTEM.md` dimuat bila legal authority relevan.
 
 ### Dynamic Entity
 
@@ -130,8 +134,9 @@ Router menggunakan domain yang benar-benar disentuh action, bukan sekadar keywor
 | Intent | Module utama | Registry / support |
 |---|---|---|
 | Faction action | `19_FACTION_SYSTEM.md` | `04_FACTIONS.md` + `factions/CANON_REGISTRY.md` + relevant state |
-| Nobility / Title / Noble House / Domain / Succession | `37_NOBILITY_SYSTEM.md` | `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/law/state |
-| Magic | `09_MAGIC_SYSTEM.md` | relevant magic identity/state; `37_NOBILITY_SYSTEM.md` bila noble context |
+| Nobility / Title / Noble House / Domain / Succession | `37_NOBILITY_SYSTEM.md` | `38_LAW_SYSTEM.md` + `GOVERNANCE_FACTION_MASTER.md` + relevant faction/NPC/state |
+| Law / Authority / Succession dispute | `38_LAW_SYSTEM.md` | `GOVERNANCE_FACTION_MASTER.md` + `37_NOBILITY_SYSTEM.md` bila noble context + relevant state |
+| Magic | `09_MAGIC_SYSTEM.md` | relevant magic identity/state; nobility/law modules bila relevant |
 | NPC / social interaction | `16_NPC_SYSTEM.md` | `npcs/CANON_REGISTRY.md` + `27_NPC_STATE.md` bila persistent |
 | Race | `36_RACE_SYSTEM.md` | `races/CANON_REGISTRY.md` + relevant state |
 | Combat | `13_COMBAT.md` | relevant state + equipment/vitality |
@@ -202,6 +207,7 @@ Router wajib:
 - check Canon NPC sebelum Dynamic NPC generation;
 - check Canon Faction Registry sebelum faction interpretation/generation;
 - load Nobility authority for title/house/domain/succession actions;
+- load Law authority for legal authority/succession/title/domain actions;
 - load Magic authority when magical capability is relevant;
 - tidak resolve outcome;
 - tidak mutate state;
