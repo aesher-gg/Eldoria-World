@@ -144,44 +144,87 @@ Satu NPC dapat menghitung pada beberapa kolom. Ini adalah **scope assignment**, 
 
 Faction/House assignment dihitung sebagai kolom tersendiri dan tidak ditambahkan ke 295 official scope target.
 
-| Assignment class | Actual assignments | Canon context |
+| Assignment class | Actual assignments | NPCs |
 |---|---:|---|
-| Imperial factions | 5 | FACTION-001, FACTION-002, FACTION-003 |
-| Kingdom factions | 5 | FACTION-101, 104, 111, 113, 121, 124, 131, 133, 141, 143 as applicable |
-| Noble Houses | 6 | NOBLE-HOUSE-009, 002, 004, 006, 008, 010 |
-| **Total NPC faction/house assignments** | **21** | Every registered NPC has a faction assignment |
+| Imperial factions | 5 | NPC-001–005 |
+| Kingdom factions | 10 | NPC-006–010, NPC-012–016 |
+| Noble Houses | 6 | NPC-016–021 |
+| **Total NPC faction/house assignments** | **21** | NPC-001–021 |
 
-> Catatan: angka `21` adalah **assignment NPC**, bukan jumlah faction/house unik. Registry faction Canon saat ini memiliki lebih banyak faction daripada yang terwakili oleh 21 NPC.
+> Catatan: angka `21` adalah **assignment NPC**, bukan jumlah faction/house unik. NPC-016 memiliki Kingdom faction + Noble House assignment, sehingga tercatat pada dua assignment class.
 
-## Coverage Gap Interpretation
+## Role Integrity
 
-### Critical gaps
+Roles must be justified by established geography, population, governance, economy, faction, or other Canon context. Suitable bands include governance, administration, security, military, trade, agriculture, mining, transport, logistics, maritime, shipbuilding, forestry, craft, pastoral, caravan, frontier, services, specialist, and community.
 
-1. **Settlement:** 40/40 scope units masih 0 coverage.
-2. **City:** 13/20 cities masih 0 coverage.
-3. **Kingdom:** seluruh 5 kingdoms masih berada di bawah minimum 10.
-4. **Empire:** masih kurang 4 assignment untuk minimum 25.
+Unsupported religious, noble-house, academic, criminal, adventuring, or other institutional roles remain `???` until valid Canon context exists.
 
-### Existing cross-scope opportunities
+## Overlap Rules
 
-NPC dengan `CITY_ID` dan `KINGDOM_ID` sudah menghasilkan coverage berlapis yang sah karena field tersebut memang tercatat dalam registry. NPC dengan `SETTLEMENT_ID: ???` tidak boleh dipaksa masuk ke settlement tertentu.
+**Allowed:** genuine cross-scope officials, faction leaders, regional specialists, and settlement figures with real wider influence.
 
-### Creation rule
+**Forbidden:** reuse solely to reach quota, artificial authority, or automatic scope relevance from geographic containment.
 
-Gap tidak otomatis berarti NPC harus dibuat. Setiap kandidat harus memiliki fungsi nyata, agency, lokasi, faction context bila relevan, Race Canon, knowledge boundary, dan Origin yang dapat diverifikasi. Overlap hanya boleh digunakan bila secara substantif benar, bukan untuk mengejar quota.
+## Anti-Filler / Anti-Duplicate
 
-## Audit Conclusion
+Reject candidates created only for quota, without material function/agency, with unsupported location/background, with template duplication, or with unverifiable Origin/knowledge boundary/Race.
+
+Before creation:
 
 ```text
-CANON NPC UNIQUE: 21
-EMPIRE COVERAGE: 21 / 25
-KINGDOM COVERAGE: 15 / 50
-CITY COVERAGE: 9 / 100
-SETTLEMENT COVERAGE: 0 / 120
-FACTION / HOUSE ASSIGNMENTS: 21
-OFFICIAL SCOPE COVERAGE: 45 / 295
-OFFICIAL COVERAGE PROGRESS: 15.25%
-OFFICIAL SCOPE COVERAGE GAP: 250
+CANON NPC REGISTRY
+↓
+EXISTING CANON NPC RECORDS
+↓
+PERSISTENT DYNAMIC NPCS
+↓
+IDENTITY / ROLE / LOCATION / FACTION COLLISION CHECK
+↓
+RELATIONSHIP / BACKGROUND COLLISION CHECK
+↓
+CANONIZATION
 ```
 
-Coverage Matrix adalah alat pemerataan kebutuhan Canon NPC. Ia tidak boleh menjadi sumber lore atau alasan untuk membuat NPC filler.
+## Race Safety
+
+Every Canon NPC must use an active `RACE_CANON_ID` from `races/CANON_REGISTRY.md`. Race must not be inferred from name, location, role, faction, appearance stereotype, or profession.
+
+## Canonization Gate
+
+```text
+[ ] Coverage need valid
+[ ] Geography verified
+[ ] Population context verified
+[ ] Governance context verified
+[ ] Faction context verified
+[ ] Race Canon available
+[ ] No duplicate
+[ ] Role materially justified
+[ ] Agency justified
+[ ] Knowledge boundary defined
+[ ] Origin traceable
+[ ] Identity schema complete
+```
+
+## Status
+
+```text
+EMPIRE TARGET: ≥25
+KINGDOM TARGET: ≥10 × 5 = ≥50
+CITY TARGET: ≥5 × 20 = ≥100
+SETTLEMENT TARGET: ≥3 × 40 = ≥120
+TOTAL SCOPE COVERAGE TARGET: ≥295
+
+AUDITED EMPIRE COVERAGE: 21 / 25
+AUDITED KINGDOM COVERAGE: 15 / 50
+AUDITED CITY COVERAGE: 9 / 100
+AUDITED SETTLEMENT COVERAGE: 0 / 120
+AUDITED OFFICIAL SCOPE COVERAGE: 45 / 295
+AUDITED OFFICIAL COVERAGE PROGRESS: 15.25%
+FACTION / HOUSE ASSIGNMENTS: 21
+
+INDIVIDUAL CANON NPC CREATED: 21
+INDIVIDUAL CANON NPC REGISTERED: 21
+```
+
+> Coverage Matrix mengatur pemerataan kebutuhan Canon NPC; bukan alasan pembuatan NPC filler.
