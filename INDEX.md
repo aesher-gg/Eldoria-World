@@ -43,12 +43,15 @@ Eldoria-World/
 ├── INDEX.md
 ├── README.md
 ├── core/
+│   └── CORE_RULES.md
 ├── characters/
 │   ├── players.md
+│   ├── CHARACTER_DATA_MODEL.md
 │   └── players/
 ├── world/
 ├── systems/
 ├── state/
+│   └── STATE_AND_HISTORY_MODEL.md
 └── history/
 ```
 
@@ -76,19 +79,11 @@ Jika suatu fakta belum tersedia dalam Canon atau State yang relevan, AI GM tidak
 
 ## 6. Core Rules
 
-Core Rules akan menjadi aturan dasar yang berlaku lintas sistem.
-
-**Planned:**
-
-```text
-core/CORE_RULES.md
-```
-
-File tersebut akan ditambahkan setelah Repository Initialization ini diverifikasi.
+`core/CORE_RULES.md` adalah aturan dasar yang berlaku lintas sistem.
 
 ## 7. Character Registry
 
-`characters/players.md` akan menjadi **Official Player/Character Registry**.
+`characters/players.md` adalah **Official Player/Character Registry**.
 
 Registry menyimpan informasi minimal untuk identifikasi dan boot karakter. Registry bukan gameplay save.
 
@@ -98,18 +93,26 @@ Detail karakter disimpan pada file karakter masing-masing di:
 characters/players/
 ```
 
-## 8. State & History
+## 8. Character Data Model
 
-State dan History dipisahkan.
+`characters/CHARACTER_DATA_MODEL.md` mendefinisikan struktur data karakter, termasuk Identity, Background, Origin, Physical Profile, Attributes, Abilities, Equipment, Possessions, Relationships, Starting State, Current State, Conditions, History Reference, dan Metadata.
+
+Modul ini mendefinisikan struktur, bukan mekanik gameplay rinci.
+
+## 9. State & History
+
+`state/STATE_AND_HISTORY_MODEL.md` adalah fondasi resmi untuk persistent State dan History.
 
 - **State** = snapshot kondisi saat ini.
 - **Starting State** = kondisi resmi saat karakter mulai gameplay.
 - **Current State** = kondisi aktual terkini.
+- **State Change** = perubahan tervalidasi dari satu State ke State berikutnya.
 - **History** = catatan kejadian/perubahan yang menjelaskan bagaimana State terbentuk.
+- **Origin/Source** = provenance yang memungkinkan perubahan penting ditelusuri.
 
-Perubahan penting harus dapat ditelusuri melalui Origin/Source dan History.
+State dan History dipisahkan tetapi harus dapat direkonsiliasi. History tidak boleh dihapus/ditimpa secara diam-diam; koreksi harus tetap dapat diaudit.
 
-## 9. Runtime Direction
+## 10. Runtime Direction
 
 Runtime Eldoria mengikuti alur konseptual:
 
@@ -133,7 +136,7 @@ BOOT / LOAD CONTEXT
 
 Satu Player Message diperlakukan sebagai satu Turn. Satu Turn dapat berisi nol atau beberapa action yang diproses secara berurutan.
 
-## 10. World Foundation
+## 11. World Foundation
 
 Fondasi dunia Eldoria yang telah disepakati:
 
@@ -147,7 +150,7 @@ Fondasi dunia Eldoria yang telah disepakati:
 - **Plot Armor:** Tidak ada perlindungan naratif khusus untuk Player maupun NPC.
 - **Theme:** **Dunia yang hidup, Player yang bebas, dan cerita yang lahir dari konsekuensi.**
 
-## 11. Canon Development Order
+## 12. Canon Development Order
 
 World lore tidak dibuat sebagai daftar besar sekaligus. Fondasi menjadi dasar untuk pengembangan bertahap:
 
@@ -175,7 +178,7 @@ OTHER WORLD SYSTEMS
 
 Urutan ini adalah arah pengembangan, bukan izin untuk menganggap seluruh bagian yang belum ditulis sebagai Canon.
 
-## 12. Authority Boundary
+## 13. Authority Boundary
 
 ```text
 ADMIN
@@ -192,7 +195,7 @@ Player memiliki kebebasan menentukan keputusan karakter, tetapi tidak menentukan
 
 AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Player menjadi pemenang secara otomatis.
 
-## 13. Integrity Principles
+## 14. Integrity Principles
 
 - Intent ≠ Result.
 - Failure adalah hasil yang valid.
