@@ -44,7 +44,8 @@ Eldoria-World/
 │   ├── SUPERNATURAL_MAGIC.md
 │   ├── ECONOMY.md
 │   ├── CREATURES_ECOLOGY.md
-│   └── FACTIONS.md
+│   ├── FACTIONS.md
+│   └── OTHER_WORLD_SYSTEMS.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -196,6 +197,14 @@ Factions v0.1 **tidak** menetapkan daftar faction, nama, pemimpin, anggota, agen
 
 Factions dibedakan dari Political Entity, Civilization, People/Race, Institution, Business, dan Individual. Membership, tujuan, pengaruh, sumber daya, serta hubungan faction harus memiliki dasar yang valid dan tidak boleh diasumsikan hanya untuk kebutuhan narasi.
 
+### 10. Other World Systems v0.1
+
+`world/OTHER_WORLD_SYSTEMS.md`
+
+Kerangka arsitektur untuk world systems yang belum memiliki canonical module khusus. Modul ini menetapkan prinsip **domain boundary, canonical ownership, dependency, runtime integration, State/History integration, autonomous processing, inter-system interaction, knowledge boundary, time dependency, formula discipline, data model, module creation criteria, progressive development, dan integrity**.
+
+Other World Systems **tidak** menetapkan mekanik final seperti combat, health/injury, kalender, travel formula, crafting, progression, quests, events, NPC behavior, relationships/reputation, religion, legal code, settlement management, diplomacy/war, atau formula numerik universal. Kategori tersebut hanya merupakan area potensial yang dapat dikembangkan sebagai modul tersendiri setelah audit dan penetapan Canon.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -231,7 +240,7 @@ RESOLVE
 
 ## Canon Development Order
 
-Urutan arsitektur World Canon saat ini:
+Arsitektur World Canon inti telah menyelesaikan rangkaian:
 
 ```text
 WORLD FOUNDATION
@@ -255,7 +264,7 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-**Status:** Factions v0.1 telah ditetapkan sebagai framework Canon. Tahap arsitektur berikutnya adalah **OTHER WORLD SYSTEMS**.
+**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Tahap berikutnya tidak lagi berupa satu catch-all module; sistem spesifik dipilih berdasarkan kebutuhan dunia, dependency, dan audit overlap.
 
 ## Canon Boundary
 
