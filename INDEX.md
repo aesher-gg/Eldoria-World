@@ -52,7 +52,8 @@ Eldoria-World/
 ├── world/
 │   ├── WORLD_FOUNDATION.md
 │   ├── GEOGRAPHY.md
-│   └── CIVILIZATION.md
+│   ├── CIVILIZATION.md
+│   └── PEOPLES_RACES.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -154,7 +155,17 @@ Civilization v0.1 menetapkan framework untuk settlement development, urbanizatio
 
 Modul ini **tidak** menetapkan daftar kingdom, negara, kota, desa, peoples/races, budaya spesifik, sistem politik, mata uang, teknologi universal, atau lore civilization tertentu. Detail yang belum ditetapkan tetap Unknown / Undefined.
 
-## 14. Canon Development Order
+## 14. Peoples / Races
+
+`world/PEOPLES_RACES.md` adalah **Official Canon** untuk kerangka representasi Peoples / Races dalam Eldoria.
+
+Peoples / Races v0.1 menetapkan framework untuk klasifikasi konseptual, hubungan People/Race dengan individu, population dan community, internal diversity, biology/physiology, environmental adaptation, culture/identity, language/communication, social organization, demography, migration/diaspora, inter-peoples relations, hubungan dengan Civilization, supernatural characteristics, character integration, knowledge boundaries, world autonomy, data model, dan integrasi State/History.
+
+Modul ini **tidak** menetapkan daftar final race/people, statistik biologis universal, lifespan universal, kemampuan rasial universal, daftar bahasa, budaya spesifik, wilayah asal spesifik, jumlah populasi, hubungan politik spesifik, sistem monster lengkap, atau magic mechanics. Detail yang belum ditetapkan tetap Unknown / Undefined.
+
+Ketetapan World Foundation bahwa **Orc, Goblin, dan kelompok sejenis diklasifikasikan sebagai monster** tetap berlaku dan tidak diubah oleh modul ini.
+
+## 15. Canon Development Order
 
 World lore tidak dibuat sebagai daftar besar sekaligus. Fondasi menjadi dasar untuk pengembangan bertahap:
 
@@ -180,9 +191,9 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-Pada tahap saat ini, **Civilization v0.1 telah ditetapkan** sebagai framework Canon. Urutan berikutnya adalah pengembangan Peoples / Races v0.1.
+Pada tahap saat ini, **Peoples / Races v0.1 telah ditetapkan** sebagai framework Canon. Urutan berikutnya adalah pengembangan Politics v0.1.
 
-## 15. Authority Boundary
+## 16. Authority Boundary
 
 ```text
 ADMIN
@@ -199,7 +210,7 @@ Player memiliki kebebasan menentukan keputusan karakter, tetapi tidak menentukan
 
 AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Player menjadi pemenang secara otomatis.
 
-## 16. Integrity Principles
+## 17. Integrity Principles
 
 - Intent ≠ Result.
 - Failure adalah hasil yang valid.
@@ -210,3 +221,5 @@ AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Pl
 - Canon yang belum didefinisikan tidak boleh diada-adakan sebagai fakta.
 - Autonomous NPC, faction, event, dan world changes harus memiliki dasar aturan/data dan dapat ditelusuri.
 - Civilization harus tetap diperlakukan sebagai framework Canon sampai detail spesifik ditetapkan secara eksplisit.
+- Peoples / Races harus tetap diperlakukan sebagai framework Canon sampai detail spesifik ditetapkan secara eksplisit.
+- Identitas People / Race tidak boleh digunakan untuk menentukan perilaku individual tanpa dasar Canon atau data karakter yang relevan.
