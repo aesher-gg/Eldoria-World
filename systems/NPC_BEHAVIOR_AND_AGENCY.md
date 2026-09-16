@@ -52,6 +52,9 @@ HEALTH & INJURY
 TIME & CALENDAR
 = temporal authority
 
+RELATIONSHIPS
+= relationship state, lifecycle, and relationship change
+
 STATE & HISTORY
 = state, provenance, history, persistence structure
 ```
@@ -526,14 +529,14 @@ HEALTH & INJURY
 → health consequence resolution
 ```
 
-### Negotiation / Social Interaction
+### Relationships / Social Interaction
 
 ```text
 NPC DECISION
-→ negotiate / persuade / refuse / cooperate
+→ negotiate / persuade / refuse / cooperate / interact
         ↓
-RELEVANT SOCIAL / RELATIONSHIP / OTHER CANON
-→ domain-specific resolution when available
+RELATIONSHIPS
+→ relationship consequence / state resolution when applicable
 ```
 
 Jika domain khusus belum memiliki canonical resolution system, NPC Behavior tidak boleh mengarang formula atau outcome universal untuk menggantikannya. Resolution tetap mengikuti Canon dan context yang tersedia.
@@ -674,7 +677,7 @@ RELATIONSHIP STATE
 NPC DECISION CONTEXT
 ```
 
-Namun relationship state tetap dimiliki oleh canonical relationship system apabila sistem tersebut kelak dibuat.
+**Canonical ownership Relationship State berada pada `systems/RELATIONSHIPS.md`.**
 
 NPC Behavior tidak boleh menciptakan universal relationship score atau mengubah relationship state tanpa dasar dan authority yang sesuai.
 
@@ -833,7 +836,7 @@ VALIDATED STATE CHANGE
 
 State change harus mengikuti `state/STATE_AND_HISTORY_MODEL.md` dan canonical owner domain masing-masing.
 
-NPC Behavior tidak menjadi owner atas Character State, Faction State, Political State, Economic State, Creature State, Travel State, Combat State, Health State, atau World State hanya karena NPC action dapat memengaruhinya.
+NPC Behavior tidak menjadi owner atas Character State, Faction State, Political State, Economic State, Creature State, Travel State, Combat State, Health State, Relationship State, atau World State hanya karena NPC action dapat memengaruhinya.
 
 Starting State tidak ditimpa secara retroaktif oleh runtime behavior.
 
@@ -1044,7 +1047,7 @@ Behavioral State adalah context/status perilaku; ia tidak mengambil alih state p
                        │
             ┌──────────┼──────────┐
             ↓          ↓          ↓
-         TRAVEL      COMBAT    OTHER SYSTEM
+         TRAVEL      COMBAT   RELATIONSHIPS
             │          │          │
             └──────────┼──────────┘
                        ↓
@@ -1075,6 +1078,7 @@ Dependency tidak mengubah canonical ownership.
 | Combat resolution | Combat | Action resolution |
 | Health / injury | Health & Injury | Consequence resolution |
 | Time | Time & Calendar | Temporal authority |
+| Relationship state / lifecycle / change | Relationships | Consumer / decision context |
 | Persistence | State & History | State/provenance owner |
 
 Tidak ada domain pada tabel ini yang dipindahkan authority-nya kepada NPC Behavior.
@@ -1148,7 +1152,6 @@ AI GM tidak boleh mengubah kekosongan Canon menjadi angka default, formula impro
 
 Future systems dapat memperluas domain yang sekarang hanya menjadi dependency atau context, misalnya:
 
-- Relationships;
 - Reputation;
 - Knowledge / Information;
 - Events;
@@ -1188,6 +1191,7 @@ systems/TIME_AND_CALENDAR.md
 systems/HEALTH_AND_INJURY.md
 systems/COMBAT.md
 systems/TRAVEL_AND_MOVEMENT.md
+systems/RELATIONSHIPS.md
 ```
 
 Dependency aktual dapat dibatasi pada module yang relevan terhadap decision atau action tertentu. Dependency tidak berarti seluruh isi semua module harus selalu dimuat atau diubah.
