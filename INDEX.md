@@ -39,7 +39,7 @@ ACTION MODEL
 ↓
 RESOLUTION ARCHITECTURE
 ↓
-DOMAIN RESOLUTION
+DOMAIN / EVENT / AUTONOMOUS PROCESS
 ↓
 STATE VALIDATION
 ↓
@@ -66,6 +66,8 @@ RUNTIME
 ACTION MODEL
 ↓
 RESOLUTION ARCHITECTURE
+↓
+EVENT / AUTONOMOUS ORCHESTRATION
 ↓
 DOMAIN SYSTEMS
 ↓
@@ -98,6 +100,12 @@ ACTION MODEL
 RESOLUTION ARCHITECTURE
 = kontrak generic untuk menghasilkan Result
 
+WORLD EVENT PROCESSOR
+= event lifecycle / trigger / scheduling / event orchestration / chaining
+
+NPC / FACTION SIMULATION
+= autonomous NPC/Faction process orchestration
+
 STATE & HISTORY
 = State / History / State Change / Origin / Source semantics
 
@@ -127,18 +135,20 @@ Canonical rules for repository authority, Player agency, Intent ≠ Result, fair
 
 `core/RUNTIME_TURN_MODEL.md`
 
-Canonical one-Player-Message-per-Turn runtime pipeline:
+Canonical one-Player-Message-per-Turn runtime pipeline, termasuk jalur autonomous Event dan NPC/Faction processing.
 
 ```text
 LOAD
 ↓
 CURRENT STATE
 ↓
-INTENT / ACTION
+PLAYER MESSAGE / WORLD PROCESS
+↓
+INTENT / EVENT / AUTONOMOUS PROCESS
 ↓
 ACTION VALIDATION
 ↓
-RESOLUTION
+RESOLUTION / EVENT ORCHESTRATION
 ↓
 RESULT
 ↓
@@ -154,7 +164,7 @@ PERSISTENCE
 ↓
 VERIFY
 ↓
-RESPONSE
+RESPONSE / NEXT PROCESS
 ```
 
 ### Action Model
@@ -180,7 +190,7 @@ Canonical generic resolution contract for Resolution Request, domain routing, Re
 Boundary:
 
 ```text
-ACTION
+ACTION / PROCESS
 ↓
 RESOLUTION REQUEST
 ↓
@@ -191,7 +201,50 @@ RESULT
 CONSEQUENCES
 ```
 
-Resolution Architecture does **not** define a universal gameplay formula, probability, multiplier, score, threshold, damage formula, or difficulty formula.
+Resolution Architecture does not define a universal gameplay formula, probability, multiplier, score, threshold, damage formula, or difficulty formula.
+
+### World Event Processor
+
+`core/WORLD_EVENT_PROCESSOR.md`
+
+Canonical orchestration layer for Event lifecycle, eligibility, triggers, scheduling when required, processing, event chaining, domain handoff, consequences, and autonomous Event processing.
+
+Boundary:
+
+```text
+EVENT
+↓
+WORLD EVENT PROCESSOR
+↓
+ACTION / RESOLUTION / DOMAIN
+↓
+STATE VALIDATION
+↓
+PERSISTENCE
+↓
+VERIFY
+```
+
+World Event Processor does not own Time, State/History, Action structure, generic Resolution, domain mechanics, State Validation, or Persistence.
+
+### NPC / Faction Simulation
+
+`core/NPC_FACTION_SIMULATION.md`
+
+Canonical orchestration layer for autonomous NPC/Faction process eligibility, actor/process selection, context loading, invocation of NPC Behavior/Faction logic, autonomous action sequences, and reaction loops.
+
+Boundary:
+
+```text
+NPC BEHAVIOR & AGENCY → NPC decision
+FACTIONS → Faction structure/state/goals/relations
+NPC / FACTION SIMULATION → autonomous orchestration
+ACTION MODEL → Action representation
+RESOLUTION → generic result contract
+DOMAIN → domain outcome
+```
+
+No universal simulation tick, activity frequency, probability, priority score, or quantitative fallback is defined by v0.1.
 
 ### State Validation
 
@@ -294,6 +347,9 @@ Boundary:
 ```text
 NPC BEHAVIOR
 = decision / agency / action selection
+
+NPC / FACTION SIMULATION
+= autonomous orchestration
 
 ACTION MODEL
 = action representation
@@ -404,6 +460,12 @@ RELATIONSHIPS
 REPUTATION
 → reputation state / audience context / reputation formation and change
 
+WORLD EVENT PROCESSOR
+→ Event lifecycle / triggering / scheduling / processing / chaining / event orchestration
+
+NPC / FACTION SIMULATION
+→ autonomous NPC/Faction process orchestration
+
 ACTION MODEL
 → generic Action structure / lifecycle / action contract
 
@@ -447,7 +509,7 @@ SOURCE FETCH
 ↓
 CONTEXT VALIDATION
 ↓
-ACTION MODEL
+ACTION MODEL / EVENT PROCESSOR / AUTONOMOUS SIMULATION
 ↓
 RESOLUTION ARCHITECTURE
 ↓
@@ -460,9 +522,11 @@ PERSISTENCE
 VERIFY
 ```
 
-Domain ownership remains authoritative. The generic Action/Resolution layers do not replace domain systems.
-
 NPC-related processing additionally uses NPC Current State, NPC Knowledge, goals/motivations, relevant relationship/reputation context, constraints, NPC Behavior & Agency, and then the relevant resolution system.
+
+Event-related processing additionally uses Event context, trigger/eligibility information, World Event Processor, relevant Action/Resolution and domain system.
+
+NPC/Faction autonomous processing uses NPC/Faction Simulation, then NPC Behavior & Agency or Faction logic, followed by Action/Resolution and relevant domain system.
 
 Relationship, Reputation, and Legal processing continue through their respective canonical systems and then return to State Validation and Persistence.
 
@@ -477,6 +541,8 @@ Current Canon infrastructure:
 🟢 RUNTIME / TURN MODEL
 🟢 ACTION MODEL
 🟢 RESOLUTION ARCHITECTURE
+🟢 WORLD EVENT PROCESSOR
+🟢 NPC / FACTION SIMULATION
 🟢 STATE VALIDATION
 🟢 PERSISTENCE
 ```
@@ -505,6 +571,8 @@ Future systems remain undefined until separately designed, audited, canonized, i
 - Intent ≠ Action ≠ Result ≠ State Change.
 - Action validation does not guarantee success.
 - Domain-specific systems retain domain resolution ownership.
+- World Event Processor owns event orchestration, not domain mechanics.
+- NPC / Faction Simulation owns autonomous orchestration, not NPC decision-making or Faction structure.
 - No universal resolution formula is created by core infrastructure.
 - Failure, blocked, delayed, interrupted, and unresolved remain distinguishable.
 - Current State is the operational baseline.
@@ -516,6 +584,8 @@ Future systems remain undefined until separately designed, audited, canonized, i
 - History and provenance must remain traceable.
 - Unknown / Undefined must not be replaced by invented defaults.
 - Autonomous world changes require a valid basis.
+- Autonomous processing is not a random story generator.
+- No universal Event/NPC/Faction simulation tick, frequency, probability, or priority score exists in current Core v0.1.
 - Narrative is not evidence of State or Persistence.
 - AI GM must not claim persistence success without verification.
 - Validation failure, persistence failure, and verification failure remain distinct.
@@ -528,8 +598,6 @@ Future systems remain undefined until separately designed, audited, canonized, i
 Potential future domains remain intentionally undefined until needed:
 
 ```text
-WORLD EVENT PROCESSOR
-NPC / FACTION SIMULATION
 ITEMS / EQUIPMENT
 PROGRESSION
 QUEST / OBJECTIVES
