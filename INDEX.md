@@ -49,7 +49,8 @@ Eldoria-World/
 ├── systems/
 │   ├── TIME_AND_CALENDAR.md
 │   ├── HEALTH_AND_INJURY.md
-│   └── COMBAT.md
+│   ├── COMBAT.md
+│   └── TRAVEL_AND_MOVEMENT.md
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
@@ -254,6 +255,44 @@ STATE & HISTORY
 
 **Status:** System spesifik ketiga telah ditetapkan setelah full Canon dependency dan overlap audit. Combat menjadi canonical owner untuk combat/conflict resolution.
 
+### 4. Travel & Movement v0.1
+
+`systems/TRAVEL_AND_MOVEMENT.md`
+
+Canonical owner untuk **travel/movement process dan resolusi perpindahan actor melalui ruang/wilayah** Eldoria. Modul ini mencakup Travel State, actor/movement context, origin/destination validation, route/path, terrain/environment/obstacles, movement method/transport, travel duration integration, ongoing/paused/delayed/interrupted/diverted travel, group travel, pursuit/escape, encounter/hazard context, serta integrasi dengan Health & Injury, Economy, Creatures/Ecology, Combat, Supernatural/Magic, Politics, Time & Calendar, State/History, dan Runtime.
+
+Travel & Movement v0.1 **tidak** menetapkan movement speed, jarak universal, travel duration universal, terrain multiplier, stamina/exhaustion formula, hunger/thirst formula, encounter rate/table, hazard probability, mount/vehicle/ship speed, carrying capacity, travel cost, route-efficiency formula, teleportation/fast-travel rules, chase formula, escape threshold, atau mekanik numerik universal lain.
+
+Boundary utama:
+
+```text
+GEOGRAPHY
+= spatial facts / structure
+
+TRAVEL & MOVEMENT
+= movement process / resolution
+
+TIME & CALENDAR
+= temporal authority
+
+HEALTH & INJURY
+= health consequences
+
+ECONOMY
+= economic consequences
+
+CREATURES / ECOLOGY
+= ecological context
+
+COMBAT
+= combat/conflict resolution
+
+STATE & HISTORY
+= persistent state / provenance
+```
+
+**Status:** System spesifik keempat telah dibuat setelah gameplay-need, dependency, dan full Canon overlap audit. Travel & Movement menjadi canonical owner untuk proses travel/movement tanpa mengambil alih domain modul lain.
+
 ## State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
@@ -317,9 +356,11 @@ TIME & CALENDAR
 HEALTH & INJURY
 ↓
 COMBAT
+↓
+TRAVEL & MOVEMENT
 ```
 
-**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1, Health & Injury v0.1, dan Combat v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
+**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1, Health & Injury v0.1, Combat v0.1, dan Travel & Movement v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
 
 ## Canon Boundary
 
