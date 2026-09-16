@@ -130,6 +130,8 @@ Relationships berisi hubungan karakter dengan NPC, kelompok, organisasi, masyara
 
 Hubungan bukan sekadar label naratif. Jika suatu hubungan memengaruhi gameplay, kondisinya harus dapat direpresentasikan sebagai State dan memiliki dasar History bila diperlukan.
 
+Detail relationship state, lifecycle, formation, change, dan consequence mengikuti canonical `systems/RELATIONSHIPS.md`.
+
 ## 12. Starting State
 
 Starting State adalah snapshot resmi kondisi karakter ketika karakter memasuki gameplay.
@@ -254,12 +256,13 @@ Attributes
 Abilities / Skills
 Items / Equipment
 Economy / Currency
-Relationships
 Health / Conditions
 Supernatural / Magic
 Progression
 Organizations / Property
 Other Character Systems
 ```
+
+Relationships sudah menjadi canonical system #06 dan bukan lagi future extension dari Character Data Model.
 
 Setiap ekstensi harus memiliki aturan Canon sendiri dan tetap kompatibel dengan Core Rules, State, History, dan Runtime.
