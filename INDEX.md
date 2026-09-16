@@ -51,7 +51,8 @@ Eldoria-World/
 │   └── players/
 ├── world/
 │   ├── WORLD_FOUNDATION.md
-│   └── GEOGRAPHY.md
+│   ├── GEOGRAPHY.md
+│   └── CIVILIZATION.md
 ├── systems/
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
@@ -145,7 +146,15 @@ Modul ini menetapkan struktur geografis bertingkat, prinsip regional diversity, 
 
 Geography v0.1 belum menetapkan nama atau jumlah benua, wilayah, kota, desa, lokasi, peta final, batas politik, distribusi sumber daya spesifik, atau durasi perjalanan universal.
 
-## 13. Canon Development Order
+## 13. Civilization
+
+`world/CIVILIZATION.md` adalah **Official Canon** untuk kerangka bagaimana masyarakat dan peradaban Eldoria terbentuk, berkembang, berfungsi, dan berubah.
+
+Civilization v0.1 menetapkan framework untuk settlement development, urbanization, rural/urban communities, social organization, institutions, governance reference, technology/material culture, infrastructure, culture/daily life, knowledge/education, economic interface, hubungan antar-peoples, civilization change, world autonomy, data model, dan integrasi State/History.
+
+Modul ini **tidak** menetapkan daftar kingdom, negara, kota, desa, peoples/races, budaya spesifik, sistem politik, mata uang, teknologi universal, atau lore civilization tertentu. Detail yang belum ditetapkan tetap Unknown / Undefined.
+
+## 14. Canon Development Order
 
 World lore tidak dibuat sebagai daftar besar sekaligus. Fondasi menjadi dasar untuk pengembangan bertahap:
 
@@ -171,9 +180,9 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ```
 
-Urutan ini adalah arah pengembangan, bukan izin untuk menganggap seluruh bagian yang belum ditulis sebagai Canon.
+Pada tahap saat ini, **Civilization v0.1 telah ditetapkan** sebagai framework Canon. Urutan berikutnya adalah pengembangan Peoples / Races v0.1.
 
-## 14. Authority Boundary
+## 15. Authority Boundary
 
 ```text
 ADMIN
@@ -190,7 +199,7 @@ Player memiliki kebebasan menentukan keputusan karakter, tetapi tidak menentukan
 
 AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Player menjadi pemenang secara otomatis.
 
-## 15. Integrity Principles
+## 16. Integrity Principles
 
 - Intent ≠ Result.
 - Failure adalah hasil yang valid.
@@ -200,3 +209,4 @@ AI GM menjalankan simulasi berdasarkan Canon dan State, tetapi tidak mengubah Pl
 - History tidak dihapus atau ditimpa secara diam-diam.
 - Canon yang belum didefinisikan tidak boleh diada-adakan sebagai fakta.
 - Autonomous NPC, faction, event, dan world changes harus memiliki dasar aturan/data dan dapat ditelusuri.
+- Civilization harus tetap diperlakukan sebagai framework Canon sampai detail spesifik ditetapkan secara eksplisit.
