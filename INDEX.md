@@ -1,83 +1,114 @@
-# Eldoria World — Official Canon Index
+# Eldoria World — INDEX
 
-> **Repository:** `aesher-gg/Eldoria-World`  
-> **Branch:** `main`  
-> **Status:** Official Canon / Persistent World Source
+> **Official Entry Point for AI Game Master**
+> **Repository:** `aesher-gg/Eldoria-World`
+> **Branch:** `main`
+> **World:** Eldoria
+> **Genre:** Medieval Fantasy
 
-## Repository Authority
+---
+
+## 1. Repository Authority
 
 Repository ini adalah **Official Canon + Persistent State Source** Eldoria.
 
 ```text
+REPOSITORY
+   ↓
+OFFICIAL CANON
+   +
+PERSISTENT STATE
+```
+
+AI GM wajib menggunakan repository sebagai sumber utama untuk Canon dan State yang tersedia.
+
+Conversation / narrative response tidak otomatis menjadi Canon atau persistent State.
+
+---
+
+## 2. How to Use This INDEX
+
+INDEX adalah entry point navigasi, bukan seluruh World Database, bukan Character Save, dan bukan gameplay State.
+
+```text
 INDEX
-  ↓
+↓
 IDENTIFY RELEVANT MODULES / DATA
-  ↓
+↓
 FETCH SOURCE
-  ↓
+↓
 VALIDATE CONTEXT
-  ↓
+↓
 RUN SIMULATION
 ```
 
-`INDEX.md` berfungsi sebagai navigator. INDEX bukan database seluruh dunia, bukan Character Save, dan bukan gameplay state.
+AI GM tidak boleh menganggap informasi yang belum dimuat sebagai Canon yang telah diverifikasi.
 
-## Current Architecture
+---
+
+## 3. Core Architecture
 
 ```text
-Eldoria-World/
-├── INDEX.md
-├── README.md
-├── core/
-│   ├── CORE_RULES.md
-│   └── RUNTIME_TURN_MODEL.md
-├── characters/
-│   ├── players.md
-│   ├── CHARACTER_DATA_MODEL.md
-│   └── players/
-├── world/
-│   ├── WORLD_FOUNDATION.md
-│   ├── GEOGRAPHY.md
-│   ├── CIVILIZATION.md
-│   ├── PEOPLES_RACES.md
-│   ├── POLITICS.md
-│   ├── SUPERNATURAL_MAGIC.md
-│   ├── ECONOMY.md
-│   ├── CREATURES_ECOLOGY.md
-│   ├── FACTIONS.md
-│   └── OTHER_WORLD_SYSTEMS.md
-├── systems/
-│   ├── TIME_AND_CALENDAR.md
-│   ├── HEALTH_AND_INJURY.md
-│   ├── COMBAT.md
-│   └── TRAVEL_AND_MOVEMENT.md
-├── state/
-│   └── STATE_AND_HISTORY_MODEL.md
-└── history/
+CANON
+   ↓
+REGISTRY
+   ↓
+STATE
+   ↓
+RUNTIME
+   ↓
+INTERACTION
+   ↓
+PERSISTENCE
 ```
 
-## Core Runtime
+Authority:
+
+```text
+ADMIN
+  └── Repository / Canon
+
+AI GM
+  └── Simulation / Resolution / NPC / World / Events
+
+PLAYER
+  └── Character decisions / intent
+```
+
+---
+
+## 4. Core Modules
 
 ### Core Rules
 
 `core/CORE_RULES.md`
 
-Memuat prinsip fundamental Eldoria: Repository authority, Player agency, Intent ≠ Result, fair simulation, no plot armor, Canon/State/History, validation, knowledge boundaries, persistence integrity, dan batas pengembangan Canon.
+Canonical rules for:
+
+- Repository authority;
+- Player agency;
+- Intent ≠ Result;
+- fair simulation;
+- Canon / State / History;
+- State Change integrity;
+- knowledge boundaries;
+- world autonomy;
+- unknown / undefined handling;
+- persistence integrity;
+- runtime principles.
 
 ### Runtime Turn Model
 
 `core/RUNTIME_TURN_MODEL.md`
 
-Pipeline utama:
+Canonical runtime sequence:
 
 ```text
-BOOT / LOAD CONTEXT
+LOAD
 ↓
 READ CURRENT STATE
 ↓
-RECEIVE PLAYER MESSAGE
-↓
-PARSE
+PARSE PLAYER MESSAGE
 ↓
 IDENTIFY ACTION / INTENT
 ↓
@@ -91,285 +122,341 @@ STATE CHANGE
 ↓
 HISTORY
 ↓
-PERSISTENCE
+PERSIST
 ↓
 VERIFY
 ↓
 RESPONSE
 ```
 
-## Character Architecture
+---
+
+## 5. Character Modules
 
 ### Player Registry
 
 `characters/players.md`
 
-Registry resmi Player dan Character. Registry bukan gameplay save state.
+Official Player / Character registry.
+
+Important:
+
+- registry ≠ gameplay save;
+- character must be registered/approved before active play;
+- detailed character data belongs to individual character files.
 
 ### Character Data Model
 
 `characters/CHARACTER_DATA_MODEL.md`
 
-Struktur data Character, termasuk Identity, Background, Origin, Physical Profile, Attributes, Abilities, Equipment, Possessions, Relationships, Starting State, Current State, Conditions, History Reference, dan Metadata.
+Canonical structure for Character / NPC data model, including identity, background, origin, attributes, abilities, equipment, relationships, Starting State, Current State, conditions, and history references.
 
-## World Canon
+---
 
-### 1. World Foundation v0.1
+## 6. World Canon
+
+### World Foundation
 
 `world/WORLD_FOUNDATION.md`
 
-Menetapkan identitas Eldoria sebagai Medieval Fantasy persistent world yang luas, terbuka, otonom, dan berbasis konsekuensi.
+Core identity, scale, tone, player freedom, world autonomy, peoples/creatures distinction, technology, and supernatural boundary.
 
-Tema:
-
-> **Dunia yang hidup, Player yang bebas, dan cerita yang lahir dari konsekuensi.**
-
-### 2. Geography v0.1
+### Geography
 
 `world/GEOGRAPHY.md`
 
-Kerangka Geography: skala dunia, wilayah, terrain, water systems, climate/environment, resources, travel/connectivity, settlements, boundaries, mapping, knowledge boundary, dan progressive revelation.
+Canonical geographic structure, terrain, environment, resources, connectivity, settlements, barriers, mapping, and geographic knowledge boundaries.
 
-### 3. Civilization v0.1
+### Civilization
 
 `world/CIVILIZATION.md`
 
-Kerangka Civilization: settlement, urban/rural life, social organization, institutions, governance sebagai kategori konseptual, technology/material culture, infrastructure, culture/daily life, knowledge, production/exchange interface, dan perubahan peradaban.
+Canonical framework for settlement, urbanization, institutions, governance concepts, infrastructure, technology/material culture, culture, education, production/exchange interfaces, and civilization change.
 
-### 4. Peoples / Races v0.1
+### Peoples / Races
 
 `world/PEOPLES_RACES.md`
 
-Kerangka Peoples/Races, sapience/sentience, biology, adaptation, culture, language, social organization, population, migration, inter-peoples relations, serta batas antara Peoples, Monsters, dan Wildlife.
+Canonical framework for sentient peoples, biology, adaptation, culture, language, demography, relations, and distinction from monsters/wildlife.
 
-World Foundation tetap menetapkan Orc, Goblin, dan kelompok serupa sebagai monster.
-
-### 5. Politics v0.1
+### Politics
 
 `world/POLITICS.md`
 
-Kerangka Political Organization, Authority, Governance, Legitimacy, Territory/Jurisdiction, Sovereignty/Control, Law/Institutions, Leadership/Succession, Diplomacy, Conflict, Political Actors, Political Knowledge, Autonomy, dan persistence.
+Canonical owner for political organization, authority, governance, jurisdiction, sovereignty/control, law/institutions, leadership/succession, diplomacy, and political relations.
 
-Politics v0.1 **tidak** menetapkan daftar kerajaan, negara, penguasa, hukum, batas wilayah, atau sistem pemerintahan universal.
-
-### 6. Supernatural / Magic v0.1
+### Supernatural / Magic
 
 `world/SUPERNATURAL_MAGIC.md`
 
-Kerangka resmi Supernatural / Magic.
+Canonical framework for supernatural ontology, sources, access, manifestation, rules, limits, costs, risks, failure, learning, magical items, detection/countermeasures, and supernatural interaction.
 
-Prinsip utama:
-
-- Supernatural umum dan diakui di Eldoria.
-- Tidak semua individu dapat menggunakan magic.
-- Supernatural tidak otomatis sama dengan magic.
-- Magical potential ≠ skill ≠ mastery.
-- Magic harus memiliki basis, kondisi, batas, dan konsekuensi yang sesuai.
-- Magic tidak otomatis menjadi pengecualian terhadap Canon.
-- Efek supernatural persisten mengikuti State & History Model.
-- Resolusi magic mengikuti Runtime Turn Model.
-
-V0.1 masih merupakan **framework**, bukan spell list atau sistem mekanik final.
-
-Belum ditetapkan secara universal: mana pool, magic level/tier, final magic schools, spell list, cosmology/source final, named magical entities, artifacts, magical races, universal cost, atau progression system.
-
-### 7. Economy v0.1
+### Economy
 
 `world/ECONOMY.md`
 
-Kerangka resmi Economy Eldoria: economic actors, needs/consumption, production, labor/occupation, resources, goods/services, property/ownership, exchange/trade, markets, currency/money, prices/valuation, supply/demand, wealth/distribution, credit/debt/finance, taxation/public revenue, logistics, infrastructure, regional economies, political/legal economy, Peoples/Races, supernatural effects, economic events/shocks, economic autonomy, character integration, State/History, runtime, data model, progressive development, dan integrity rules.
+Canonical owner for economic actors, production, labor, resources, goods/services, ownership, exchange, markets, currency, prices, supply/demand, wealth, credit/debt, taxation, logistics, and economic change.
 
-Economy v0.1 **tidak** menetapkan nama atau jumlah mata uang, kurs, harga, upah, pajak universal, sistem perbankan universal, daftar komoditas lengkap, pasar atau merchant tertentu, wealth tier universal, statistik ekonomi universal, atau formula harga/supply-demand universal.
-
-### 8. Creatures / Ecology v0.1
+### Creatures / Ecology
 
 `world/CREATURES_ECOLOGY.md`
 
-Kerangka resmi Creatures / Ecology Eldoria sebagai fondasi untuk **Wildlife → Monsters → Habitat → Food Chain → Population → Behavior → Ecosystem → Creature–Environment Interaction → Monster Ecology → State/History → Dynamic World**.
+Canonical owner for wildlife, monsters, habitat, food webs, populations, lifecycle, behavior, territoriality, ecosystem interaction, monster ecology, domestication/taming context, and ecological processes.
 
-Modul mencakup klasifikasi creature, Wildlife, Monsters, habitat, food/nutrition, food web, population, lifecycle/reproduction, behavior, territoriality/range, ecosystem, creature-environment interaction, monster ecology, creature-people interaction, domestication/taming/captivity, population dynamics, ecological events/shocks, ecological autonomy, data models, State/History, runtime, knowledge boundary, progressive development, canon boundary, dependencies, dan integrity rules.
-
-V0.1 **tidak** menetapkan daftar creature/monster/wildlife, biology universal, habitat spesifik, population count, stat block, loot table, taming formula, atau formula ecological simulation universal.
-
-### 9. Factions v0.1
+### Factions
 
 `world/FACTIONS.md`
 
-Kerangka resmi Factions Eldoria: definisi dan identitas faction, formation, tipe konseptual, membership/recruitment, leadership/internal structure, goals/interests/agendas, resources/capabilities, influence/power, geographic presence, internal politics, alliances/rivalries/external relations, reputation/recognition/legitimacy, economy/funding, hubungan dengan Peoples/Races, Civilization, Politics, Supernatural/Magic, Character integration, NPC/faction autonomy, faction events/change, State/History, runtime/resolution, knowledge boundary, data models, progressive development, canon boundary, dependencies, dan integrity rules.
+Canonical owner for faction formation, membership, leadership, goals, resources, influence, presence, internal politics, alliances/rivalries, reputation/recognition/legitimacy, and faction relations.
 
-Factions dibedakan dari Political Entity, Civilization, People/Race, Institution, Business, dan Individual. Membership, tujuan, pengaruh, sumber daya, serta hubungan faction harus memiliki dasar yang valid dan tidak boleh diasumsikan hanya untuk kebutuhan narasi.
-
-### 10. Other World Systems v0.1
+### Other World Systems
 
 `world/OTHER_WORLD_SYSTEMS.md`
 
-Kerangka arsitektur untuk world systems yang belum memiliki canonical module khusus. Modul ini menetapkan prinsip **domain boundary, canonical ownership, dependency, runtime integration, State/History integration, autonomous processing, inter-system interaction, knowledge boundary, time dependency, formula discipline, data model, module creation criteria, progressive development, dan integrity**.
+Architecture framework for identifying and creating future world systems without duplicating canonical ownership.
 
-Other World Systems **tidak** menetapkan mekanik final seperti combat, health/injury, kalender, travel formula, crafting, progression, quests, events, NPC behavior, relationships/reputation, religion, legal code, settlement management, diplomacy/war, atau formula numerik universal. Kategori tersebut hanya merupakan area potensial yang dapat dikembangkan sebagai modul tersendiri setelah audit dan penetapan Canon.
+---
 
-## Systems
+## 7. World Systems
 
-### 1. Time & Calendar v0.1
+### System #01 — Time & Calendar
 
 `systems/TIME_AND_CALENDAR.md`
 
-Canonical temporal authority Eldoria. Menetapkan representasi World Time, Calendar, Duration, Timestamp, Temporal State, time advancement, hubungan Turn dengan waktu, sequential/concurrent processes, temporal ordering, temporal uncertainty, calendar conversion, serta integrasi Runtime, State, History, Character, dan world systems lain.
+Canonical temporal authority for World Time, Calendar, Duration, Timestamp, Temporal State, Time Advancement, turn-time integration, temporal ordering, and temporal uncertainty.
 
-Time & Calendar v0.1 **tidak** menetapkan nama/jumlah kalender, era, jumlah hari/bulan/tahun, nama hari/bulan, musim universal, durasi Turn, travel/combat/crafting/sleep duration, atau formula temporal universal. Detail tersebut harus ditetapkan secara eksplisit oleh Canon yang berwenang.
-
-**Status:** System spesifik pertama telah ditetapkan. Time & Calendar menjadi canonical owner untuk temporal representation dan calendar rules yang telah didefinisikan.
-
-### 2. Health & Injury v0.1
+### System #02 — Health & Injury
 
 `systems/HEALTH_AND_INJURY.md`
 
-Canonical owner untuk representasi health-state dan injury-state Eldoria, termasuk injury, wounds, conditions, symptoms, functional impact, recovery, treatment, aggravation, complications, incapacitation, death/irreversible outcomes, serta integrasi dengan Time & Calendar, Character, State/History, Runtime, Combat, Creatures, Supernatural/Magic, Environment, dan Travel.
+Canonical owner for health-state and injury-state representation, conditions, wounds, recovery, treatment, complications, incapacitation, death/irreversible outcomes, and health consequences.
 
-Health & Injury v0.1 **tidak** menetapkan HP universal, damage formula, armor mitigation, severity scale universal, healing rate, treatment success rate, death threshold, disease list, anatomy universal, resurrection rules, atau formula kesehatan numerik lain. Detail tersebut harus ditetapkan secara eksplisit oleh Canon yang berwenang.
-
-**Status:** System spesifik kedua telah ditetapkan setelah gameplay-need, dependency, dan overlap audit. Health & Injury menjadi canonical owner untuk health/injury representation dan health-state lifecycle yang telah didefinisikan.
-
-### 3. Combat v0.1
+### System #03 — Combat
 
 `systems/COMBAT.md`
 
-Canonical owner untuk **combat/conflict resolution** Eldoria. Menetapkan framework Combat State, participants, intent/objectives, action model, validation, position/context, initiative/order sebagai konsep yang bergantung pada mekanisme valid, attack/defense resolution, maneuver, retreat/escape, surrender/capture, disengagement, combat end conditions, serta integrasi dengan Health & Injury, Time & Calendar, Character, Creatures/Ecology, Supernatural/Magic, State/History, Geography, Politics, Economy, Factions, dan Runtime.
+Canonical owner for combat/conflict resolution, participants, actions, validation, position/context, attack/defense resolution, maneuvers, retreat/escape/pursuit, surrender/capture, combat end conditions, and combat consequences.
 
-Combat v0.1 **tidak** menetapkan HP universal, attack/defense formula, damage formula, armor mitigation, initiative formula, critical-hit/dodge percentage, weapon damage table, movement speed, range bands, action points, fixed combat rounds, combat-round duration, level/tier/rank, universal morale formula, universal escape/surrender threshold, atau mekanik numerik universal lain.
-
-Boundary utama:
-
-```text
-COMBAT
-= combat/conflict resolution
-
-HEALTH & INJURY
-= health/injury state and consequences
-
-TIME & CALENDAR
-= temporal authority
-
-STATE & HISTORY
-= state/provenance/persistence structure
-```
-
-**Status:** System spesifik ketiga telah ditetapkan setelah full Canon dependency dan overlap audit. Combat menjadi canonical owner untuk combat/conflict resolution.
-
-### 4. Travel & Movement v0.1
+### System #04 — Travel & Movement
 
 `systems/TRAVEL_AND_MOVEMENT.md`
 
-Canonical owner untuk **travel/movement process dan resolusi perpindahan actor melalui ruang/wilayah** Eldoria. Modul ini mencakup Travel State, actor/movement context, origin/destination validation, route/path, terrain/environment/obstacles, movement method/transport, travel duration integration, ongoing/paused/delayed/interrupted/diverted travel, group travel, pursuit/escape, encounter/hazard context, serta integrasi dengan Health & Injury, Economy, Creatures/Ecology, Combat, Supernatural/Magic, Politics, Time & Calendar, State/History, dan Runtime.
+Canonical owner for movement/travel process and resolution, while Geography remains owner of geographic facts and Time remains temporal authority.
 
-Travel & Movement v0.1 **tidak** menetapkan movement speed, jarak universal, travel duration universal, terrain multiplier, stamina/exhaustion formula, hunger/thirst formula, encounter rate/table, hazard probability, mount/vehicle/ship speed, carrying capacity, travel cost, route-efficiency formula, teleportation/fast-travel rules, chase formula, escape threshold, atau mekanik numerik universal lain.
+### System #05 — NPC Behavior & Agency
 
-Boundary utama:
+`systems/NPC_BEHAVIOR_AND_AGENCY.md`
+
+Canonical owner for:
+
+- NPC decision-making;
+- NPC agency;
+- motivation and goals;
+- priorities and decision context;
+- perception and available information;
+- beliefs and uncertainty;
+- action candidate selection;
+- autonomous behavior;
+- plans and reactions;
+- NPC knowledge updates;
+- NPC decision integration with other world systems.
+
+Boundary:
 
 ```text
-GEOGRAPHY
-= spatial facts / structure
+NPC BEHAVIOR
+= decision / agency / action selection
 
-TRAVEL & MOVEMENT
-= movement process / resolution
-
-TIME & CALENDAR
-= temporal authority
-
-HEALTH & INJURY
-= health consequences
-
-ECONOMY
-= economic consequences
-
-CREATURES / ECOLOGY
-= ecological context
-
-COMBAT
-= combat/conflict resolution
-
-STATE & HISTORY
-= persistent state / provenance
+OTHER SYSTEMS
+= domain-specific action resolution
 ```
 
-**Status:** System spesifik keempat telah dibuat setelah gameplay-need, dependency, dan full Canon overlap audit. Travel & Movement menjadi canonical owner untuk proses travel/movement tanpa mengambil alih domain modul lain.
+NPC Behavior does not replace Character Data, Factions, Politics, Economy, Creatures/Ecology, Travel, Combat, Health, Time, or State/History authority.
 
-## State & History
+No universal NPC numerical formula, decision probability, personality score, simulation tick, behavior frequency, or quantitative fallback is defined by v0.1.
+
+---
+
+## 8. State & History
 
 `state/STATE_AND_HISTORY_MODEL.md`
 
-Menetapkan hubungan:
+Canonical structure for:
+
+- Current State;
+- State Snapshot;
+- State Change;
+- provenance;
+- History;
+- world state;
+- character state;
+- NPC / faction / location state;
+- correction records;
+- persistence integrity.
+
+---
+
+## 9. History
+
+`history/`
+
+Persistent event/history records are stored here as the repository develops.
+
+History must preserve provenance and must not become an implicit source of new rules.
+
+---
+
+## 10. Canonical Ownership Map
 
 ```text
-CANON
-├── aturan / fakta resmi
-STATE
-├── kondisi yang berlaku sekarang
-HISTORY
-└── rekam kejadian / perubahan
+WORLD FOUNDATION
+→ world identity / fundamental constraints
+
+GEOGRAPHY
+→ geographic facts / structure
+
+CIVILIZATION
+→ settlements / institutions / civilization processes
+
+PEOPLES / RACES
+→ sentient peoples / biology / culture / demography
+
+POLITICS
+→ authority / governance / jurisdiction / political relations
+
+SUPERNATURAL / MAGIC
+→ supernatural / magical domain
+
+ECONOMY
+→ economic processes / exchange / resources / markets
+
+CREATURES / ECOLOGY
+→ creature biology / ecology / ecological behavior
+
+FACTIONS
+→ organized groups / membership / faction relations
+
+TIME & CALENDAR
+→ temporal authority
+
+HEALTH & INJURY
+→ health / injury state and consequences
+
+COMBAT
+→ combat / conflict resolution
+
+TRAVEL & MOVEMENT
+→ movement / travel resolution
+
+NPC BEHAVIOR & AGENCY
+→ sentient NPC decision-making / agency / action selection
+
+STATE & HISTORY
+→ state / provenance / persistence
 ```
 
-State Change yang persisten harus memiliki Cause/Origin/Source yang valid dan dapat diverifikasi.
+Principle:
 
-## Module Loading Principle
+```text
+ONE CANONICAL OWNER
+        ↓
+CLEAR DEPENDENCIES
+        ↓
+NO SILENT DUPLICATION
+```
 
-AI GM tidak perlu memuat seluruh repository untuk setiap tindakan. Gunakan INDEX untuk menentukan modul yang relevan, lalu fetch sumber resmi sebelum resolusi.
+---
+
+## 11. Runtime Loading Principle
+
+AI GM should not blindly load every file for every action.
+
+Use:
 
 ```text
 INDEX
 ↓
-RELEVANT MODULES / DATA
+RELEVANT MODULE IDENTIFICATION
 ↓
-FETCH
+SOURCE FETCH
 ↓
-VALIDATE
+CONTEXT VALIDATION
 ↓
-RESOLVE
+ACTION / EVENT RESOLUTION
 ```
 
-## Canon Development Order
-
-Arsitektur World Canon inti telah menyelesaikan rangkaian:
+NPC-related processing should additionally use:
 
 ```text
-WORLD FOUNDATION
+NPC CURRENT STATE
 ↓
-GEOGRAPHY
+NPC KNOWLEDGE
 ↓
-CIVILIZATION
+GOALS / MOTIVATIONS
 ↓
-PEOPLES / RACES
+CONTEXT / CONSTRAINTS
 ↓
-POLITICS
+NPC BEHAVIOR & AGENCY
 ↓
-SUPERNATURAL / MAGIC
-↓
-ECONOMY
-↓
-CREATURES / ECOLOGY
-↓
-FACTIONS
-↓
-OTHER WORLD SYSTEMS
-↓
-TIME & CALENDAR
-↓
-HEALTH & INJURY
-↓
-COMBAT
-↓
-TRAVEL & MOVEMENT
+RELEVANT RESOLUTION SYSTEM
 ```
 
-**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1, Health & Injury v0.1, Combat v0.1, dan Travel & Movement v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
+---
 
-## Canon Boundary
+## 12. Development Status
 
-Jika suatu detail belum didefinisikan dalam Canon resmi, perlakukan sebagai `Undefined / Unknown`.
+Current Canon systems:
 
 ```text
-UNDEFINED CANON
-≠
-PERMISSION TO INVENT
+🟢 #01 TIME & CALENDAR
+🟢 #02 HEALTH & INJURY
+🟢 #03 COMBAT
+🟢 #04 TRAVEL & MOVEMENT
+🟢 #05 NPC BEHAVIOR & AGENCY
 ```
 
-Specific world lore, mechanics, entities, locations, laws, cultures, magic systems, economies, creatures, factions, dan rules hanya menjadi Canon setelah ditetapkan secara resmi melalui Repository.
+Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
+
+Potential future domains listed by architecture framework are not automatically Canon systems.
+
+---
+
+## 13. Integrity Rules
+
+- Repository is the Official Canon + Persistent State Source.
+- Do not invent undefined Canon.
+- Do not convert Unknown / Undefined into fallback values.
+- Do not duplicate canonical ownership.
+- Do not treat narrative as automatic Canon or State.
+- Intent ≠ Result ≠ State Change.
+- Player agency must be preserved.
+- NPC agency must be grounded in valid context.
+- NPC Knowledge ≠ Player Knowledge ≠ World Canon.
+- Autonomous processing requires a valid basis.
+- System-specific resolution must use the canonical owner.
+- Persistent State Change requires validation and provenance.
+- Persistence must be verified before being claimed.
+
+---
+
+## 14. Future System Selection
+
+There is no mandatory order for all future systems.
+
+Selection should follow:
+
+```text
+IDENTIFY WORLD NEED
+↓
+CHECK EXISTING CANON OWNER
+↓
+AUDIT OVERLAP
+↓
+DEFINE NEW SYSTEM IF NECESSARY
+↓
+INTEGRATE
+↓
+VERIFY
+```
+
+A future system should only be created when its domain, rules, data model, lifecycle, runtime resolution, dependencies, or integrity requirements justify a separate canonical owner.
