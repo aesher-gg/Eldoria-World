@@ -47,7 +47,8 @@ Eldoria-World/
 │   ├── FACTIONS.md
 │   └── OTHER_WORLD_SYSTEMS.md
 ├── systems/
-│   └── TIME_AND_CALENDAR.md
+│   ├── TIME_AND_CALENDAR.md
+│   └── HEALTH_AND_INJURY.md
 ├── state/
 │   └── STATE_AND_HISTORY_MODEL.md
 └── history/
@@ -194,8 +195,6 @@ V0.1 **tidak** menetapkan daftar creature/monster/wildlife, biology universal, h
 
 Kerangka resmi Factions Eldoria: definisi dan identitas faction, formation, tipe konseptual, membership/recruitment, leadership/internal structure, goals/interests/agendas, resources/capabilities, influence/power, geographic presence, internal politics, alliances/rivalries/external relations, reputation/recognition/legitimacy, economy/funding, hubungan dengan Peoples/Races, Civilization, Politics, Supernatural/Magic, Character integration, NPC/faction autonomy, faction events/change, State/History, runtime/resolution, knowledge boundary, data models, progressive development, canon boundary, dependencies, dan integrity rules.
 
-Factions v0.1 **tidak** menetapkan daftar faction, nama, pemimpin, anggota, agenda, markas, wilayah, rank universal, membership requirement universal, loyalty/reputation/influence/strength formula, recruitment formula, faction economy formula, relationship formula, atau sejarah/event faction tertentu.
-
 Factions dibedakan dari Political Entity, Civilization, People/Race, Institution, Business, dan Individual. Membership, tujuan, pengaruh, sumber daya, serta hubungan faction harus memiliki dasar yang valid dan tidak boleh diasumsikan hanya untuk kebutuhan narasi.
 
 ### 10. Other World Systems v0.1
@@ -217,6 +216,16 @@ Canonical temporal authority Eldoria. Menetapkan representasi World Time, Calend
 Time & Calendar v0.1 **tidak** menetapkan nama/jumlah kalender, era, jumlah hari/bulan/tahun, nama hari/bulan, musim universal, durasi Turn, travel/combat/crafting/sleep duration, atau formula temporal universal. Detail tersebut harus ditetapkan secara eksplisit oleh Canon yang berwenang.
 
 **Status:** System spesifik pertama telah ditetapkan. Time & Calendar menjadi canonical owner untuk temporal representation dan calendar rules yang telah didefinisikan.
+
+### 2. Health & Injury v0.1
+
+`systems/HEALTH_AND_INJURY.md`
+
+Canonical owner untuk representasi health-state dan injury-state Eldoria, termasuk injury, wounds, conditions, symptoms, functional impact, recovery, treatment, aggravation, complications, incapacitation, death/irreversible outcomes, serta integrasi dengan Time & Calendar, Character, State/History, Runtime, Combat, Creatures, Supernatural/Magic, Environment, dan Travel.
+
+Health & Injury v0.1 **tidak** menetapkan HP universal, damage formula, armor mitigation, severity scale universal, healing rate, treatment success rate, death threshold, disease list, anatomy universal, resurrection rules, atau formula kesehatan numerik lain. Detail tersebut harus ditetapkan secara eksplisit oleh Canon yang berwenang.
+
+**Status:** System spesifik kedua telah ditetapkan setelah gameplay-need, dependency, dan overlap audit. Health & Injury menjadi canonical owner untuk health/injury representation dan health-state lifecycle yang telah didefinisikan.
 
 ## State & History
 
@@ -277,9 +286,11 @@ FACTIONS
 OTHER WORLD SYSTEMS
 ↓
 TIME & CALENDAR
+↓
+HEALTH & INJURY
 ```
 
-**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. System spesifik pertama, Time & Calendar v0.1, telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
+**Status:** Other World Systems v0.1 telah ditetapkan sebagai architecture framework. Time & Calendar v0.1 dan Health & Injury v0.1 telah dibuat setelah dependency dan overlap audit. Sistem berikutnya harus dipilih berdasarkan kebutuhan gameplay, dependency, dan audit Canon; tidak ada urutan wajib untuk semua system berikutnya.
 
 ## Canon Boundary
 
