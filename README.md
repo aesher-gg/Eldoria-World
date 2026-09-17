@@ -21,7 +21,7 @@ Mengendalikan keputusan, tindakan, dan intent karakter.
 Memelihara Repository, Canon, registrasi karakter, validasi, arsitektur, dan perubahan resmi dunia.
 
 ### AI GM
-Membaca Canon dan State, menjalankan simulasi, menyelesaikan action, mengendalikan NPC/faction/event, menghitung konsekuensi, dan menghasilkan narasi.
+Membaca Canon dan State, menjalankan simulasi, mengorkestrasi proses event dan autonomous NPC/faction, menyelesaikan action melalui system yang relevan, menghitung konsekuensi, dan menghasilkan narasi.
 
 ### Repository
 Berfungsi sebagai **Official Canon + Persistent State Source**.
@@ -95,12 +95,16 @@ Perubahan penting harus dapat ditelusuri melalui Origin/Source.
 Runtime menggunakan prinsip umum:
 
 ```text
-LOAD → READ STATE → PARSE → VALIDATE → RESOLVE
+LOAD → READ STATE → PARSE
+→ ROUTE TO ACTION / EVENT / AUTONOMOUS PROCESS
+→ VALIDATE → RESOLVE / PROCESS
 → CONSEQUENCES → STATE CHANGE → VALIDATE
-→ APPLY → HISTORY → PERSIST → RESPONSE
+→ APPLY → HISTORY → PERSIST → VERIFY → RESPONSE
 ```
 
-Intent tidak sama dengan hasil. Action dapat berhasil, gagal, diblokir, atau terinterupsi.
+`World Event Processor` mengorkestrasi lifecycle dan processing Event. `NPC/Faction Simulation` mengorkestrasi evaluasi dan proses autonomous NPC/Faction. NPC Behavior/Factions tetap menjadi pemilik decision dan domain masing-masing; Action Model, Resolution Architecture, domain systems, State Validation, Persistence, dan Time & Calendar tetap menjalankan authority masing-masing.
+
+Intent tidak sama dengan hasil. Action dapat berhasil, gagal, diblokir, tertunda, atau terinterupsi. Tidak semua Event harus menjadi Action, dan autonomous world processing tidak berarti setiap NPC harus disimulasikan pada setiap Turn.
 
 ## World Foundation
 
