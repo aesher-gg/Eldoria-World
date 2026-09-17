@@ -304,6 +304,24 @@ Equipment pada v0.1 adalah context / State penggunaan Item, bukan entity terpisa
 
 V0.1 tidak menetapkan universal item damage, armor value, weight, durability formula, rarity, quality tier, inventory slot, carrying-capacity formula, item price, magical power, loot table, atau crafting recipe.
 
+### System — Progression
+
+`systems/PROGRESSION.md`
+
+Canonical owner untuk perubahan capability Character atau entity yang valid dari waktu ke waktu, termasuk Attribute Development, Ability Acquisition, Ability Development, dan Capability Change.
+
+Progression menggunakan training, practice, experience, learning, teaching, observation, discovery, dan proses valid lain sebagai mechanism/input/context tanpa menetapkan sistem XP, level, skill point, attribute point, class, tier, rank, atau formula advancement universal.
+
+Boundary:
+
+```text
+CAPABILITY DEFINITION
+≠
+CAPABILITY PROGRESSION
+```
+
+Progression tidak mengambil alih Character structure, Action, generic Resolution, Combat, Supernatural / Magic, NPC decision-making, Items / Equipment, State & History, Time, State Validation, atau Persistence.
+
 ---
 
 ## 8. State & History
@@ -381,6 +399,9 @@ REPUTATION
 ITEMS / EQUIPMENT
 → item identity / item state / equipment context / item lifecycle
 
+PROGRESSION
+→ capability development / acquisition / change
+
 WORLD EVENT PROCESSOR
 → Event lifecycle / triggering / scheduling / processing / chaining / event orchestration
 
@@ -445,6 +466,8 @@ VERIFY
 
 Jika proses melibatkan Item / Equipment, `systems/ITEMS_EQUIPMENT.md` wajib diambil bersama Character Data Model dan domain lain yang relevan.
 
+Jika proses melibatkan capability acquisition/development/change, `systems/PROGRESSION.md` wajib diambil bersama Character Data Model, Current State, dan domain/source yang relevan.
+
 ---
 
 ## 12. Development Status
@@ -474,6 +497,7 @@ Current Canon systems:
 🟢 #07 REPUTATION
 🟢 #08 LAW / LEGAL PROCEDURES
 🟢 #09 ITEMS / EQUIPMENT
+🟢 PROGRESSION
 ```
 
 Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
@@ -507,6 +531,8 @@ Future systems remain undefined until separately designed, audited, canonized, i
 - Validation failure, persistence failure, and verification failure remain distinct.
 - Conflicts must not be silently resolved.
 - Item semantics belong to Items / Equipment; economic, combat, travel, health, magic, State, and persistence semantics remain with their respective owners.
+- Progression owns capability development/acquisition/change without taking ownership of capability definitions or domain resolution.
+- Progression does not introduce universal XP, level, skill point, attribute point, class, tier, rank, or advancement formulas.
 
 ---
 
@@ -515,7 +541,6 @@ Future systems remain undefined until separately designed, audited, canonized, i
 Potential future domains remain intentionally undefined until needed:
 
 ```text
-PROGRESSION
 QUEST / OBJECTIVES
 CRAFTING
 PROPERTY / SETTLEMENT MANAGEMENT
