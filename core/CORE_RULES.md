@@ -181,20 +181,23 @@ Alur konseptual minimum:
 ```text
 1. BOOT / LOAD CONTEXT
 2. READ CURRENT STATE
-3. RECEIVE PLAYER MESSAGE
-4. PARSE MESSAGE
-5. IDENTIFY ACTION / INTENT
-6. VALIDATE
-7. RESOLVE
+3. RECEIVE PLAYER MESSAGE / WORLD PROCESS
+4. PARSE / IDENTIFY PROCESS
+5. ROUTE TO ACTION / EVENT / AUTONOMOUS ORCHESTRATION
+6. VALIDATE RELEVANT PROCESS / ACTION
+7. RESOLVE OR PROCESS EVENT
 8. CALCULATE CONSEQUENCES
 9. GENERATE STATE CHANGES
 10. VALIDATE STATE CHANGES
 11. APPLY STATE
 12. CREATE HISTORY
 13. PERSIST
-14. GENERATE RESPONSE
-15. END TURN
+14. VERIFY
+15. GENERATE RESPONSE / NEXT PROCESS
+16. END TURN / PROCESS
 ```
+
+Untuk Event atau autonomous process, tidak setiap tahap Action berlaku secara identik. `WORLD_EVENT_PROCESSOR` dan `NPC_FACTION_SIMULATION` mengorkestrasi jalur yang relevan sebelum Action/Resolution/domain processing bila diperlukan.
 
 Narrative adalah hasil dari proses tersebut, bukan sumber kebenaran State.
 
@@ -207,7 +210,7 @@ CHARACTER VALIDATION
 ↓
 STATE VALIDATION
 ↓
-ACTION VALIDATION
+ACTION / PROCESS VALIDATION
 ↓
 STATE CHANGE VALIDATION
 ↓
@@ -288,7 +291,7 @@ Setelah perubahan penting diterapkan, State dan History harus tetap konsisten.
 
 Core Rules v0.1 sengaja bersifat fundamental dan tidak memuat lore rinci.
 
-Pengembangan berikutnya dilakukan secara modular:
+Pengembangan arsitektur dan domain dilakukan secara modular:
 
 ```text
 CORE RULES
@@ -298,6 +301,14 @@ CHARACTER MODEL
 STATE / HISTORY MODEL
 ↓
 RUNTIME MODEL
+↓
+ACTION MODEL
+↓
+RESOLUTION ARCHITECTURE
+↓
+WORLD EVENT PROCESSOR
+↓
+NPC / FACTION SIMULATION
 ↓
 WORLD FOUNDATION
 ↓
@@ -317,7 +328,13 @@ CREATURES / ECOLOGY
 ↓
 FACTIONS
 ↓
-OTHER SYSTEMS
+SYSTEMS
+↓
+STATE VALIDATION
+↓
+PERSISTENCE
 ```
+
+Urutan di atas adalah dependency/orchestration guide, bukan urutan wajib implementasi atau runtime execution tunggal. `STATE VALIDATION` dan `PERSISTENCE` tetap merupakan canonical integrity/save boundaries yang digunakan setelah proposed State Changes dari jalur yang relevan.
 
 Modul berikutnya tidak boleh mengubah Core Rules secara diam-diam. Jika ada kebutuhan yang bertentangan atau membutuhkan pengecualian, perubahan harus dibuat secara eksplisit sebagai perubahan Canon.
