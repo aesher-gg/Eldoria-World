@@ -137,36 +137,6 @@ Canonical rules for repository authority, Player agency, Intent ≠ Result, fair
 
 Canonical one-Player-Message-per-Turn runtime pipeline, termasuk jalur autonomous Event dan NPC/Faction processing.
 
-```text
-LOAD
-↓
-CURRENT STATE
-↓
-PLAYER MESSAGE / WORLD PROCESS
-↓
-INTENT / EVENT / AUTONOMOUS PROCESS
-↓
-ACTION VALIDATION
-↓
-RESOLUTION / EVENT ORCHESTRATION
-↓
-RESULT
-↓
-CONSEQUENCES
-↓
-STATE CHANGE
-↓
-STATE VALIDATION
-↓
-HISTORY
-↓
-PERSISTENCE
-↓
-VERIFY
-↓
-RESPONSE / NEXT PROCESS
-```
-
 ### Action Model
 
 `core/ACTION_MODEL.md`
@@ -187,64 +157,17 @@ Action Model does not own NPC decision-making, domain mechanics, State semantics
 
 Canonical generic resolution contract for Resolution Request, domain routing, Resolution Result, outcome status, consequence handoff, temporal result, provenance, and State Change handoff.
 
-Boundary:
-
-```text
-ACTION / PROCESS
-↓
-RESOLUTION REQUEST
-↓
-RELEVANT DOMAIN RESOLUTION
-↓
-RESULT
-↓
-CONSEQUENCES
-```
-
-Resolution Architecture does not define a universal gameplay formula, probability, multiplier, score, threshold, damage formula, or difficulty formula.
-
 ### World Event Processor
 
 `core/WORLD_EVENT_PROCESSOR.md`
 
 Canonical orchestration layer for Event lifecycle, eligibility, triggers, scheduling when required, processing, event chaining, domain handoff, consequences, and autonomous Event processing.
 
-Boundary:
-
-```text
-EVENT
-↓
-WORLD EVENT PROCESSOR
-↓
-ACTION / RESOLUTION / DOMAIN
-↓
-STATE VALIDATION
-↓
-PERSISTENCE
-↓
-VERIFY
-```
-
-World Event Processor does not own Time, State/History, Action structure, generic Resolution, domain mechanics, State Validation, or Persistence.
-
 ### NPC / Faction Simulation
 
 `core/NPC_FACTION_SIMULATION.md`
 
 Canonical orchestration layer for autonomous NPC/Faction process eligibility, actor/process selection, context loading, invocation of NPC Behavior/Faction logic, autonomous action sequences, and reaction loops.
-
-Boundary:
-
-```text
-NPC BEHAVIOR & AGENCY → NPC decision
-FACTIONS → Faction structure/state/goals/relations
-NPC / FACTION SIMULATION → autonomous orchestration
-ACTION MODEL → Action representation
-RESOLUTION → generic result contract
-DOMAIN → domain outcome
-```
-
-No universal simulation tick, activity frequency, probability, priority score, or quantitative fallback is defined by v0.1.
 
 ### State Validation
 
@@ -306,8 +229,6 @@ FACTIONS → organized groups / membership / faction relations
 OTHER WORLD SYSTEMS → future-system architecture / ownership discipline
 ```
 
-World modules remain frameworks where their Canon has not yet defined specific names, numbers, formulas, laws, mechanics, or universal defaults.
-
 ---
 
 ## 7. World Systems
@@ -342,24 +263,6 @@ Canonical owner for movement/travel process and resolution. Geography remains ow
 
 Canonical owner for NPC decision-making, agency, motivation, goals, priorities, perception, available information, beliefs/uncertainty, action selection, autonomous behavior, plans, reactions, and knowledge updates.
 
-Boundary:
-
-```text
-NPC BEHAVIOR
-= decision / agency / action selection
-
-NPC / FACTION SIMULATION
-= autonomous orchestration
-
-ACTION MODEL
-= action representation
-
-DOMAIN SYSTEMS
-= domain-specific action resolution
-```
-
-No universal NPC decision formula, probability, personality score, simulation tick, or quantitative fallback is defined by v0.1.
-
 ### System #06 — Relationships
 
 `systems/RELATIONSHIPS.md`
@@ -378,13 +281,28 @@ Canonical owner for reputation state, audience/context, reputation formation/cha
 
 Canonical owner for legal rules, applicability, jurisdiction-specific procedures, legal status, adjudication, enforcement, and legal consequences.
 
-Important distinction:
+### System #09 — Items / Equipment
+
+`systems/ITEMS_EQUIPMENT.md`
+
+Canonical owner for Item identity, classification framework, properties framework, Item State, Equipment Context, possession/availability/location references, condition concept, Item lifecycle, Item-related action semantics, and Item integration with other domains.
+
+Boundary:
 
 ```text
-FACT ≠ CLAIM ≠ ALLEGATION ≠ RUMOR ≠ EVIDENCE
+ITEMS / EQUIPMENT
+≠ ECONOMY
+≠ COMBAT
+≠ TRAVEL
+≠ HEALTH
+≠ SUPERNATURAL / MAGIC
+≠ STATE & HISTORY
+≠ PERSISTENCE
 ```
 
-No universal legal code, crime list, punishment formula, sentence formula, evidence score, or quantitative legal fallback is defined by v0.1.
+Equipment pada v0.1 adalah context / State penggunaan Item, bukan entity terpisah secara default.
+
+V0.1 tidak menetapkan universal item damage, armor value, weight, durability formula, rarity, quality tier, inventory slot, carrying-capacity formula, item price, magical power, loot table, atau crafting recipe.
 
 ---
 
@@ -460,6 +378,9 @@ RELATIONSHIPS
 REPUTATION
 → reputation state / audience context / reputation formation and change
 
+ITEMS / EQUIPMENT
+→ item identity / item state / equipment context / item lifecycle
+
 WORLD EVENT PROCESSOR
 → Event lifecycle / triggering / scheduling / processing / chaining / event orchestration
 
@@ -522,13 +443,7 @@ PERSISTENCE
 VERIFY
 ```
 
-NPC-related processing additionally uses NPC Current State, NPC Knowledge, goals/motivations, relevant relationship/reputation context, constraints, NPC Behavior & Agency, and then the relevant resolution system.
-
-Event-related processing additionally uses Event context, trigger/eligibility information, World Event Processor, relevant Action/Resolution and domain system.
-
-NPC/Faction autonomous processing uses NPC/Faction Simulation, then NPC Behavior & Agency or Faction logic, followed by Action/Resolution and relevant domain system.
-
-Relationship, Reputation, and Legal processing continue through their respective canonical systems and then return to State Validation and Persistence.
+Jika proses melibatkan Item / Equipment, `systems/ITEMS_EQUIPMENT.md` wajib diambil bersama Character Data Model dan domain lain yang relevan.
 
 ---
 
@@ -558,6 +473,7 @@ Current Canon systems:
 🟢 #06 RELATIONSHIPS
 🟢 #07 REPUTATION
 🟢 #08 LAW / LEGAL PROCEDURES
+🟢 #09 ITEMS / EQUIPMENT
 ```
 
 Future systems remain undefined until separately designed, audited, canonized, integrated, and verified.
@@ -590,6 +506,7 @@ Future systems remain undefined until separately designed, audited, canonized, i
 - AI GM must not claim persistence success without verification.
 - Validation failure, persistence failure, and verification failure remain distinct.
 - Conflicts must not be silently resolved.
+- Item semantics belong to Items / Equipment; economic, combat, travel, health, magic, State, and persistence semantics remain with their respective owners.
 
 ---
 
@@ -598,7 +515,6 @@ Future systems remain undefined until separately designed, audited, canonized, i
 Potential future domains remain intentionally undefined until needed:
 
 ```text
-ITEMS / EQUIPMENT
 PROGRESSION
 QUEST / OBJECTIVES
 CRAFTING
